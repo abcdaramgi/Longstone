@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/SpringStudy.iml" filepath="$PROJECT_DIR$/.idea/SpringStudy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/untitled.iml" filepath="$PROJECT_DIR$/untitled.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/untitled_android.iml" filepath="$PROJECT_DIR$/android/untitled_android.iml" />
     </modules>
   </component>
 </project>
