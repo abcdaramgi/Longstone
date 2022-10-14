@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class BoardApplication {
 
 	public static void main(String[] args) {
-		System.out.println("*******************Godlen Hour Server*******************");
+		System.out.println("*********************Godlen Hour Server*******************");
 	}
 
 }
