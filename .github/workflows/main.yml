@@ -11,10 +11,12 @@ permissions:
 
 jobs:
   build:
-    # 실행 환경 지정
     runs-on: ubuntu-latest
-
-    # Task의 sequence를 명시한다.
+    
+    defaults:
+      run:
+       working-directory: "./server/Board"
+       
     steps:
     - uses: actions/checkout@v2
     
