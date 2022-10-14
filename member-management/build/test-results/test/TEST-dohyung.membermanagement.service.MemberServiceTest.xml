@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dohyung.membermanagement.service.MemberServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-08-31T09:36:31" hostname="DESKTOP-AAJL2ML" time="0.065">
-  <properties/>
-  <testcase name="회원가입()" classname="dohyung.membermanagement.service.MemberServiceTest" time="0.065"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
