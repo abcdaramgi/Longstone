@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:goldenhour/Screen/detail_screen.dart';
 import 'package:goldenhour/model/model_food.dart';
 
 class BoxSlider extends StatelessWidget{
@@ -17,7 +18,7 @@ class BoxSlider extends StatelessWidget{
             height: 600,
             child: ListView(
               scrollDirection: Axis.vertical,
-              children: makeBoxImages(foods),
+              children: makeBoxImages(context, foods),
             ),
           )
         ],
@@ -25,12 +26,20 @@ class BoxSlider extends StatelessWidget{
     );
   }
 
-  List<Widget> makeBoxImages(List<Food> foods){
+  List<Widget> makeBoxImages(BuildContext context, List<Food> foods){
     List<Widget> results = [];
     for(var i=0; i<foods.length;i++){
       results.add(
           InkWell(
-          onTap:(){},
+          onTap:(){
+            Navigator.of(context).push(MaterialPageRoute<Null>(
+                fullscreenDialog: true,
+                builder: (BuildContext context){
+                  return DetailScreen(
+                      food: foods[i],
+                  );
+            }));
+          },
         child: Container(
           padding: EdgeInsets.only(bottom: 10),
           child: Align(
