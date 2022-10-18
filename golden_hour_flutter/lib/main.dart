@@ -1,20 +1,66 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/Screen/uploadFood.dart';
+import 'package:untitled/Home/MainHome.dart';
+import 'package:untitled/Screen/contol.dart';
 
-void main() {
+void main(){
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatelessWidget{
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context){
+    return MaterialApp(
+      title: 'GoldenHour',
+      theme: ThemeData(
+          scaffoldBackgroundColor: Colors.white
+      ),
+      home: const MainPage(),
+    );
+  }
+}
+
+class MainPage extends StatefulWidget {
+  const MainPage({super.key});
+
+  @override
+  _MainPageState createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  final List<Widget> _widgetOptions = <Widget>[
+    const UploadfoodPage(),
+    HomePage(),
+    const contolPage(),
+  ];
+
+  int _selectionIndex = 1;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectionIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(),
-        body: Container(),
-        bottomNavigationBar: BottomAppBar(),
-      )
+    return Scaffold(
+      body: _widgetOptions[_selectionIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add_circle_rounded), label: '등록',),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home), label: '홈',),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person), label: '설정'),
+        ],
+        currentIndex: _selectionIndex,
+        selectedItemColor: Colors.redAccent,
+        onTap: _onItemTapped,
+      ),
     );
   }
 }
