@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/first"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="홈" />
+
+    <item android:id="@+id/second"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="검색"/>
+
+    <item android:id="@+id/third"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_location_on_24"
+        android:title="지도"/>
+
+    <item android:id="@+id/four"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_star_24"
+        android:title="즐겨찾기" />
+
+    <item android:id="@+id/five"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="사용자"/>
+
+</menu>
