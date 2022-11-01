@@ -1,17 +1,17 @@
 package com.example.applicationtest
+
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.activity_main.*
 
-class HomeScreen : Fragment() {
+class BellScreen : Fragment() {
 
     companion object {
-        fun newInstance():HomeScreen {
-            return HomeScreen()
+        fun newInstance(): BellScreen {
+            return BellScreen()
         }
     }
 
@@ -29,6 +29,6 @@ class HomeScreen : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_home_screen, container, false)
+        return inflater.inflate(R.layout.fragment_bell_screen, container, false)
     }
 }
