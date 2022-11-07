@@ -11,14 +11,20 @@ class FirstActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_first)
         //소비자 이동
-        button1.setOnClickListener({
+        btn_login.setOnClickListener({
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         })
-
-        button2.setOnClickListener({
-            //val intent = Intent(this, StMainActivity::class.java)
+        //판매자 이동
+        btn_store.setOnClickListener({
+            val intent = Intent(this, StMainActivity::class.java)
             startActivity(intent)
         })
+        //회원가입
+        btn_register.setOnClickListener({
+            val intent = Intent(this, SignupActivity::class.java)
+            startActivity(intent)
+        })
+
     }
 }

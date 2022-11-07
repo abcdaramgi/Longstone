@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.applicationtest.databinding.FragmentStAddBinding
 
-class StAddFragment : Fragment() {
+class StAddFragment : Fragment(R.layout.fragment_st_add) {
+
 
     companion object {
         fun newInstance():StAddFragment {
