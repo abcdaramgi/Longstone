@@ -70,7 +70,7 @@
             android:exported="false">
             <meta-data
                 android:name="com.kakao.sdk.AppKey"
-                android:value="f900c8bfdae2f9ebc4f577a855cfb872"/>
+                android:value="91a51bcb5915b515817ec1b48530df87"/>
         </activity>
 
     </application>
