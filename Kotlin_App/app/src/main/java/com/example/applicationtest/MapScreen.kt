@@ -26,7 +26,7 @@ import org.jetbrains.annotations.Nullable
 
 class MapScreen : Fragment() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var mapView: MapView
+    //val mapView: MapView
     private val ACCESS_FINE_LOCATION = 1000
 
     companion object {
@@ -58,6 +58,7 @@ class MapScreen : Fragment() {
         val v: View = inflater.inflate(R.layout.fragment_map_screen, container, false)
         //binding = ActivityMainBinding.inflate(layoutInflater)
         val mapView = MapView(getActivity())
+        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(35.798838, 128.583052), true);
         val mapViewContainer: ViewGroup = v.findViewById(R.id.map_view) as ViewGroup
         mapViewContainer.addView(mapView)
 
@@ -101,9 +102,9 @@ class MapScreen : Fragment() {
         mapView.onCreate(savedInstanceState)*/
     }
 
-    private fun startTracking() {
-        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(35.798838, 128.583052), true);
-    }
+//    private fun startTracking() {
+//        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(35.798838, 128.583052), true);
+//    }
 
 /*
 
