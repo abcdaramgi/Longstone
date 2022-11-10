@@ -73,13 +73,9 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".MapScreen"
-            android:exported="false">
             <meta-data
                 android:name="com.kakao.sdk.AppKey"
                 android:value="91a51bcb5915b515817ec1b48530df87"/>
-        </activity>
     </application>
 
 </manifest>

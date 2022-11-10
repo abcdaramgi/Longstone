@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.google.android.gms.maps.MapView
 import kotlinx.android.synthetic.main.fragment_map_screen.*
+import net.daum.mf.map.api.MapView
 import org.jetbrains.annotations.Nullable
 
 class MapScreen : Fragment() {
@@ -20,7 +20,12 @@ class MapScreen : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+  //      val mapView = MapView(getActivity())
 
+    //    val mapViewContainer = map_view as ViewGroup?
+        //val v: View = inflater.inflate(R.layout.fragment_map_screen, container, false)
+        //val mapViewContainer: ViewGroup = v.findViewById(R.id.map_view) as ViewGroup
+    //    mapViewContainer?.addView(mapView)
     }
 
     // 프래그먼트를 안고 있는 액티비티에 붙었을 때
@@ -35,7 +40,7 @@ class MapScreen : Fragment() {
     ): View? {
         val v: View = inflater.inflate(R.layout.fragment_map_screen, container, false)
 
-        val mapView = getActivity()?.let { MapView(it) }
+        val mapView = MapView(getActivity())
         val mapViewContainer: ViewGroup = v.findViewById(R.id.map_view) as ViewGroup
         mapViewContainer.addView(mapView)
         return v
@@ -43,9 +48,10 @@ class MapScreen : Fragment() {
 
     override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mapView = view.findViewById(R.id.map_view)
-        mapView.onCreate(savedInstanceState)
+/*        mapView = view.findViewById(R.id.map_view)
+        mapView.onCreate(savedInstanceState)*/
     }
+/*
 
     override fun onStart() {
         super.onStart()
@@ -80,5 +86,5 @@ class MapScreen : Fragment() {
     override fun onLowMemory() {
         super.onLowMemory()
         mapView.onLowMemory()
-    }
+    }*/
 }
