@@ -62,8 +62,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/register", method = {RequestMethod.POST})
-    public void registerUserData(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        boolean success = false;
+    public String registerUserData(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String success = "false";
         ServletInputStream inputStream = request.getInputStream();
         String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
 
@@ -75,6 +75,19 @@ public class UserController {
                 "phone : " + userData.phone + "\n" +
                 "birth : " + userData.birth);
         success = userRepository.insertRegisterData(userData);
+        return success;
     }
 
+    @RequestMapping(value = "/login", method = {RequestMethod.POST})
+    public String loginUserData(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String success = "false";
+        ServletInputStream inputStream = request.getInputStream();
+        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+
+        User userData = objectMapper.readValue(messageBody, User.class);
+        System.out.println("id : " + userData.id + "\n" +
+                "pw : " + userData.pw);
+        success = userRepository.selectLoginData(userData);
+        return success;
+    }
 }

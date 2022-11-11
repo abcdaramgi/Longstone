@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.applicationtest.DTO.MemberDTO
+import com.example.applicationtest.Transport.RegisterTask
 
 class SignupActivity : AppCompatActivity(), Runnable {
     private var send_btn: Button? = null
@@ -42,13 +43,12 @@ class SignupActivity : AppCompatActivity(), Runnable {
 
         send_btn?.run {
             setOnClickListener(View.OnClickListener {
-                Log.d("hello", "test test test")
-                login()
+                Log.d("Register", "register start...")
+                register()
             })
         }
     }
-    fun login() {
-        Log.w("login", "로그인하는중")
+    fun register() {
         try {
             val id = name_edit!!.text.toString()
             val pw = pw_edit!!.text.toString()
@@ -56,10 +56,11 @@ class SignupActivity : AppCompatActivity(), Runnable {
             val email = email_edit!!.text.toString()
             val phone = phone_edit!!.text.toString()
             val birth = birth_edit!!.text.toString()
-            Log.w("앱에서 보낸값", "$id, $pw, $name, $email, $phone, $birth")
-            val task = CustomTask()
+            Log.d("앱에서 보낸값", "$id, $pw, $name, $email, $phone, $birth")
+            val task = RegisterTask()
             val result = task.execute(id, pw, name, email, phone, birth).get()
-            Log.w("받은값", result)
+            Log.d("받은값", result)
+            Log.d("Register", "register end...")
         } catch (e: Exception) {
         }
     }

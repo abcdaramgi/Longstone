@@ -1,4 +1,4 @@
-package com.example.applicationtest;
+package com.example.applicationtest.Transport;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -14,8 +14,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-class CustomTask extends AsyncTask<String, Void, String> {
+public class RegisterTask extends AsyncTask<String, Void, String> {
     String sendMsg, receiveMsg;
+    boolean success;
     @Override
     protected String doInBackground(String... strings) {
         try{
