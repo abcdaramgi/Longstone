@@ -15,7 +15,7 @@
     </em>
 </p>
 <div id="map" style="width:100%;height:350px;"></div>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=당신의 키값을 넣어주세요&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=217f8737761f5b39ef9e1b73cbaf50d6&libraries=services"></script>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     mapOption = {

@@ -8,6 +8,7 @@
 
 
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -75,6 +76,9 @@
         <!--<activity
             android:name=".MapScreen"
             android:exported="false">
+            <meta-data
+                android:name="com.kakao.sdk.AppKey"
+                android:value="91a51bcb5915b515817ec1b48530df87"/>
             <meta-data
                 android:name="com.kakao.sdk.AppKey"
                 android:value="91a51bcb5915b515817ec1b48530df87"/>

@@ -1,13 +1,19 @@
 package com.example.applicationtest
 import android.content.Intent
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Base64
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_map_screen.*
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener{
     private lateinit var homeScreen: HomeScreen
@@ -20,6 +26,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
 
         nav_view.setOnNavigationItemSelectedListener(this)
@@ -76,5 +83,27 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             }
         }
         return true
+    }
+
+    private fun getHashKey() {
+        var packageInfo: PackageInfo? = null
+        try{
+            packageInfo = packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNATURES)
+        } catch (e: PackageManager.NameNotFoundException) {
+            e.printStackTrace()
+        }
+        if (packageInfo == null) {
+            Log.d("hashKey", "null")
+        }
+        packageInfo?.signatures?.forEach {
+            try {
+                val md = MessageDigest.getInstance("SHA")
+                md.update(it.toByteArray())
+                Log.d("hashKey", Base64.encodeToString(md.digest(), Base64.DEFAULT))
+            } catch (e: NoSuchAlgorithmException) {
+                e.printStackTrace()
+                Log.e("KeyHash", "Unable to get MessageDigest. signature=$it", e)
+            }
+        }
     }
 }
