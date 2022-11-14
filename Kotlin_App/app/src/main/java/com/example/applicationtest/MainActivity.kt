@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_map_screen.*
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener{
     private lateinit var homeScreen: HomeScreen
     private lateinit var searchScreen: SearchScreen
-    private lateinit var mapScreen: MapScreen
+    /*private lateinit var mapScreen: MapScreen*/
     private lateinit var preferScreen:PreferScreen
     private lateinit var userScreen: UserScreen
     private lateinit var bellScreen: BellScreen
@@ -62,10 +62,10 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 searchScreen = SearchScreen.newInstance()
                 supportFragmentManager.beginTransaction().replace(R.id.fl_container, searchScreen).commit()
             }
-            R.id.third -> {
+            /*R.id.third -> {
                 mapScreen = MapScreen.newInstance()
                 supportFragmentManager.beginTransaction().replace(R.id.fl_container, mapScreen).commit()
-            }
+            }*/
             R.id.four -> {
                 preferScreen = PreferScreen.newInstance()
                 supportFragmentManager.beginTransaction().replace(R.id.fl_container, preferScreen).commit()

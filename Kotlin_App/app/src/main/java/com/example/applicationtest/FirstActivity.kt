@@ -2,9 +2,12 @@ package com.example.applicationtest
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
 import kotlinx.android.synthetic.main.activity_first.*
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.item_menu_view.*
 
 class FirstActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +28,5 @@ class FirstActivity : AppCompatActivity() {
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         })
-
     }
 }

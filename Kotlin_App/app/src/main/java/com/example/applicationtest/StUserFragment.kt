@@ -8,8 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 
-class StUserFragment : Fragment() {
-    companion object {
+class StUserFragment : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.fragment_st_user)
+    }
+    /*companion object {
         fun newInstance():StUserFragment {
             return StUserFragment()
         }
@@ -32,5 +36,5 @@ class StUserFragment : Fragment() {
         // 레이아웃과 조각을 서로 연결
         val view = inflater.inflate(R.layout.fragment_st_user, container, false)
         return view
-    }
+    }*/
 }

@@ -9,6 +9,7 @@ import com.google.android.gms.maps.MapView
 import kotlinx.android.synthetic.main.fragment_map_screen.*
 import org.jetbrains.annotations.Nullable
 
+/*
 class MapScreen : Fragment() {
     private lateinit var mapView: MapView
 
@@ -22,6 +23,7 @@ class MapScreen : Fragment() {
         super.onCreate(savedInstanceState)
 
     }
+
 
     // 프래그먼트를 안고 있는 액티비티에 붙었을 때
     override fun onAttach(context: Context) {
@@ -41,7 +43,7 @@ class MapScreen : Fragment() {
         return v
     }
 
-    override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mapView = view.findViewById(R.id.map_view)
         mapView.onCreate(savedInstanceState)
@@ -81,4 +83,4 @@ class MapScreen : Fragment() {
         super.onLowMemory()
         mapView.onLowMemory()
     }
-}
+}*/

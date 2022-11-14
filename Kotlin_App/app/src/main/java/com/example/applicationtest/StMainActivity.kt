@@ -1,5 +1,6 @@
 package com.example.applicationtest
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -7,10 +8,12 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_st_main.*
 import kotlinx.android.synthetic.main.fragment_st_home.*
 import kotlinx.android.synthetic.main.fragment_st_home.view.*
+import kotlinx.android.synthetic.main.fragment_st_user.*
 
 
 class StMainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener{
@@ -18,7 +21,7 @@ class StMainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationIte
     private lateinit var sthomefragment: StHomeFragment
     private lateinit var stuserfragment: StUserFragment
 
-    var dataList: ArrayList<HomeData> = arrayListOf(
+    var HomeList: ArrayList<HomeData> = arrayListOf(
         HomeData("첫 번째 데이터1", "두 번째 데이터1", "세 번째 데이터1"),
         HomeData("첫 번째 데이터2", "두 번째 데이터2", "세 번째 데이터2"),
         HomeData("첫 번째 데이터3", "두 번째 데이터3", "세 번째 데이터3"),
@@ -51,7 +54,7 @@ class StMainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationIte
             StHomeFragment()
         )
         transaction.commit()
-        intent.putExtra("DataList",dataList)
+        intent.putExtra("DataList",HomeList)
         /*sthomefragment = StHomeFragment.newInstance()
         supportFragmentManager.beginTransaction().add(R.id.fragment_frame, sthomefragment).commit()
         */
@@ -70,13 +73,13 @@ class StMainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationIte
                     StHomeFragment()
                 )
                 transaction.commit()
-                intent.putExtra("DataList",dataList)
+                intent.putExtra("DataList",HomeList)
                /* sthomefragment = StHomeFragment.newInstance()
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_frame, sthomefragment).commit()*/
             }
             R.id.menu_Person -> {
-                stuserfragment = StUserFragment.newInstance()
-                supportFragmentManager.beginTransaction().replace(R.id.fragment_frame, stuserfragment).commit()
+                val intent = Intent(this, StUserFragment::class.java)
+                startActivity(intent)
             }
         }
         return true
