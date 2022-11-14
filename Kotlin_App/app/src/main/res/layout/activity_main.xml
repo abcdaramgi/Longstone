@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- 구매자 main Activity xml 파일 -->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,19 +12,12 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:id="@+id/fl_container"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintBottom_toTopOf="@id/nav_view"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="10dp"
-        tools:layout_editor_absoluteX="0dp"
-        android:id="@+id/listview"
-        app:layout_constraintTop_toTopOf="parent"/>
-
+    <!-- main Activity 하단바 구현 -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -36,14 +30,15 @@
         app:itemIconTint="@color/icon_color"
         app:itemTextColor="@color/icon_color"/>
 
+    <!-- main Activity 툴바(상단바) 구현 -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        android:layout_gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -52,11 +47,11 @@
             android:id="@+id/bar_findText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="FOODTIME"
             android:layout_gravity="center"
+            android:text="FOODTIME"
             android:textColor="@color/white"
             android:textSize="25sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
     </androidx.appcompat.widget.Toolbar>
 </androidx.constraintlayout.widget.ConstraintLayout>

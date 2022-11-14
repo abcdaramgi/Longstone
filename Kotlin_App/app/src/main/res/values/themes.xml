@@ -15,4 +15,9 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!-- 액션바 뒤로가기 버튼 커스텀 생성 -->
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+
 </resources>

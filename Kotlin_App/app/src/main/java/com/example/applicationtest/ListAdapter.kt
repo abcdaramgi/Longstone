@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ListAdapter (private var list: MutableList<HomeData>): RecyclerView.Adapter<ListAdapter.ListItemViewHolder> () {
+class ListAdapter(private var list: ArrayList<HomeData>): RecyclerView.Adapter<ListAdapter.ListItemViewHolder> () {
 
     // inner class로 ViewHolder 정의
     inner class ListItemViewHolder(itemView: View?): RecyclerView.ViewHolder(itemView!!) {

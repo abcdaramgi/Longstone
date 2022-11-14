@@ -1,34 +1,28 @@
 package com.example.applicationtest
 
-import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.fragment_bell_screen.*
 
-class CartScreen : Fragment() {
-
-    companion object {
-        fun newInstance(): CartScreen {
-            return CartScreen()
-        }
-    }
-
+class CartScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.fragment_cart_screen)
+
+        setSupportActionBar(toolbar) //커스텀한 toolbar 액션바로 사용
+        supportActionBar?.setDisplayShowTitleEnabled(false) //액션바에 표시되는 제목의 표시유무를 설정합니다. false로 해야 custom한 툴바의 이름이 화면에 보이게 됩니다.
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    // 프래그먼트를 안고 있는 액티비티에 붙었을 때
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_cart_screen, container, false)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        when (id) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
