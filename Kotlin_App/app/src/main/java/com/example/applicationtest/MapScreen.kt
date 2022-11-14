@@ -1,3 +1,4 @@
+/*
 package com.example.applicationtest
 import android.Manifest
 import android.annotation.SuppressLint
@@ -45,6 +46,7 @@ class MapScreen : Fragment() {
     //    mapViewContainer?.addView(mapView)
     }
 
+
     // 프래그먼트를 안고 있는 액티비티에 붙었을 때
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -63,7 +65,7 @@ class MapScreen : Fragment() {
         mapViewContainer.addView(mapView)
 
 
-/*        map_page_location_btn.setOnClickListener {
+        map_page_location_btn.setOnClickListener {
             val permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
             if(permissionCheck == PackageManager.PERMISSION_GRANTED) {
                 val lm: LocationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -91,12 +93,11 @@ class MapScreen : Fragment() {
                 ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, PERMISSIONS_REQUEST_CODE )
             }
         }
-*/
         startTracking()
         return v
     }
 
-    override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -108,7 +109,6 @@ class MapScreen : Fragment() {
         mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(35.798838, 128.583052), true);
     }
 
-/*
 
     override fun onStart() {
         super.onStart()
@@ -143,5 +143,7 @@ class MapScreen : Fragment() {
     override fun onLowMemory() {
         super.onLowMemory()
         mapView.onLowMemory()
-    }*/
+    }
 }
+
+*/

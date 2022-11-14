@@ -19,13 +19,21 @@ public class UserRepository {
     JdbcTemplate jdbcTemplate;
 
 
-    public boolean insertRegisterData(User user){
-        boolean success = false;
+    public String insertRegisterData(User user){
+        String success = "False";
         String sql = "INSERT INTO test VALUES(?,?,?,?,?,?)";
         int result = jdbcTemplate.update(sql, user.getId(), user.getPw(),
                 user.getName(), user.getEmail(), user.getPhone(), user.getBirth());
         if(result != 0)
-            success = true;
+            success = "true";
+        return success;
+    }
+    public String selectLoginData(User user){
+        String success = "False";
+        String sql = "SELECT count(*) FROM test WHERE id=? AND pw=?";
+        int result = jdbcTemplate.queryForObject(sql, Integer.class, user.getId(), user.getPw());
+        if(result != 0)
+            success = "true";
         return success;
     }
     //test
