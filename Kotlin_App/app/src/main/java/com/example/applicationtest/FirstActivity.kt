@@ -25,19 +25,18 @@ class FirstActivity : AppCompatActivity() {
         //소비자 이동
         btn_login.setOnClickListener({
 
-            Log.d("Login", "login start...")
-            var result = login()
-            Log.d("result = ", result)
-            if(result == "true"){
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-            }else{
-                Log.d("Login", "login fail...")
-            }
-
+//            Log.d("Login", "login start...")
+//            var result = login()
+//            Log.d("result = ", result)
+//            if(result == "true"){
+//                val intent = Intent(this, MainActivity::class.java)
+//                startActivity(intent)
+//            }else{
+//                Log.d("Login", "login fail...")
+//            }
             //테스트시 이부분 주석풀고 위쪽 코드 주석달고 테스트
-//            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         })
         //판매자 이동
         btn_store.setOnClickListener({

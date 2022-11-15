@@ -25,40 +25,12 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         FoodData("뚜레주르","구암동","2500원 -> 1200원",R.drawable.image_bread1),
         FoodData("뚜레주르","구암동","2500원 -> 1200원",R.drawable.image_bread1),
         FoodData("뚜레주르","구암동","2500원 -> 1200원", R.drawable.image_bread1),
-        //TodayData("첫 번째 데이터2", "두 번째 데이터2", "세 번째 데이터2")
-        /*HomeData("첫 번째 데이터3", "두 번째 데이터3", "세 번째 데이터3"),
-        HomeData("첫 번째 데이터4", "두 번째 데이터4", "세 번째 데이터4"),
-        HomeData("첫 번째 데이터5", "두 번째 데이터5", "세 번째 데이터5"),
-        HomeData("첫 번째 데이터6", "두 번째 데이터6", "세 번째 데이터6"),
-        HomeData("첫 번째 데이터7", "두 번째 데이터7", "세 번째 데이터7"),
-        HomeData("첫 번째 데이터8", "두 번째 데이터8", "세 번째 데이터8"),
-        HomeData("첫 번째 데이터9", "두 번째 데이터9", "세 번째 데이터9"),
-        HomeData("첫 번째 데이터10", "두 번째 데이터10", "세 번째 데이터10"),
-        HomeData("첫 번째 데이터11", "두 번째 데이터11", "세 번째 데이터11"),
-        HomeData("첫 번째 데이터12", "두 번째 데이터12", "세 번째 데이터12"),
-        HomeData("첫 번째 데이터13", "두 번째 데이터13", "세 번째 데이터13"),
-        HomeData("첫 번째 데이터14", "두 번째 데이터14", "세 번째 데이터14"),
-        HomeData("첫 번째 데이터15", "두 번째 데이터15", "세 번째 데이터15")*/
     )
 
     var storeList: ArrayList<StoreData> = arrayListOf(
         StoreData("뚜레주르","빵, 음료, 샐러드",R.drawable.image_bread1),
         StoreData("유가네 닭갈비","닭갈비, 볶음밥, 막국수, ",R.drawable.image_bread1),
         StoreData("봉대박찜닭","찜닭, 샐러드",R.drawable.image_bread1),
-        //TodayData("첫 번째 데이터2", "두 번째 데이터2", "세 번째 데이터2")
-        /*HomeData("첫 번째 데이터3", "두 번째 데이터3", "세 번째 데이터3"),
-        HomeData("첫 번째 데이터4", "두 번째 데이터4", "세 번째 데이터4"),
-        HomeData("첫 번째 데이터5", "두 번째 데이터5", "세 번째 데이터5"),
-        HomeData("첫 번째 데이터6", "두 번째 데이터6", "세 번째 데이터6"),
-        HomeData("첫 번째 데이터7", "두 번째 데이터7", "세 번째 데이터7"),
-        HomeData("첫 번째 데이터8", "두 번째 데이터8", "세 번째 데이터8"),
-        HomeData("첫 번째 데이터9", "두 번째 데이터9", "세 번째 데이터9"),
-        HomeData("첫 번째 데이터10", "두 번째 데이터10", "세 번째 데이터10"),
-        HomeData("첫 번째 데이터11", "두 번째 데이터11", "세 번째 데이터11"),
-        HomeData("첫 번째 데이터12", "두 번째 데이터12", "세 번째 데이터12"),
-        HomeData("첫 번째 데이터13", "두 번째 데이터13", "세 번째 데이터13"),
-        HomeData("첫 번째 데이터14", "두 번째 데이터14", "세 번째 데이터14"),
-        HomeData("첫 번째 데이터15", "두 번째 데이터15", "세 번째 데이터15")*/
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

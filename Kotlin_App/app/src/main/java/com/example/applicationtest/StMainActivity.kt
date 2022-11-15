@@ -21,22 +21,10 @@ class StMainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationIte
     private lateinit var sthomefragment: StHomeFragment
     private lateinit var stuserfragment: StUserFragment
 
-    var HomeList: ArrayList<HomeData> = arrayListOf(
-        HomeData("첫 번째 데이터1", "두 번째 데이터1", "세 번째 데이터1"),
-        HomeData("첫 번째 데이터2", "두 번째 데이터2", "세 번째 데이터2"),
-        HomeData("첫 번째 데이터3", "두 번째 데이터3", "세 번째 데이터3"),
-        HomeData("첫 번째 데이터4", "두 번째 데이터4", "세 번째 데이터4"),
-        HomeData("첫 번째 데이터5", "두 번째 데이터5", "세 번째 데이터5"),
-        HomeData("첫 번째 데이터6", "두 번째 데이터6", "세 번째 데이터6"),
-        HomeData("첫 번째 데이터7", "두 번째 데이터7", "세 번째 데이터7"),
-        HomeData("첫 번째 데이터8", "두 번째 데이터8", "세 번째 데이터8"),
-        HomeData("첫 번째 데이터9", "두 번째 데이터9", "세 번째 데이터9"),
-        HomeData("첫 번째 데이터10", "두 번째 데이터10", "세 번째 데이터10"),
-        HomeData("첫 번째 데이터11", "두 번째 데이터11", "세 번째 데이터11"),
-        HomeData("첫 번째 데이터12", "두 번째 데이터12", "세 번째 데이터12"),
-        HomeData("첫 번째 데이터13", "두 번째 데이터13", "세 번째 데이터13"),
-        HomeData("첫 번째 데이터14", "두 번째 데이터14", "세 번째 데이터14"),
-        HomeData("첫 번째 데이터15", "두 번째 데이터15", "세 번째 데이터15")
+    var stfoodList: ArrayList<FoodData> = arrayListOf(
+        FoodData("뚜레주르","구암동","2500원 -> 1200원",R.drawable.image_bread1),
+        FoodData("뚜레주르","구암동","2500원 -> 1200원",R.drawable.image_bread1),
+        FoodData("뚜레주르","구암동","2500원 -> 1200원", R.drawable.image_bread1),
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,7 +42,7 @@ class StMainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationIte
             StHomeFragment()
         )
         transaction.commit()
-        intent.putExtra("DataList",HomeList)
+        intent.putExtra("DataList",stfoodList)
         /*sthomefragment = StHomeFragment.newInstance()
         supportFragmentManager.beginTransaction().add(R.id.fragment_frame, sthomefragment).commit()
         */
@@ -73,7 +61,7 @@ class StMainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationIte
                     StHomeFragment()
                 )
                 transaction.commit()
-                intent.putExtra("DataList",HomeList)
+                intent.putExtra("DataList",stfoodList)
                /* sthomefragment = StHomeFragment.newInstance()
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_frame, sthomefragment).commit()*/
             }
@@ -81,6 +69,21 @@ class StMainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationIte
                 val intent = Intent(this, StUserFragment::class.java)
                 startActivity(intent)
             }
+        }
+        return true
+    }
+
+    override fun onOptionsItemSelected(Appitem: MenuItem): Boolean {
+        when(Appitem?.itemId){
+            R.id.action_bell -> {
+                val intent = Intent(this, BellScreen::class.java)
+                startActivity(intent)
+            }
+            R.id.action_cart -> {
+                val intent = Intent(this, CartScreen::class.java)
+                startActivity(intent)
+            }
+            else -> return super.onOptionsItemSelected(Appitem)
         }
         return true
     }

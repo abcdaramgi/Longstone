@@ -10,30 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_st_home.*
 
-class HomeData(
-    private var data1: String? =null,
-    private var data2: String? =null,
-    private var data3: String? =null,
-) {
-    fun getData1(): String? {
-        return data1
-    }
-    fun setData1(name: String) {
-        this.data1 = data1
-    }
-    fun getData2(): String? {
-        return data2
-    }
-    fun setData2(address: String) {
-        this.data2 = data2
-    }
-    fun getData3(): String? {
-        return data3
-    }
-    fun setData3(type: String) {
-        this.data3 = data3
-    }
-}
 class StHomeFragment : Fragment()
 {
     //RecyclerView.adapter에 지정할 Adapter
@@ -52,7 +28,7 @@ class StHomeFragment : Fragment()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var list: ArrayList<HomeData> = requireActivity().intent!!.extras!!.get("DataList") as ArrayList<HomeData>
+        var list: ArrayList<FoodData> = requireActivity().intent!!.extras!!.get("DataList") as ArrayList<FoodData>
         Log.e("FirstFragment", "Data List: ${list}")
 
         // Fragment에서 전달받은 list를 넘기면서 ListAdapter 생성
