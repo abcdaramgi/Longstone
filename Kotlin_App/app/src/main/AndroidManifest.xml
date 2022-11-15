@@ -107,12 +107,12 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-<<<<<<< HEAD
+
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="91a51bcb5915b515817ec1b48530df87" />
-=======
+
         <!--<activity
             android:name=".MapScreen"
             android:exported="false">
@@ -123,7 +123,7 @@
                 android:name="com.kakao.sdk.AppKey"
                 android:value="91a51bcb5915b515817ec1b48530df87"/>
         </activity>-->
->>>>>>> 59007b5010d800cbd8ade0816c04b79d685f33d9
+
     </application>
 
 </manifest>

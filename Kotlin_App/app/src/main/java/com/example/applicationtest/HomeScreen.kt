@@ -53,7 +53,7 @@ class FoodData(
 
 class HomeScreen : Fragment() {
 
-    private  lateinit var todayListAdapter: TodayListAdapter
+    private lateinit var todayListAdapter: TodayListAdapter
     // 뷰가 생성되었을 때, 프래그먼트와 레이아웃을 연결시켜주는 부분
 
     override fun onCreateView(

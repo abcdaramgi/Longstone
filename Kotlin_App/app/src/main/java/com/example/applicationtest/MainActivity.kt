@@ -17,7 +17,7 @@ import java.security.NoSuchAlgorithmException
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener{
     private lateinit var homeScreen: HomeScreen
     private lateinit var searchScreen: SearchScreen
-    /*private lateinit var mapScreen: MapScreen*/
+    private lateinit var mapScreen: MapScreen
     private lateinit var preferScreen:PreferScreen
     private lateinit var userScreen: UserScreen
 
@@ -127,10 +127,10 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 /*searchScreen = SearchScreen.newInstance()
                 supportFragmentManager.beginTransaction().replace(R.id.fl_container, searchScreen).commit()*/
             }
-            /*R.id.third -> {
+            R.id.third -> {
                 mapScreen = MapScreen.newInstance()
                 supportFragmentManager.beginTransaction().replace(R.id.fl_container, mapScreen).commit()
-            }*/
+            }
             R.id.four -> {
                 transaction.replace(
                     R.id.fl_container,
