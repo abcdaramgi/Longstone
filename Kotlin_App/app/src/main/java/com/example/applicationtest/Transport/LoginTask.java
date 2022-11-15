@@ -20,7 +20,7 @@ public class LoginTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... strings) {
         try{
             String str;
-            URL url = new URL("http://211.55.204.103:8080/user/login");
+            URL url = new URL("http://222.103.14.225:8080/user/login");
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type", "application/json");

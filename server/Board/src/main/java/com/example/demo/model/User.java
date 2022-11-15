@@ -3,6 +3,7 @@ package com.example.demo.model;
 public class User {
     public String id;
     public String pw;
+    public String nickname;
     public String name;
     public String email;
     public String phone;
@@ -20,6 +21,8 @@ public class User {
         this.pw = pw;
     }
 
+    public String getNickname(){return nickname;}
+    public void setNickname(){this.nickname = nickname;}
     public String getName(){
         return name;
     }

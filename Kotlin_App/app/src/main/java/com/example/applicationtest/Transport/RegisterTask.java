@@ -21,7 +21,7 @@ public class RegisterTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... strings) {
         try{
             String str;
-                URL url = new URL("http://211.55.204.103:8080/user/register");
+                URL url = new URL("http://222.103.14.225:8080/user/register");
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 //                conn.setRequestProperty("Content-Type", "application/x-www-form-unlencoded");
@@ -38,10 +38,11 @@ public class RegisterTask extends AsyncTask<String, Void, String> {
             JSONObject sendJson = new JSONObject();
             sendJson.put("id", strings[0]);
             sendJson.put("pw", strings[1]);
-            sendJson.put("name", strings[2]);
-            sendJson.put("email", strings[3]);
-            sendJson.put("phone", strings[4]);
-            sendJson.put("birth", strings[5]);
+            sendJson.put("nickname", strings[2]);
+            sendJson.put("name", strings[3]);
+            sendJson.put("email", strings[4]);
+            sendJson.put("phone", strings[5]);
+            sendJson.put("birth", strings[6]);
 //                osw.write(sendMsg);
             osw.write(sendJson.toString());
             Log.d("value :", sendJson.toString());

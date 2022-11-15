@@ -70,6 +70,7 @@ public class UserController {
         User userData = objectMapper.readValue(messageBody, User.class);
         System.out.println("id : " + userData.id + "\n" +
                 "pw : " + userData.pw + "\n" +
+                "nickname : " + userData.nickname + "\n" +
                 "name : " + userData.name + "\n" +
                 "email : " + userData.email + "\n" +
                 "phone : " + userData.phone + "\n" +
