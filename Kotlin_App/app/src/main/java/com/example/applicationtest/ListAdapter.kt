@@ -6,18 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-
-class ListAdapter(private var list: ArrayList<HomeData>): RecyclerView.Adapter<ListAdapter.ListItemViewHolder> () {
+//ST_HOME_LIST, ITEM 연결
+class ListAdapter(private var list: ArrayList<FoodData>): RecyclerView.Adapter<ListAdapter.ListItemViewHolder> () {
 
     // inner class로 ViewHolder 정의
     inner class ListItemViewHolder(itemView: View?): RecyclerView.ViewHolder(itemView!!) {
 
-        var data1Text: TextView = itemView!!.findViewById(R.id.data1Text)
-        var data2Text: TextView = itemView!!.findViewById(R.id.data2Text)
-        var data3Text: TextView = itemView!!.findViewById(R.id.data3Text)
+        var data1Text: TextView = itemView!!.findViewById(R.id.food_name)
+        var data2Text: TextView = itemView!!.findViewById(R.id.food_place)
+        var data3Text: TextView = itemView!!.findViewById(R.id.food_cost)
 
         // onBindViewHolder의 역할을 대신한다.
-        fun bind(data: HomeData, position: Int) {
+        fun bind(data: FoodData, position: Int) {
             Log.d("ListAdapter", "===== ===== ===== ===== bind ===== ===== ===== =====")
             Log.d("ListAdapter", data.getData1()+" "+data.getData2()+" "+data.getData3())
             data1Text.text = data.getData1()

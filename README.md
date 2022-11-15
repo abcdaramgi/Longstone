@@ -21,4 +21,4 @@ https://www.notion.so/LongStone-aed314b49bef4644b0355e0359198893
 
 ### ER Diagram
 
-![GoldenHourERD (1)](https://user-images.githubusercontent.com/86977236/195609849-23586619-38ff-4239-b59f-6991024196f9.png)
+![GoldenHourERD (1)](https://user-images.githubusercontent.com/86977236/201834071-ad7bf15f-7790-4ef3-91ce-5474442c35c2.png)
