@@ -21,16 +21,17 @@ public class UserRepository {
 
     public String insertRegisterData(User user){
         String success = "False";
-        String sql = "INSERT INTO test VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO UserTB(userId, userPassword, nickName, userName, birthDate, phoneNum, userMail)" +
+                "VALUES(?,?,?,?,?,?,?)";
         int result = jdbcTemplate.update(sql, user.getId(), user.getPw(),
-                user.getName(), user.getEmail(), user.getPhone(), user.getBirth());
+                user.getNickname(), user.getName(), user.getBirth(), user.getPhone(), user.getEmail());
         if(result != 0)
             success = "true";
         return success;
     }
     public String selectLoginData(User user){
         String success = "False";
-        String sql = "SELECT count(*) FROM test WHERE id=? AND pw=?";
+        String sql = "SELECT count(*) FROM UserTB WHERE userId=? AND userPassword=?";
         int result = jdbcTemplate.queryForObject(sql, Integer.class, user.getId(), user.getPw());
         if(result != 0)
             success = "true";
