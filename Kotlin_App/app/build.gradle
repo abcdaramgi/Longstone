@@ -66,6 +66,10 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
 
     //kakao map
-    /*implementation files('libs/libDaumMapAndroid.jar')*/
+    implementation files('libs/libDaumMapAndroid.jar')
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    //gson
+    implementation 'com.google.code.gson:gson:2.8.5'
+
 }
