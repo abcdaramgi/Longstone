@@ -12,8 +12,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout3"
-            android:layout_width="406dp"
-            android:layout_height="681dp"
+            android:layout_width="408dp"
+            android:layout_height="638dp"
             android:layout_marginTop="1dp"
             android:layout_marginBottom="4dp"
             app:layout_constraintBottom_toTopOf="@+id/button"
@@ -24,10 +24,13 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="180dp"
-                android:layout_height="181dp"
-                tools:layout_editor_absoluteX="113dp"
-                tools:layout_editor_absoluteY="429dp">
+                android:layout_width="182dp"
+                android:layout_height="172dp"
+                android:layout_marginBottom="71dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewTimer">
 
             </ImageView>
 
@@ -69,59 +72,114 @@
                 android:hint="할인가격"
                 android:inputType="number"
                 android:textColorHint="@color/black"
-                tools:layout_editor_absoluteX="78dp"
-                tools:layout_editor_absoluteY="181dp" />
+                app:layout_constraintStart_toStartOf="@+id/editTextOrigianlPrice"
+                app:layout_constraintTop_toBottomOf="@+id/editTextOrigianlPrice" />
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="36dp"
+                android:layout_marginBottom="23dp"
                 android:text="이미지 등록"
-                tools:layout_editor_absoluteX="149dp"
-                tools:layout_editor_absoluteY="610dp" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="120dp"
                 android:text="상품 등록"
                 android:textAlignment="viewStart"
                 android:textColor="@color/black"
                 android:textSize="34dp"
                 android:textStyle="bold"
-                tools:layout_editor_absoluteX="137dp"
-                tools:layout_editor_absoluteY="16dp" />
+                app:layout_constraintBottom_toTopOf="@+id/editTextDiscountPrice"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/editTextNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="9dp"
                 android:ems="10"
                 android:inputType="number"
-                tools:layout_editor_absoluteX="120dp"
-                tools:layout_editor_absoluteY="227dp" />
+                app:layout_constraintBottom_toTopOf="@+id/minute_picker"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textViewCount"
+                app:layout_constraintTop_toBottomOf="@+id/editTextDiscountPrice" />
 
             <TextView
                 android:id="@+id/textViewCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="7dp"
                 android:text="수량"
                 android:textColor="@color/black"
                 android:textSize="19dp"
-                tools:layout_editor_absoluteX="78dp"
-                tools:layout_editor_absoluteY="235dp" />
+                app:layout_constraintBaseline_toBaselineOf="@+id/editTextNumber"
+                app:layout_constraintEnd_toStartOf="@+id/editTextNumber"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent" />
 
-            "
+            <TextView
+                android:id="@+id/textViewTimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="78dp"
+                android:layout_marginTop="336dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginBottom="67dp"
+                android:text="타이머"
+                android:textColor="@color/black"
+                android:textSize="19dp"
+                app:layout_constraintBottom_toTopOf="@+id/imageView"
+                app:layout_constraintEnd_toStartOf="@+id/hour_picker"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <NumberPicker
+                android:id="@+id/hour_picker"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="14dp"
+                android:keepScreenOn="false"
+                android:solidColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/minute_picker"
+                app:layout_constraintEnd_toStartOf="@+id/minute_picker"
+                app:layout_constraintStart_toEndOf="@+id/textViewTimer"
+                app:layout_constraintTop_toTopOf="@+id/minute_picker" />
+
+            <NumberPicker
+                android:id="@+id/minute_picker"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="77dp"
+                android:layout_marginBottom="12dp"
+                android:keepScreenOn="false"
+                android:solidColor="@color/white"
+                app:layout_constraintBottom_toTopOf="@+id/imageView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/hour_picker"
+                app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btn_registration"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
             android:text="상품 등록"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />

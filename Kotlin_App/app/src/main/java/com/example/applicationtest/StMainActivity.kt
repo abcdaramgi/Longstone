@@ -37,6 +37,7 @@ class StMainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationIte
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         val transaction = supportFragmentManager.beginTransaction()
+        R.id.menu_Home
         transaction.replace(
             R.id.fragment_frame,
             StHomeFragment()
@@ -52,8 +53,8 @@ class StMainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationIte
         var transaction = supportFragmentManager.beginTransaction()
         when (item.itemId) {
             R.id.menu_plus -> {
-                staddfragment = StAddFragment.newInstance()
-                supportFragmentManager.beginTransaction().replace(R.id.fragment_frame, staddfragment).commit()
+                val intent = Intent(this, StAddFragment::class.java)
+                startActivity(intent)
             }
             R.id.menu_Home -> {
                 transaction.replace(

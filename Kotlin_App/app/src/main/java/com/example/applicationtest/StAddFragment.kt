@@ -2,33 +2,66 @@ package com.example.applicationtest
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.SurfaceControl.Transaction
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.NumberPicker
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.applicationtest.DTO.postDTO
 import com.example.applicationtest.Transport.PostTask
-import com.example.applicationtest.databinding.FragmentStAddBinding
+import kotlinx.android.synthetic.main.fragment_st_add.*
+import kotlinx.android.synthetic.main.item_alertdialog.view.*
 
-class StAddFragment : Fragment(R.layout.fragment_st_add) {
+class StAddFragment : AppCompatActivity() {
     private var send_btn: Button? = null
     private var price_edit: EditText? = null
     private var foodName_edit: EditText? = null
-
     var items: List<postDTO>? = null
 
-    @SuppressLint("MissingInflatedId")
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.fragment_st_add)
+        timer()
 
-        send_btn = getView()?.findViewById(R.id.button)
-        price_edit = getView()?.findViewById(R.id.editTextPrice)
-        foodName_edit = getView()?.findViewById(R.id.editTextFoodName)
+        btn_registration.setOnClickListener({
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage("등록되었습니다.")
+                .setPositiveButton("확인",
+                    DialogInterface.OnClickListener{ dialog, id ->
+                        finish()
+                    })
+            builder.show()
+        })
+        add()
+    }
+    //NumberPicker 활성화
+    fun timer(){
+        hour_picker.apply {
+            maxValue = 2
+            minValue = 0
+            wrapSelectorWheel = false
+        }
+        minute_picker.apply {
+            maxValue = 59
+            minValue = 0
+            wrapSelectorWheel = false
+        }
+    }
+    
+    @SuppressLint("MissingInflatedId")
+    fun add() {
+        send_btn = findViewById(R.id.button)
+        price_edit = findViewById(R.id.editTextOrigianlPrice)
+        foodName_edit = findViewById(R.id.editTextFoodName)
 
         items = ArrayList()
 
@@ -39,7 +72,7 @@ class StAddFragment : Fragment(R.layout.fragment_st_add) {
             })
         }
     }
-
+    
     fun post() {
         try {
             val price = price_edit!!.text.toString()
@@ -54,29 +87,9 @@ class StAddFragment : Fragment(R.layout.fragment_st_add) {
         }
     }
 
-
     companion object {
         fun newInstance():StAddFragment {
             return StAddFragment()
         }
-    }
-    //메모리에 올라갔을 때
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-    //Fragment를 안고 있는 액티비티에 붙었을 때때
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
-
-    // 뷰가 생성되었을 때, 프래그먼트와 레이아웃을 연결시켜주는 부분
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // 레이아웃과 조각을 서로 연결
-        val view = inflater.inflate(R.layout.fragment_st_add, container, false)
-        return view
     }
 }
