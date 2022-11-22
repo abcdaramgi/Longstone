@@ -1,4 +1,4 @@
-package com.example.applicationtest.DTO.Transport;
+package com.example.applicationtest.Transport;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -14,43 +14,33 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class RegisterTask extends AsyncTask<String, Void, String> {
+public class PostTask extends AsyncTask<String, Void, String>{
     String sendMsg, receiveMsg;
     boolean success;
     @Override
     protected String doInBackground(String... strings) {
         try{
             String str;
-                URL url = new URL("http://222.103.14.225:8080/user/register");
-
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//                conn.setRequestProperty("Content-Type", "application/x-www-form-unlencoded");
+            URL url = new URL("http://10.0.2.2:8080/api/v1/posts/");//url 객체 생성
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection(); //url 연결
+            //content type json
             conn.setRequestProperty("Content-Type", "application/json");
-//                application/json이 {key:value}의 형태로 전송되며
-//                application/x-www-form-urlencoded가 key-value&key=value...의 형태로 전송
 
             //보내는방식 GET OR POST
             conn.setRequestMethod("POST");
-            conn.setDoOutput(true);
+            conn.setDoOutput(true); // OutputStream으로 POST 데이터를 넘겨주겠다..
             //서버에 보낼값포함해 요청함
             OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
-//                sendMsg = "name="+strings[0]+"&email="+strings[1];
+
             JSONObject sendJson = new JSONObject();
-            sendJson.put("id", strings[0]);
-            sendJson.put("pw", strings[1]);
-            sendJson.put("nickname", strings[2]);
-            sendJson.put("name", strings[3]);
-            sendJson.put("email", strings[4]);
-            sendJson.put("phone", strings[5]);
-            sendJson.put("birth", strings[6]);
-//                osw.write(sendMsg);
+            sendJson.put("price", strings[0]);
+            sendJson.put("foodName", strings[1]);
+
             osw.write(sendJson.toString());
             Log.d("value :", sendJson.toString());
             osw.flush();
 
-
-            //통신도 잘되고 서버에서 보낸값 받음
-            if(conn.getResponseCode() == conn.HTTP_OK){
+            if(conn.getResponseCode() == conn.HTTP_OK){ //통신 ready?
                 InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), "UTF-8");
                 BufferedReader reader = new BufferedReader(tmp);
                 StringBuffer buffer = new StringBuffer();

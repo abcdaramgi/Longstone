@@ -13,25 +13,21 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout3"
             android:layout_width="406dp"
-            android:layout_height="0dp"
+            android:layout_height="681dp"
             android:layout_marginTop="1dp"
             android:layout_marginBottom="4dp"
             app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="248dp"
-                android:layout_height="0dp"
-                android:layout_marginBottom="148dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.512"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView8">
+                android:layout_width="180dp"
+                android:layout_height="181dp"
+                tools:layout_editor_absoluteX="113dp"
+                tools:layout_editor_absoluteY="429dp">
 
             </ImageView>
 
@@ -44,54 +40,78 @@
                 android:hint="상품명"
                 android:inputType="textPersonName"
                 android:textColorHint="@color/black"
-                app:layout_constraintBottom_toTopOf="@+id/editTextPrice"
+                app:layout_constraintBottom_toTopOf="@+id/editTextOrigianlPrice"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.522"
+                app:layout_constraintHorizontal_bias="0.503"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                app:layout_constraintTop_toBottomOf="@+id/textView8"
+                app:layout_constraintVertical_bias="1.0" />
 
             <EditText
-                android:id="@+id/editTextPrice"
+                android:id="@+id/editTextOrigianlPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="29dp"
+                android:layout_marginBottom="248dp"
                 android:ems="12"
-                android:hint="가격"
+                android:hint="원가격"
                 android:inputType="number"
                 android:textColorHint="@color/black"
                 app:layout_constraintBottom_toTopOf="@+id/imageView"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.522"
+                app:layout_constraintHorizontal_bias="0.503"
                 app:layout_constraintStart_toStartOf="parent" />
+
+            <EditText
+                android:id="@+id/editTextDiscountPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="12"
+                android:hint="할인가격"
+                android:inputType="number"
+                android:textColorHint="@color/black"
+                tools:layout_editor_absoluteX="78dp"
+                tools:layout_editor_absoluteY="181dp" />
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="60dp"
                 android:text="이미지 등록"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView"
-                app:layout_constraintVertical_bias="1.0" />
+                tools:layout_editor_absoluteX="149dp"
+                tools:layout_editor_absoluteY="610dp" />
 
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="186dp"
                 android:text="상품 등록"
                 android:textAlignment="viewStart"
                 android:textColor="@color/black"
                 android:textSize="34dp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/imageView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.501"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                tools:layout_editor_absoluteX="137dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <EditText
+                android:id="@+id/editTextNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number"
+                tools:layout_editor_absoluteX="120dp"
+                tools:layout_editor_absoluteY="227dp" />
+
+            <TextView
+                android:id="@+id/textViewCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="수량"
+                android:textColor="@color/black"
+                android:textSize="19dp"
+                tools:layout_editor_absoluteX="78dp"
+                tools:layout_editor_absoluteY="235dp" />
+
+            "
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

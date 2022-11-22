@@ -9,7 +9,38 @@ import android.widget.EditText
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.applicationtest.DTO.MemberDTO
-import com.example.applicationtest.DTO.Transport.RegisterTask
+import com.example.applicationtest.Transport.RegisterTask
+import com.example.applicationtest.Transport.SearchTask
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.io.Serializable
+import java.lang.reflect.Type
+
+
+class StoreData2(
+    var name: String? =null,
+    var number: String? =null,
+    var pdname: String? =null,
+): Serializable {
+    fun getData1(): String? {
+        return name
+    }
+    fun setData1(name: String) {
+        this.name = name
+    }
+    fun getData2(): String? {
+        return number
+    }
+    fun setData2(address: String) {
+        this.number = number
+    }
+    fun getData3(): String? {
+        return pdname
+    }
+    fun setData3(type: String) {
+        this.pdname = pdname
+    }
+}
 
 class SignupActivity : AppCompatActivity(), Runnable {
     private var send_btn: Button? = null
@@ -48,6 +79,7 @@ class SignupActivity : AppCompatActivity(), Runnable {
             setOnClickListener(View.OnClickListener {
                 Log.d("Register", "register start...")
                 register()
+                //testplz()
             })
         }
     }
@@ -65,6 +97,23 @@ class SignupActivity : AppCompatActivity(), Runnable {
             val result = task.execute(id, pw, nickname, name, email, phone, birth).get()
             Log.d("받은값", result)
             Log.d("Register", "register end...")
+        } catch (e: Exception) {
+        }
+    }
+
+    fun testplz(){
+        try {
+            val content = id_edit!!.text.toString()
+            val task = SearchTask()
+            val result = task.execute(content).get()
+
+            val gson = Gson()
+            val listType: Type = object : TypeToken<ArrayList<StoreData2?>?>() {}.type
+            val yourClassList: List<StoreData2> = Gson().fromJson(result, listType)
+
+            Log.d("받은값", result)
+            Log.d("Register", "register end...")
+            Log.d("리스트변환했냐", yourClassList.get(1).name.toString())
         } catch (e: Exception) {
         }
     }

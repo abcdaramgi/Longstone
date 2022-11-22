@@ -7,7 +7,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import com.example.applicationtest.DTO.Transport.LoginTask
+import com.example.applicationtest.Transport.LoginTask
 import kotlinx.android.synthetic.main.activity_first.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_menu_view.*
@@ -34,6 +34,7 @@ class FirstActivity : AppCompatActivity() {
 //            }else{
 //                Log.d("Login", "login fail...")
 //            }
+
             //테스트시 이부분 주석풀고 위쪽 코드 주석달고 테스트
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
