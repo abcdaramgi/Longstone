@@ -1,4 +1,4 @@
-package com.example.applicationtest.Transport;
+package com.example.applicationtest.DTO.Transport;
 
 import android.os.AsyncTask;
 import android.util.Log;

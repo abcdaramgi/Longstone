@@ -73,24 +73,19 @@ class StMainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationIte
         return true
     }
 
-    override fun onOptionsItemSelected(Appitem: MenuItem): Boolean {
-        when(Appitem?.itemId){
-            R.id.action_bell -> {
-                val intent = Intent(this, BellScreen::class.java)
-                startActivity(intent)
-            }
-            R.id.action_cart -> {
-                val intent = Intent(this, CartScreen::class.java)
-                startActivity(intent)
-            }
-            else -> return super.onOptionsItemSelected(Appitem)
-        }
-        return true
-    }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.st_toolbar_menu, menu)
         return true
     }
-
+    //액션버튼 클릭
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item?.itemId){
+            R.id.action_notifications -> {
+                val intent = Intent(this, StBellScreen::class.java)
+                startActivity(intent)
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+        return true
+    }
 }

@@ -9,7 +9,7 @@ import android.widget.EditText
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.applicationtest.DTO.MemberDTO
-import com.example.applicationtest.Transport.RegisterTask
+import com.example.applicationtest.DTO.Transport.RegisterTask
 
 class SignupActivity : AppCompatActivity(), Runnable {
     private var send_btn: Button? = null
