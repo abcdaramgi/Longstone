@@ -18,7 +18,11 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+<<<<<<< Updated upstream
             android:name=".StInfoScreen"
+=======
+            android:name=".CheckBuyActivity"
+>>>>>>> Stashed changes
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

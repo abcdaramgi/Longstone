@@ -22,9 +22,9 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     private lateinit var userScreen: UserScreen
 
     var dataList: ArrayList<FoodData> = arrayListOf(
-        FoodData("뚜레주르","구암동","2500원 -> 1200원",R.drawable.image_bread1),
-        FoodData("뚜레주르","구암동","2500원 -> 1200원",R.drawable.image_bread1),
-        FoodData("뚜레주르","구암동","2500원 -> 1200원", R.drawable.image_bread1),
+        FoodData("뚜레주르","구암동","2500원 -> 1200원",R.drawable.image_bread1,5,"가게1"),
+        FoodData("뚜레주르","구암동","2500원 -> 1200원",R.drawable.image_bread1,6,"가게2"),
+        FoodData("뚜레주르","구암동","2500원 -> 1200원", R.drawable.image_bread1,8,"가게3"),
     )
 
     var storeList: ArrayList<StoreData> = arrayListOf(

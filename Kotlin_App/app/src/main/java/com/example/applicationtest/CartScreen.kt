@@ -45,12 +45,12 @@ class CartScreen : AppCompatActivity() {
         re_cart.adapter = cartAdapter
 
         datas.apply {
-            add(ItemCart("5점","바삭하고 맛있어요.",R.drawable.image_bread1))
-            add(ItemCart("5점","바삭하고 맛있어요.",R.drawable.image_bread1))
-            add(ItemCart("5점","바삭하고 맛있어요.",R.drawable.image_bread1))
+            add(ItemCart("소영이네 빵집","생크림 소금빵",R.drawable.image_bread1))
+            add(ItemCart("갱초이 정육점","양념불고기(간장)",R.drawable.image_bread1))
+            add(ItemCart("혜르무르 카페","김혜르무르트 2세 쿠키",R.drawable.image_bread1))
         }
         cartAdapter.datas = datas
         cartAdapter.notifyDataSetChanged()
-        textView22.text = "상품" + cartAdapter.getItemCount().toString()+ "개"
+        textView22.text = "상품 " + cartAdapter.getItemCount().toString()+ "개"
     }
 }

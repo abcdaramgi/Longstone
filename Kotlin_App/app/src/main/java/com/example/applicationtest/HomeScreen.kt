@@ -24,6 +24,8 @@ class FoodData(
     var place: String? =null,
     var cost: String? =null,
     var img: Int? =null,
+    var count: Int? =null,
+    var storename: String? =null,
 ): Serializable {
     fun getData1(): String? {
         return name
