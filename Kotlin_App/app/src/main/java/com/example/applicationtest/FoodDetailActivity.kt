@@ -6,13 +6,18 @@ import android.widget.Spinner
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.activity_buy.*
 import kotlinx.android.synthetic.main.item_alertdialog.view.*
 import kotlinx.android.synthetic.main.item_today_food_detail.*
+import kotlinx.android.synthetic.main.item_today_food_detail.store_box
+import kotlinx.android.synthetic.main.item_today_food_detail.store_de_name
+import kotlinx.android.synthetic.main.item_today_food_detail.store_de_place
 
 // 메인 화면 상품 리스트를 클릭했을 때, 상품의 정보를 자세히 보여주는 화면
 class FoodDetailActivity : AppCompatActivity() {
     lateinit var datas : FoodData
     var ad_count : Int = 0
+    var selectNum : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,11 +26,12 @@ class FoodDetailActivity : AppCompatActivity() {
         datas = intent.getSerializableExtra("data") as FoodData
 
         Glide.with(this).load(datas.img).into(img_profile)
+        Glide.with(this).load(datas.storeimg).into(img_store_photo)
         detail_food_name.text = datas.name
         ad_count = datas.count!!
         store_de_name.text = datas.storename
-
-        var selectNum = 0
+        store_de_place.text = datas.place
+        review.text = datas.refood.toString()+"개"
 
         // 구매 버튼을 눌렀을 때, 구매창(BuyActivity)으로 넘어감
         buy_bnt.setOnClickListener({
@@ -46,7 +52,10 @@ class FoodDetailActivity : AppCompatActivity() {
 
                 layout.btn_ok.setOnClickListener {
                     selectNum = layout.number_picker.value
+
                     val intent = Intent(this, BuyActivity::class.java)
+                    intent.putExtra("foodCount",selectNum)
+                    intent.putExtra("data",datas)
                     startActivity(intent)
                 }
             })
@@ -58,6 +67,11 @@ class FoodDetailActivity : AppCompatActivity() {
         })
 
         review_img.setOnClickListener({
+            val intent = Intent(this, ReviewActivity::class.java)
+            startActivity(intent)
+        })
+
+        review.setOnClickListener({
             val intent = Intent(this, ReviewActivity::class.java)
             startActivity(intent)
         })

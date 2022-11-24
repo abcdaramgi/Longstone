@@ -32,6 +32,7 @@ class StAddFragment : AppCompatActivity() {
         setContentView(R.layout.fragment_st_add)
         timer()
 
+<<<<<<< Updated upstream
         btn_registration.setOnClickListener({
             val builder = AlertDialog.Builder(this)
             builder.setMessage("등록되었습니다.")
@@ -62,6 +63,11 @@ class StAddFragment : AppCompatActivity() {
         send_btn = findViewById(R.id.button)
         price_edit = findViewById(R.id.editTextOrigianlPrice)
         foodName_edit = findViewById(R.id.editTextFoodName)
+=======
+        send_btn = getView()?.findViewById(R.id.button)
+        price_edit = getView()?.findViewById(R.id.editTextOrigianlPrice)
+        foodName_edit = getView()?.findViewById(R.id.editTextFoodName)
+>>>>>>> Stashed changes
 
         items = ArrayList()
 

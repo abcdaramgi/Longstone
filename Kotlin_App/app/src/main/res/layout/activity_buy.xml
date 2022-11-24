@@ -46,7 +46,7 @@
         app:layout_constraintTop_toBottomOf="@id/text_box">
 
         <ImageView
-            android:id="@+id/img_store_photo"
+            android:id="@+id/img_store"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_marginStart="25dp"
@@ -57,7 +57,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/store_de_name"
+            android:id="@+id/buy_store_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -66,11 +66,11 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintLeft_toRightOf="@id/img_store_photo"
+            app:layout_constraintLeft_toRightOf="@id/img_store"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/store_de_place"
+            android:id="@+id/buy_store_place"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -78,8 +78,8 @@
             android:text="가게위치"
             android:textColor="@color/black"
             android:textSize="12sp"
-            app:layout_constraintLeft_toRightOf="@id/img_store_photo"
-            app:layout_constraintTop_toBottomOf="@id/store_de_name" />
+            app:layout_constraintLeft_toRightOf="@id/img_store"
+            app:layout_constraintTop_toBottomOf="@id/buy_store_name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -95,7 +95,7 @@
         app:layout_constraintTop_toBottomOf="@id/store_box">
 
         <TextView
-            android:id="@+id/textView14"
+            android:id="@+id/buy_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -106,7 +106,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView8"
+            android:id="@+id/buy_food_img"
             android:layout_width="103dp"
             android:layout_height="93dp"
             android:layout_marginStart="26dp"
@@ -114,30 +114,32 @@
             android:layout_marginBottom="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView14"
+            app:layout_constraintTop_toBottomOf="@id/buy_info"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/buy_food_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="74dp"
             android:text="소금빵"
             android:textSize="22sp"
-            app:layout_constraintStart_toEndOf="@id/imageView8"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@id/buy_food_img"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView15"
+            android:id="@+id/buy_food_cost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="10dp"
             android:text="2300원 -> 1300원"
+            android:textColor="@color/black"
             android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@id/imageView8"
-            app:layout_constraintTop_toBottomOf="@id/textView9" />
+            app:layout_constraintStart_toEndOf="@id/buy_food_img"
+            app:layout_constraintTop_toBottomOf="@id/buy_food_name" />
 
         <TextView
             android:id="@+id/textView19"
@@ -146,7 +148,8 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="82dp"
             android:text="수량 : "
-            app:layout_constraintStart_toEndOf="@id/textView9"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@id/buy_food_name"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
