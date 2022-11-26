@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_first.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_menu_view.*
 
+
 class FirstActivity : AppCompatActivity() {
     private var login_id : EditText? = null
     private var login_pw : EditText? = null
@@ -23,33 +24,44 @@ class FirstActivity : AppCompatActivity() {
         setContentView(R.layout.activity_first)
 
         //소비자 이동
-        btn_login.setOnClickListener({
+        btn_login.setOnClickListener {
 
-           /* Log.d("Login", "login start...")
-            var result = login()
+            Log.d("Login", "login start...")
+            val result = login()
             Log.d("result = ", result)
-            if(result == "true"){
+            if (result == "true") {
+
+                val preferences = getSharedPreferences("UserInfo", MODE_PRIVATE)
+                val editor = preferences.edit()
+                editor.putString("id", login_id!!.text.toString())
+                editor.putString("pw", login_pw!!.text.toString())
+                editor.commit()
+
+                val testid = preferences.getString("id", "ss")
+                val testpw = preferences.getString("pw", "ss")
+                Log.d("연습용 아이디: ", testid.toString())
+                Log.d("연습용 비밀번호: ", testpw.toString())
+
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
-            }else{
+            } else {
                 Log.d("Login", "login fail...")
             }
-            */
 
             //테스트시 이부분 주석풀고 위쪽 코드 주석달고 테스트
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        })
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+        }
         //판매자 이동
-        btn_store.setOnClickListener({
+        btn_store.setOnClickListener {
             val intent = Intent(this, StMainActivity::class.java)
             startActivity(intent)
-        })
+        }
         //회원가입
-        btn_register.setOnClickListener({
+        btn_register.setOnClickListener {
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
-        })
+        }
     }
     fun login() : String{
         var result = ""

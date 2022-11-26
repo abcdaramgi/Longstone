@@ -1,5 +1,4 @@
 package com.example.demo.controller;
-
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
