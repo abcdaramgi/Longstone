@@ -1,14 +1,25 @@
 package com.example.applicationtest.DTO;
 
 public class postDTO {
-    private String price;
+    private String originalPrice;
+    private String discountPrice;
+    private String foodCount;
     private String foodName;
 
-    public String getPrice(){
-        return price;
+    public String getOriginalPrice(){
+        return originalPrice;
     }
-    public void setPrice(String price){
-        this.price = price;
+    public void setOriginalPrice(String originalPrice){
+        this.originalPrice = originalPrice;
+    }
+
+    public String getDiscountPrice() {return discountPrice;}
+    public void setDiscountPrice(String discountPrice) {this.discountPrice = discountPrice;}
+
+    public String getFoodCount() {return foodCount;}
+
+    public void setFoodCount(String foodCount) {
+        this.foodCount = foodCount;
     }
 
     public String getFoodName(){

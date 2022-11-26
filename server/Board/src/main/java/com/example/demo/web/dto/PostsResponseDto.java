@@ -6,12 +6,16 @@ import lombok.Getter;
 @Getter
 public class PostsResponseDto {
     private Long id;
-    private String price;
+    private String originalPrice;
+    private String discountPrice;
+    private String foodCount;
     private String foodName;
 
     public PostsResponseDto(Posts entity) {
         this.id = entity.getId();
-        this.price = entity.getPrice();
+        this.originalPrice = entity.getOriginalPrice();
+        this.discountPrice = entity.getDiscountPrice();
+        this.foodCount = entity.getFoodCount();
         this.foodName = entity.getFoodName();
     }
 }

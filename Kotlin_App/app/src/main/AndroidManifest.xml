@@ -18,6 +18,20 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".StInfoScreen"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".CheckBuyActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".FoodStoreDetailActivity"
             android:exported="false">
             <meta-data
@@ -81,6 +95,13 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".StBellScreen"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".CartScreen"
             android:exported="false">
             <meta-data
@@ -121,6 +142,9 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="91a51bcb5915b515817ec1b48530df87" />
     </application>
 
 </manifest>

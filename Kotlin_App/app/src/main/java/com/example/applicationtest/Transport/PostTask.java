@@ -33,8 +33,10 @@ public class PostTask extends AsyncTask<String, Void, String>{
             OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
 
             JSONObject sendJson = new JSONObject();
-            sendJson.put("price", strings[0]);
-            sendJson.put("foodName", strings[1]);
+            sendJson.put("originalPrice", strings[0]);
+            sendJson.put("discountPrice", strings[1]);
+            sendJson.put("foodCount", strings[2]);
+            sendJson.put("foodName", strings[3]);
 
             osw.write(sendJson.toString());
             Log.d("value :", sendJson.toString());

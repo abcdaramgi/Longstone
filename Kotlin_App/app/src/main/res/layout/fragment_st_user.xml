@@ -20,7 +20,7 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/button_logout"
+        android:id="@+id/btn_st_logout"
         android:layout_width="100dp"
         android:layout_height="40dp"
         android:layout_marginLeft="280dp"
@@ -38,8 +38,7 @@
         android:rowCount="3">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardview1"
-
+            android:id="@+id/cardview_stinfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_row="0"
@@ -104,7 +103,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="주문내역"
+                    android:text="상품 정보"
                     android:textAlignment="center"
                     android:textStyle="bold" />
 
@@ -141,7 +140,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="상품 정보"
+                    android:text="주문 정보"
                     android:textAlignment="center"
                     android:textStyle="bold" />
 
@@ -178,7 +177,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="리뷰"
+                    android:text="판매내역"
                     android:textAlignment="center"
                     android:textStyle="bold" />
 
@@ -187,7 +186,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardview5"
+            android:id="@+id/cardview_streview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_row="2"
@@ -215,7 +214,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="판매내역"
+                    android:text="리뷰"
                     android:textAlignment="center"
                     android:textStyle="bold" />
 
@@ -252,7 +251,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="환경설정"
+                    android:text="설정"
                     android:textAlignment="center"
                     android:textStyle="bold" />
 

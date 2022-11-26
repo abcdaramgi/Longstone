@@ -22,8 +22,13 @@ import java.io.Serializable
 class FoodData(
     var name: String? =null,
     var place: String? =null,
-    var cost: String? =null,
+    var cost: Int? =null,
+    var updatecost: Int? =null,
     var img: Int? =null,
+    var count: Int? =null,
+    var storename: String? =null,
+    var storeimg: Int? =null,
+    var refood: Int? =null,
 ): Serializable {
     fun getData1(): String? {
         return name
@@ -37,10 +42,10 @@ class FoodData(
     fun setData2(address: String) {
         this.place = place
     }
-    fun getData3(): String? {
+    fun getData3(): Int? {
         return cost
     }
-    fun setData3(type: String) {
+    fun setData3(type: Int) {
         this.cost = cost
     }
     fun getData4(): Int?{
@@ -48,6 +53,12 @@ class FoodData(
     }
     fun setData4(type: Int) {
         this.img = img
+    }
+    fun getData5(): Int? {
+        return updatecost
+    }
+    fun setData5(type: Int) {
+        this.updatecost = updatecost
     }
 }
 

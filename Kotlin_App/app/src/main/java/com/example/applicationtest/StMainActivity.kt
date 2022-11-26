@@ -22,9 +22,9 @@ class StMainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationIte
     private lateinit var stuserfragment: StUserFragment
 
     var stfoodList: ArrayList<FoodData> = arrayListOf(
-        FoodData("뚜레주르","구암동","2500원 -> 1200원",R.drawable.image_bread1),
-        FoodData("뚜레주르","구암동","2500원 -> 1200원",R.drawable.image_bread1),
-        FoodData("뚜레주르","구암동","2500원 -> 1200원", R.drawable.image_bread1),
+        FoodData("소금빵","용산동",2500,2300,R.drawable.image_bread1,5,"가게1",R.drawable.ic_baseline_home_24,2),
+        FoodData("오징어젓갈","신당동",12000,8000,R.drawable.image_bread1,6,"가게2",R.drawable.ic_baseline_home_24,5),
+        FoodData("샐러드","신당동",25200, 17000,R.drawable.image_bread1,8,"가게3",R.drawable.ic_baseline_home_24,3),
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +37,7 @@ class StMainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationIte
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         val transaction = supportFragmentManager.beginTransaction()
+        R.id.menu_Home
         transaction.replace(
             R.id.fragment_frame,
             StHomeFragment()
@@ -52,8 +53,8 @@ class StMainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationIte
         var transaction = supportFragmentManager.beginTransaction()
         when (item.itemId) {
             R.id.menu_plus -> {
-                staddfragment = StAddFragment.newInstance()
-                supportFragmentManager.beginTransaction().replace(R.id.fragment_frame, staddfragment).commit()
+                val intent = Intent(this, StAddFragment::class.java)
+                startActivity(intent)
             }
             R.id.menu_Home -> {
                 transaction.replace(
@@ -73,24 +74,19 @@ class StMainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationIte
         return true
     }
 
-    override fun onOptionsItemSelected(Appitem: MenuItem): Boolean {
-        when(Appitem?.itemId){
-            R.id.action_bell -> {
-                val intent = Intent(this, BellScreen::class.java)
-                startActivity(intent)
-            }
-            R.id.action_cart -> {
-                val intent = Intent(this, CartScreen::class.java)
-                startActivity(intent)
-            }
-            else -> return super.onOptionsItemSelected(Appitem)
-        }
-        return true
-    }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.st_toolbar_menu, menu)
         return true
     }
-
+    //액션버튼 클릭
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item?.itemId){
+            R.id.action_notifications -> {
+                val intent = Intent(this, StBellScreen::class.java)
+                startActivity(intent)
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+        return true
+    }
 }

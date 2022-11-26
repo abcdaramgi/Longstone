@@ -25,7 +25,6 @@ class FirstActivity : AppCompatActivity() {
 
         //소비자 이동
         btn_login.setOnClickListener {
-
             Log.d("Login", "login start...")
             val result = login()
             Log.d("result = ", result)

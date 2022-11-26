@@ -26,7 +26,7 @@ class ReviewAdapter (private val context: Context) : RecyclerView.Adapter<Review
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private val txtScore: TextView = itemView.findViewById(R.id.textView11)
-        private val txtReview: TextView = itemView.findViewById(R.id.textView12)
+        private val txtReview: TextView = itemView.findViewById(R.id.textView13)
         private val reImg : ImageView = itemView.findViewById(R.id.imageView6)
 
         fun bind(item: ItemReview) {

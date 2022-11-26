@@ -33,13 +33,14 @@
                     android:id="@+id/food_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="가게이름"
-                    android:textStyle="bold"
                     android:layout_marginLeft="20dp"
-                    android:textSize="20sp"
+                    android:layout_marginTop="18dp"
+                    android:text="가게이름"
                     android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
                     app:layout_constraintLeft_toRightOf="@id/img_food_photo"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/food_place"
@@ -59,10 +60,32 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="5dp"
-                    android:text="음식가격"
+                    android:text="원가"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     app:layout_constraintLeft_toRightOf="@id/img_food_photo"
+                    app:layout_constraintTop_toBottomOf="@id/food_place" />
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="20dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintStart_toEndOf="@id/food_cost"
+                    app:layout_constraintTop_toBottomOf="@id/food_place"
+                    app:srcCompat="@android:drawable/ic_media_play"
+                    app:tint="@color/black" />
+
+                <TextView
+                    android:id="@+id/food_updata_cost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:text="등록가"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toEndOf="@id/imageView5"
                     app:layout_constraintTop_toBottomOf="@id/food_place" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
