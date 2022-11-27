@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import com.example.demo.domain.posts.Posts;
 import com.example.demo.domain.posts.PostsRepository;
 import com.example.demo.model.OrderPost;
+import com.example.demo.model.Product;
+import com.example.demo.repository.PostRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StreamUtils;
@@ -23,20 +25,22 @@ import java.util.List;
 public class PostsController {
     @Autowired
     PostsRepository postsRepo;
+    @Autowired
+    PostRepository postRepository;
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    @GetMapping
-    public String get() {
-
-        //테이블 posts에 insert/update 쿼리를 실행한다.
-        //postsRepo.save(Posts.builder().price("15000").foodName("치킨").build());
-
-        List<Posts> list = postsRepo.findAll();
-        System.out.println(list.get(0).getFoodName());
-
-        return "hello world";
-    }
+//    @GetMapping
+//    public String get() {
+//
+//        //테이블 posts에 insert/update 쿼리를 실행한다.
+//        //postsRepo.save(Posts.builder().price("15000").foodName("치킨").build());
+//
+//        List<Posts> list = postsRepo.findAll();
+//        System.out.println(list.get(0).getFoodName());
+//
+//        return "hello world";
+//    }
 
     @RequestMapping(value = "/order", method = {RequestMethod.POST})
     public String orderProductPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -45,10 +49,24 @@ public class PostsController {
 
         OrderPost oderPost = objectMapper.readValue(messagebody, OrderPost.class);
 
-
-
-
-
         return "hi";
+    }
+
+    @RequestMapping(value = "/product", method = {RequestMethod.POST})
+    public String uploadProduct(HttpServletRequest request, HttpServletResponse response ) throws IOException{
+        String success = "false";
+        ServletInputStream inputStream = request.getInputStream();
+        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+
+        Product product = objectMapper.readValue(messageBody, Product.class);
+        System.out.println(
+                "strId : " + product.strId + "\n" +
+                "pdPrice : " + product.pdPrice + "\n" +
+                "pdTimer : " + product.pdTimer + "\n" +
+                "pdSale : " + product.pdSale + "\n" +
+                "topicName : " + product.topicName + "\n" +
+                "pdCount : " + product.pdCount);
+        success = postRepository.insertProductData(product);
+        return success;
     }
 }

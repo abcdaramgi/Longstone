@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import com.example.applicationtest.Singleton.SellerSingleton
 import com.example.applicationtest.Transport.LoginTask
 import com.example.applicationtest.Transport.SellerLoginTask
 import kotlinx.android.synthetic.main.activity_first.*
@@ -54,17 +55,23 @@ class FirstActivity : AppCompatActivity() {
         }
         //판매자 이동
         btn_store.setOnClickListener {
-            Log.d("SellerLogin", "login start...")
-            val result = sellerLogin()
-            Log.d("result = ", result)
-            if(result == "true"){
-                val intent = Intent(this, StMainActivity::class.java)
-                startActivity(intent)
-            }else{
-                Log.d("SellerLogin", "login fail...")
-            }
-//            val intent = Intent(this, StMainActivity::class.java)
-//            startActivity(intent)
+
+            //===================================================================//
+            //판매자 로그인 부분
+            //===================================================================//
+//            Log.d("SellerLogin", "login start...")
+//            val result = sellerLogin()
+//            Log.d("result = ", result)
+//            if(result == "true"){
+//                val intent = Intent(this, StMainActivity::class.java)
+//                startActivity(intent)
+//            }else{
+//                Log.d("SellerLogin", "login fail...")
+//            }
+            //===================================================================//
+
+            val intent = Intent(this, StMainActivity::class.java)
+            startActivity(intent)
         }
         //회원가입
         btn_register.setOnClickListener {
@@ -114,6 +121,11 @@ class FirstActivity : AppCompatActivity() {
             result = task.execute(id,pw).get()
 
             Log.d("받은값", result)
+
+            //판매자 로그인 성공시 판매자의 ID를 싱글톤 객체안에 넣는다
+            if(result == "true"){
+                SellerSingleton.getInstance().sellerId = login_id!!.text.toString();
+            }
             Log.d("SellerLogin", "login end...")
         }catch(e : Exception){
             e.printStackTrace()

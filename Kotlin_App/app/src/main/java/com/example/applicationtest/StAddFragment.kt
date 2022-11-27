@@ -20,6 +20,7 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.applicationtest.DTO.postDTO
+import com.example.applicationtest.Singleton.SellerSingleton
 import com.example.applicationtest.Transport.PostTask
 import kotlinx.android.synthetic.main.fragment_st_add.*
 import kotlinx.android.synthetic.main.item_alertdialog.view.*
@@ -28,10 +29,14 @@ import java.io.InputStream
 
 class StAddFragment : AppCompatActivity() {
     private var send_btn: Button? = null
+
     private var original_price_edit: EditText? = null
     private var discount_price_edit: EditText? = null
     private var foodName_edit: EditText? = null
     private var food_count: EditText? = null
+    private var hourPicker : NumberPicker? = null
+    private var minutePicker :NumberPicker? = null
+
     private var img_btn: Button? = null
     var items: List<postDTO>? = null
 
@@ -43,6 +48,7 @@ class StAddFragment : AppCompatActivity() {
         add()
 
         btn_registration.setOnClickListener({
+            post()
             val builder = AlertDialog.Builder(this)
             builder.setMessage("등록되었습니다.")
                 .setPositiveButton("확인",
@@ -73,6 +79,8 @@ class StAddFragment : AppCompatActivity() {
         foodName_edit = findViewById(R.id.editTextFoodName)
         discount_price_edit = findViewById((R.id.editTextDiscountPrice))
         food_count = findViewById((R.id.editTextNumber))
+        hourPicker = findViewById(R.id.hour_picker)
+        minutePicker = findViewById(R.id.minute_picker)
 
         items = ArrayList()
 
@@ -91,10 +99,12 @@ class StAddFragment : AppCompatActivity() {
             var discountPrice = discount_price_edit!!.text.toString()
             var foodCount = food_count!!.text.toString()
             val foodName = foodName_edit!!.text.toString()
+            var timePicker = ((hourPicker!!.value * 60) + (minutePicker!!.value)).toString()
 
-            Log.d("앱에서 보낸값", "$originalPrice, $discountPrice, $foodCount $foodName")
+            Log.d("앱에서 보낸값", "${SellerSingleton.getInstance().sellerId} ,$originalPrice, " +
+                    "$discountPrice, $foodCount, $foodName, $timePicker")
             val task = PostTask()
-            val result = task.execute(originalPrice, discountPrice, foodCount, foodName).get()
+            val result = task.execute(originalPrice, discountPrice, foodCount, foodName, timePicker).get()
             Log.d("받은값", result)
             Log.d("post", "posting end...")
 
