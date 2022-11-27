@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 import com.example.demo.model.User;
+import com.example.demo.repository.SellerRepository;
 import com.example.demo.repository.UserRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,6 +33,8 @@ public class UserController {
 
     @Autowired  //의존성 주입
     UserRepository userRepository;
+    @Autowired
+    SellerRepository sellerRepository;
 
     @GetMapping
     public String check(){
@@ -60,6 +63,7 @@ public class UserController {
         return data;
     }
 
+    //회원가입
     @RequestMapping(value = "/register", method = {RequestMethod.POST})
     public String registerUserData(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String success = "false";
@@ -78,6 +82,7 @@ public class UserController {
         return success;
     }
 
+    //로그인
     @RequestMapping(value = "/login", method = {RequestMethod.POST})
     public String loginUserData(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String success = "false";
@@ -88,6 +93,20 @@ public class UserController {
         System.out.println("id : " + userData.id + "\n" +
                 "pw : " + userData.pw);
         success = userRepository.selectLoginData(userData);
+        return success;
+    }
+
+    //판매자로그인
+    @RequestMapping(value = "/sellerlogin", method = {RequestMethod.POST})
+    public String loginSellerData(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String success = "false";
+        ServletInputStream inputStream = request.getInputStream();
+        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+
+        User userData = objectMapper.readValue(messageBody, User.class);
+        System.out.println("id : " + userData.id + "\n" +
+                "pw : " + userData.pw);
+        success = sellerRepository.selectSellerLoginData(userData);
         return success;
     }
 }

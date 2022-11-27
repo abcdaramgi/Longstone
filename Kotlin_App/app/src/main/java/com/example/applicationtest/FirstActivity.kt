@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.example.applicationtest.Transport.LoginTask
+import com.example.applicationtest.Transport.SellerLoginTask
 import kotlinx.android.synthetic.main.activity_first.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_menu_view.*
@@ -53,8 +54,17 @@ class FirstActivity : AppCompatActivity() {
         }
         //판매자 이동
         btn_store.setOnClickListener {
-            val intent = Intent(this, StMainActivity::class.java)
-            startActivity(intent)
+            Log.d("SellerLogin", "login start...")
+            val result = sellerLogin()
+            Log.d("result = ", result)
+            if(result == "true"){
+                val intent = Intent(this, StMainActivity::class.java)
+                startActivity(intent)
+            }else{
+                Log.d("SellerLogin", "login fail...")
+            }
+//            val intent = Intent(this, StMainActivity::class.java)
+//            startActivity(intent)
         }
         //회원가입
         btn_register.setOnClickListener {
@@ -62,6 +72,8 @@ class FirstActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    //사용자 로그인
     fun login() : String{
         var result = ""
         try{
@@ -79,6 +91,30 @@ class FirstActivity : AppCompatActivity() {
 
             Log.d("받은값", result)
             Log.d("Login", "login end...")
+        }catch(e : Exception){
+            e.printStackTrace()
+        }
+        return result
+    }
+
+    //판매자 로그인
+    fun sellerLogin() : String{
+        var result = ""
+        try{
+            login_id = findViewById(R.id.edit_id)
+            login_pw = findViewById(R.id.edit_pw)
+            login_btn = findViewById(R.id.btn_login)
+
+            val id = login_id!!.text.toString()
+            val pw = login_pw!!.text.toString()
+
+            Log.d("앱에서 보낸값", "$id, $pw")
+
+            val task = SellerLoginTask()
+            result = task.execute(id,pw).get()
+
+            Log.d("받은값", result)
+            Log.d("SellerLogin", "login end...")
         }catch(e : Exception){
             e.printStackTrace()
         }
