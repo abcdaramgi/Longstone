@@ -4,6 +4,7 @@ import com.example.demo.domain.posts.Posts;
 import com.example.demo.domain.posts.PostsRepository;
 import com.example.demo.model.OrderPost;
 import com.example.demo.model.Product;
+import com.example.demo.repository.OderPostRepository;
 import com.example.demo.repository.PostRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,8 @@ public class PostsController {
     PostsRepository postsRepo;
     @Autowired
     PostRepository postRepository;
+    @Autowired
+    OderPostRepository oderPostRepository;
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
@@ -44,10 +47,12 @@ public class PostsController {
 
     @RequestMapping(value = "/order", method = {RequestMethod.POST})
     public String orderProductPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String success = "false";
         ServletInputStream inputStream = request.getInputStream();
         String messagebody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
 
         OrderPost oderPost = objectMapper.readValue(messagebody, OrderPost.class);
+        oderPostRepository.getPostMatchOrderPost(oderPost);
 
         return "hi";
     }
