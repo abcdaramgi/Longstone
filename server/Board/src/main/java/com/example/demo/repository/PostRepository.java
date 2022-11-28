@@ -11,10 +11,19 @@ public class PostRepository {
     JdbcTemplate jdbcTemplate;
 
     public String insertProductData(Product product){
-        String success = "False";
+        String success = "false";
         String sql = "INSERT INTO ProductTB(pdId, sellerId, pdPrice, pdTimer, pdSale, topicName, pdCount) VALUES(?,?,?,?,?,?,?)";
-        int result = jdbcTemplate.update(sql, 3, product.getstrId(), product.getPdPrice(),
+        int result = jdbcTemplate.update(sql, 4, product.getstrId(), product.getPdPrice(),
                 product.getPdTimer(), product.getPdSale(), product.getTopicName(), product.getPdCount());
+        if(result != 0)
+            success = "true";
+        return success;
+    }
+
+    public String insertProductImage(String savepath){
+        String success = "false";
+        String sql = "INSERT INTO PdimageTB(pdId, sellerId, imgUrl) VALUES(?,?,?)";
+        int result = jdbcTemplate.update(sql, 4, "seller1123", savepath);
         if(result != 0)
             success = "true";
         return success;

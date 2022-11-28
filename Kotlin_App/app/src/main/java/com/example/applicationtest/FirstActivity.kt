@@ -70,19 +70,19 @@ class FirstActivity : AppCompatActivity() {
             //===================================================================//
             //판매자 로그인 부분
             //===================================================================//
-//            Log.d("SellerLogin", "login start...")
-//            val result = sellerLogin()
-//            Log.d("result = ", result)
-//            if(result == "true"){
-//                val intent = Intent(this, StMainActivity::class.java)
-//                startActivity(intent)
-//            }else{
-//                Log.d("SellerLogin", "login fail...")
-//            }
+            Log.d("SellerLogin", "login start...")
+            val result = sellerLogin()
+            Log.d("result = ", result)
+            if(result == "true"){
+                val intent = Intent(this, StMainActivity::class.java)
+                startActivity(intent)
+            }else{
+                Log.d("SellerLogin", "login fail...")
+            }
             //===================================================================//
 
-            val intent = Intent(this, StMainActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(this, StMainActivity::class.java)
+//            startActivity(intent)
         }
         //회원가입
         btn_register.setOnClickListener {

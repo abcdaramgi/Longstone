@@ -9,16 +9,17 @@ import com.example.demo.repository.PostRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StreamUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Iterator;
 import java.util.List;
 
 @RestController
@@ -72,6 +73,31 @@ public class PostsController {
                 "topicName : " + product.topicName + "\n" +
                 "pdCount : " + product.pdCount);
         success = postRepository.insertProductData(product);
+        return success;
+    }
+
+    @RequestMapping(value = "/image", method = {RequestMethod.POST})
+    public String uploadProductImage(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        String success = "false";
+        String sellerId = "";
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+        Iterator<String> iterator = multipartRequest.getFileNames();
+
+        while(iterator.hasNext()){
+            String key = (String) iterator.next();
+            for(MultipartFile file : multipartRequest.getFiles(key)){
+                System.out.println("file name : " + file.getName());
+                System.out.println("file size : " + file.getSize());
+
+                String savePath = "C:\\Users\\kddns\\Documents\\test\\" + file.getOriginalFilename();
+                System.out.println("seller name : " + sellerId);
+                System.out.println("save file path : " + savePath);
+
+                file.transferTo(new File(savePath));
+                success = postRepository.insertProductImage(savePath);
+            }
+        }
+
         return success;
     }
 }
