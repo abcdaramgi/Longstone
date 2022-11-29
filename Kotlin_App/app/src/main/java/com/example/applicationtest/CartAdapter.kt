@@ -31,11 +31,13 @@ class CartAdapter (private val context: Context) : RecyclerView.Adapter<CartAdap
         private val txtFood: TextView = itemView.findViewById(R.id.data3Text)
         private val txtStore: TextView = itemView.findViewById(R.id.data2Text)
         private val foodImg : ImageView = itemView.findViewById(R.id.imageView3)
+        private val foodcount : TextView = itemView.findViewById(R.id.textView12)
 
         fun bind(item: ItemCart) {
             txtFood.text = item.FoodName
             txtStore.text = item.StorePlace
             Glide.with(itemView).load(item.food_img).into(foodImg)
+            foodcount.text = item.food_count.toString()
         }
     }
 }

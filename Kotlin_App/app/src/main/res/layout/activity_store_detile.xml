@@ -162,9 +162,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id = "@+id/store_re_de"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="6dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textView13"
             tools:layout_editor_absoluteX="16dp" />

@@ -81,6 +81,7 @@ class HomeScreen : Fragment() {
 
 
         var list: ArrayList<FoodData> = requireActivity().intent!!.extras!!.get("DataList") as ArrayList<FoodData>
+
         Log.e("FirstFragment", "Data List: ${list}")
 
         // Fragment에서 전달받은 list를 넘기면서 ListAdapter 생성
