@@ -112,7 +112,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardview3"
+            android:id="@+id/cardview_orderinfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_row="1"
@@ -217,7 +217,6 @@
                     android:text="리뷰"
                     android:textAlignment="center"
                     android:textStyle="bold" />
-
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>

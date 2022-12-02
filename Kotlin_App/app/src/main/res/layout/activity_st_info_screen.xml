@@ -4,6 +4,230 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StInfoScreen">
+    tools:context=".StoreDetailActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/store_de_box"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/st_toolbar_stinfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:theme="@style/ToolbarTheme">
+
+            <TextView
+                android:id="@+id/st_bar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="가게 정보"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout4"
+            android:layout_width="0dp"
+            android:layout_height="667dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/st_toolbar_review">
+
+            <ScrollView
+                android:id="@+id/scrollView2"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:elevation="8dp"
+                        android:orientation="vertical">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="213dp">
+
+                            <ImageView
+                                android:id="@+id/store_img"
+                                android:layout_width="153dp"
+                                android:layout_height="139dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginBottom="14dp"
+                                app:layout_constraintBottom_toTopOf="@+id/st_de_name"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/st_de_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="16dp"
+                                android:gravity="center"
+                                android:text="가게이름"
+                                android:textAlignment="center"
+                                android:textColor="#000000"
+                                android:textSize="22sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/store_img" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/use_box"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="@id/store_de_box"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent">
+
+
+                            <TextView
+                                android:id="@+id/textView1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="전화번호"
+                                android:textColor="#000000"
+                                android:textSize="18dp"
+                                app:layout_constraintBaseline_toBaselineOf="@+id/textView_st_phonenum"
+                                app:layout_constraintEnd_toEndOf="@+id/textView2"
+                                app:layout_constraintStart_toEndOf="@+id/textView2" />
+
+                            <TextView
+                                android:id="@+id/textView_st_phonenum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginTop="32dp"
+                                android:text="0503241234"
+                                android:textColor="#000000"
+                                android:textSize="18dp"
+                                app:layout_constraintStart_toEndOf="@+id/textView1"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/textView2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="25dp"
+                                android:layout_marginTop="16dp"
+                                android:text="주소"
+                                android:textColor="#000000"
+                                android:textSize="18dp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/textView1" />
+
+                            <TextView
+                                android:id="@+id/textView_st_address"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="56dp"
+                                android:layout_marginTop="16dp"
+                                android:text="대구"
+                                android:textColor="#000000"
+                                android:textSize="18dp"
+                                app:layout_constraintStart_toEndOf="@+id/textView2"
+                                app:layout_constraintTop_toBottomOf="@+id/textView_st_phonenum" />
+
+                            <TextView
+                                android:id="@+id/textView3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="18dp"
+                                android:text="영업시간"
+                                android:textColor="#000000"
+                                android:textSize="18dp"
+                                app:layout_constraintEnd_toEndOf="@+id/textView2"
+                                app:layout_constraintStart_toEndOf="@+id/textView2"
+                                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+                            <TextView
+                                android:id="@+id/textView_st_openingtime"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="25dp"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginEnd="25dp"
+                                android:textColor="#000000"
+                                android:textSize="18dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+                            <TextView
+                                android:id="@+id/textView4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:text="원산지정보"
+                                android:textColor="#000000"
+                                android:textSize="18dp"
+                                app:layout_constraintStart_toStartOf="@+id/textView_st_openingtime"
+                                app:layout_constraintTop_toBottomOf="@+id/textView_st_openingtime" />
+
+                            <TextView
+                                android:id="@+id/textView_origininfo"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="25dp"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginEnd="25dp"
+                                android:textColor="#000000"
+                                android:textSize="18dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+                            <Button
+                                android:id="@+id/btn_stinfo_correct"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginEnd="16dp"
+                                android:background="#81000000"
+                                android:text="수정"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

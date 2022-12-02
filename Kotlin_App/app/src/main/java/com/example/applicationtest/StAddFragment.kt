@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.SurfaceControl.Transaction
 import android.view.View
 import android.view.ViewGroup
@@ -43,6 +44,19 @@ class StAddFragment : AppCompatActivity() {
         })
         add()
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        when (id) {
+            //뒤로가기 버튼이 눌리면 현재 접속 중인 화면을 나감
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     //NumberPicker 활성화
     fun timer(){
         hour_picker.apply {
@@ -59,7 +73,7 @@ class StAddFragment : AppCompatActivity() {
     
     @SuppressLint("MissingInflatedId")
     fun add() {
-        send_btn = findViewById(R.id.button)
+        send_btn = findViewById(R.id.btn_registration)
         price_edit = findViewById(R.id.editTextOrigianlPrice)
         foodName_edit = findViewById(R.id.editTextFoodName)
 
