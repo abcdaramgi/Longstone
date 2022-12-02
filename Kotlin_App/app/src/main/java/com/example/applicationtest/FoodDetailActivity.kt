@@ -1,31 +1,56 @@
 package com.example.applicationtest
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Spinner
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.applicationtest.MapScreen.Companion.newInstance
+import kotlinx.android.synthetic.main.activity_buy.*
+import kotlinx.android.synthetic.main.fragment_prefer_screen.*
 import kotlinx.android.synthetic.main.item_alertdialog.view.*
 import kotlinx.android.synthetic.main.item_today_food_detail.*
+import kotlinx.android.synthetic.main.item_today_food_detail.store_box
+import kotlinx.android.synthetic.main.item_today_food_detail.store_de_name
+import kotlinx.android.synthetic.main.item_today_food_detail.store_de_place
 
 // 메인 화면 상품 리스트를 클릭했을 때, 상품의 정보를 자세히 보여주는 화면
 class FoodDetailActivity : AppCompatActivity() {
     lateinit var datas : FoodData
     var ad_count : Int = 0
+    var selectNum : Int = 0
+    val NEW_STORE = 22
+    val list : java.util.ArrayList<StoreData> = MainActivity().storeList as ArrayList
+    lateinit var storeAdapter : StoreAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.item_today_food_detail)
 
+        val fragment : PreferScreen? = supportFragmentManager.findFragmentByTag("fragment_prefer_screen") as PreferScreen?
+        supportFragmentManager.executePendingTransactions()
+
+        fragment?.storeAdapter = StoreAdapter(list)
+        /*fragment.st_listView.layoutManager = LinearLayoutManager(fragment.activity, RecyclerView.VERTICAL, false)
+        fragment.st_listView.adapter = fragment.storeAdapter
+
+        list.add(StoreData("hi","hell",R.drawable.image_bread1))
+        storeAdapter.notifyDataSetChanged()*/
+
         datas = intent.getSerializableExtra("data") as FoodData
 
         Glide.with(this).load(datas.img).into(img_profile)
+        Glide.with(this).load(datas.storeimg).into(img_store_photo)
         detail_food_name.text = datas.name
         ad_count = datas.count!!
         store_de_name.text = datas.storename
-
-        var selectNum = 0
+        store_de_place.text = datas.place
+        review.text = datas.refood.toString()+"개"
 
         // 구매 버튼을 눌렀을 때, 구매창(BuyActivity)으로 넘어감
         buy_bnt.setOnClickListener({
@@ -46,7 +71,10 @@ class FoodDetailActivity : AppCompatActivity() {
 
                 layout.btn_ok.setOnClickListener {
                     selectNum = layout.number_picker.value
+
                     val intent = Intent(this, BuyActivity::class.java)
+                    intent.putExtra("foodCount",selectNum)
+                    intent.putExtra("data",datas)
                     startActivity(intent)
                 }
             })
@@ -54,10 +82,16 @@ class FoodDetailActivity : AppCompatActivity() {
         // 가게 정보가 담긴 부분을 눌렀을 때, 가게 상세 정보(FoodStoreDetailActivity) 창으로 넘어감
         store_box.setOnClickListener({
             val intent = Intent(this, FoodStoreDetailActivity::class.java)
-            startActivity(intent)
+            intent.putExtra("data",datas)
+            startActivityForResult(intent,NEW_STORE)
         })
 
         review_img.setOnClickListener({
+            val intent = Intent(this, ReviewActivity::class.java)
+            startActivity(intent)
+        })
+
+        review.setOnClickListener({
             val intent = Intent(this, ReviewActivity::class.java)
             startActivity(intent)
         })
@@ -83,4 +117,21 @@ class FoodDetailActivity : AppCompatActivity() {
             }
         })
     }
+    /*override fun onActivityResult(requestCode: Int, resultCode : Int, data : Intent?) {
+        val list : java.util.ArrayList<StoreData> = MainActivity().storeList as ArrayList
+        fragment.storeAdapter = StoreAdapter(list)
+        fragment.st_listView.layoutManager = LinearLayoutManager(fragment.activity, RecyclerView.VERTICAL, false)
+        fragment.st_listView.adapter = fragment.storeAdapter
+
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == NEW_STORE) {
+            Log.d("MDM", "In onActivityResult")
+            if (resultCode == Activity.RESULT_OK) {
+                val store = data?.getSerializableExtra("new_store") as StoreData//새 레스토랑 받아옴
+                list.add(store)
+                fragment.storeAdapter.notifyDataSetChanged()
+            }
+        }
+    }*/
 }

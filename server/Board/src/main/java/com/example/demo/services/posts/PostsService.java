@@ -24,7 +24,7 @@ public class PostsService {
     public Long update(Long id, PostsUpdateRequestDto requestDto) {
         Posts posts = postsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Id not exist!! id="+id));
 
-        posts.update(requestDto.getPrice(), requestDto.getFoodName());
+        posts.update(requestDto.getOriginalPrice(), requestDto.getDiscountPrice(), requestDto.getFoodCount(), requestDto.getFoodName());
         return id;
     }
 

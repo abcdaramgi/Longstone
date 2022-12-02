@@ -16,13 +16,14 @@ class ListAdapter(private var list: ArrayList<FoodData>): RecyclerView.Adapter<L
         var data2Text: TextView = itemView!!.findViewById(R.id.food_place)
         var data3Text: TextView = itemView!!.findViewById(R.id.food_cost)
 
+
         // onBindViewHolder의 역할을 대신한다.
         fun bind(data: FoodData, position: Int) {
             Log.d("ListAdapter", "===== ===== ===== ===== bind ===== ===== ===== =====")
             Log.d("ListAdapter", data.getData1()+" "+data.getData2()+" "+data.getData3())
             data1Text.text = data.getData1()
             data2Text.text = data.getData2()
-            data3Text.text = data.getData3()
+            data3Text.text = data.getData3().toString()
         }
     }
 

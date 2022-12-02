@@ -8,16 +8,21 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class PostsSaveRequestDto {
-    private String price;
+    private String originalPrice;
+    private String discountPrice;
+    private String foodCount;
     private String foodName;
 
+
     @Builder
-    public PostsSaveRequestDto(String price, String foodName) {
-        this.price = price;
+    public PostsSaveRequestDto(String originalPrice, String discountPrice, String foodCount, String foodName) {
+        this.originalPrice = originalPrice;
+        this.discountPrice = discountPrice;
+        this.foodCount = foodCount;
         this.foodName = foodName;
     }
 
     public Posts toEntity() {
-        return Posts.builder().price(price).foodName(foodName).build();
+        return Posts.builder().originalPrice(originalPrice).discountPrice(discountPrice).foodCount(foodCount).foodName(foodName).build();
     }
 }

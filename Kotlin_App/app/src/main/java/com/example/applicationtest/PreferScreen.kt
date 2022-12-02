@@ -1,4 +1,5 @@
 package com.example.applicationtest
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,8 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.internal.ContextUtils.getActivity
 import kotlinx.android.synthetic.main.fragment_prefer_screen.*
-import kotlinx.android.synthetic.main.fragment_st_home.*
 import java.io.Serializable
 
 class StoreData(
@@ -40,22 +41,24 @@ class StoreData(
 
 class PreferScreen : Fragment() {
 
-    private  lateinit var storeAdapter: StoreAdapter
+    lateinit var storeAdapter: StoreAdapter
+    var list: ArrayList<StoreData> = ArrayList()
+    val NEW_STORE = 22
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         return inflater.inflate(R.layout.fragment_prefer_screen, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var list: ArrayList<StoreData> = requireActivity().intent!!.extras!!.get("DataList") as ArrayList<StoreData>
         Log.e("FirstFragment", "Data List: ${list}")
+
+        list = requireActivity().intent!!.extras!!.get("DataList") as ArrayList<StoreData>
 
         // Fragment에서 전달받은 list를 넘기면서 ListAdapter 생성
         storeAdapter = StoreAdapter(list)
@@ -69,12 +72,43 @@ class PreferScreen : Fragment() {
         storeAdapter.setOnItemClickListener(object : StoreAdapter.OnItemClickListener
         {
             override fun onItemClick(v: View, data: StoreData, pos: Int){
-                val intent = Intent(getActivity(), StoreDetailActivity::class.java)
+                val intent = Intent(requireActivity(), StoreDetailActivity::class.java)
                 intent.putExtra("data",data)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
+                intent.putExtra("list",list)
+                //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivityForResult(intent,NEW_STORE)
             }
         })
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode : Int, data : Intent?) {
+        list = requireActivity().intent!!.extras!!.get("DataList") as ArrayList<StoreData>
+        storeAdapter = StoreAdapter(list)
+        st_listView.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+        st_listView.adapter = storeAdapter
+
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == NEW_STORE) {
+            Log.d("MDM", "In onActivityResult")
+            if (resultCode == Activity.RESULT_OK) {
+                val store = data?.getSerializableExtra("new_store") as StoreData//새 레스토랑 받아옴
+                list.add(store)
+                storeAdapter.notifyDataSetChanged()
+            }
+        }
+
+        st_listView.addItemDecoration(DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL))
+
+        storeAdapter.setOnItemClickListener(object : StoreAdapter.OnItemClickListener
+        {
+            override fun onItemClick(v: View, data: StoreData, pos: Int){
+                val intent = Intent(requireActivity(), StoreDetailActivity::class.java)
+                intent.putExtra("data",data)
+                intent.putExtra("list",list)
+                //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivityForResult(intent,NEW_STORE)
+            }
+        })
+    }
 }

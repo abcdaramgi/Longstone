@@ -21,15 +21,17 @@ class TodayListAdapter(private var list: MutableList<FoodData>): RecyclerView.Ad
         var place: TextView = itemView!!.findViewById(R.id.food_place)
         var cost: TextView = itemView!!.findViewById(R.id.food_cost)
         var imgFood: ImageView = itemView!!.findViewById(R.id.img_food_photo)
-
+        var cost2: TextView = itemView!!.findViewById(R.id.food_updata_cost)
         // onBindViewHolder의 역할을 대신한다.
+
         fun bind(data: FoodData, position: Int) {
             //Log.d("ListAdapter", "===== ===== ===== ===== bind ===== ===== ===== =====")
             Log.d("ListAdapter", data.getData1() + " " + data.getData2() + " " + data.getData3())
             Glide.with(itemView).load(data.getData4()).into(imgFood)
             name.text = data.getData1()
             place.text = data.getData2()
-            cost.text = data.getData3()
+            cost.text = data.getData3().toString() + "원"
+            cost2.text = data.getData5().toString() + "원"
 
             val pos = adapterPosition
             if(pos!= RecyclerView.NO_POSITION)

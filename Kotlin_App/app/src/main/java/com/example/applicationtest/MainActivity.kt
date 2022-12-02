@@ -22,18 +22,17 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     private lateinit var userScreen: UserScreen
 
     var dataList: ArrayList<FoodData> = arrayListOf(
-        FoodData("뚜레주르","구암동","2500원 -> 1200원",R.drawable.image_bread1,5,"가게1"),
-        FoodData("뚜레주르","구암동","2500원 -> 1200원",R.drawable.image_bread1,6,"가게2"),
-        FoodData("뚜레주르","구암동","2500원 -> 1200원", R.drawable.image_bread1,8,"가게3"),
+        FoodData("소금빵","용산동",2500,2300,R.drawable.image_bread1,5,"가게1",R.drawable.ic_baseline_home_24,2),
+        FoodData("오징어젓갈","신당동",10000,5500,R.drawable.image_bread1,6,"가게2",R.drawable.ic_baseline_home_24,5),
+        FoodData("샐러드","신당동",12000, 8000,R.drawable.image_food1,8,"가게3",R.drawable.ic_baseline_home_24,3),
     )
-
-    var storeList: ArrayList<StoreData> = arrayListOf(
+    var storeList: MutableList<StoreData> = mutableListOf(
         StoreData("뚜레주르","빵, 음료, 샐러드",R.drawable.image_bread1),
         StoreData("유가네 닭갈비","닭갈비, 볶음밥, 막국수, ",R.drawable.image_bread1),
         StoreData("봉대박찜닭","찜닭, 샐러드",R.drawable.image_bread1),
     )
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+        override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
@@ -86,7 +85,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 )
                 transaction.commit()
                 intent.putExtra("DataList",dataList)
-
                 /*homeScreen = HomeScreen.newInstance()
                 supportFragmentManager.beginTransaction().replace(R.id.fl_container, homeScreen).commit()*/
             }
@@ -109,7 +107,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                     PreferScreen()
                 )
                 transaction.commit()
-                intent.putExtra("DataList",storeList)
+                intent.putExtra("DataList",storeList as ArrayList)
                 /*preferScreen = PreferScreen.newInstance()
                 supportFragmentManager.beginTransaction().replace(R.id.fl_container, preferScreen).commit()*/
             }

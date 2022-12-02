@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "959936776527",
+    "project_id": "goldenhour-88bee",
+    "storage_bucket": "goldenhour-88bee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:959936776527:android:5c14934291afb0617f1d3a",
+        "android_client_info": {
+          "package_name": "com.example.applicationtest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "959936776527-ttgco9621sl326ffj7e2b8k17j8tcul8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_1ufkAF1yjFR8Dcrg5d9d5GSslgZC6o8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "959936776527-ttgco9621sl326ffj7e2b8k17j8tcul8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

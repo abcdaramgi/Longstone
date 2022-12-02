@@ -17,19 +17,29 @@ public class Posts {
     private Long id;
 
     @Column(length = 500, nullable = false)
-    private String price;
+    private String originalPrice;
+
+    @Column(length = 500, nullable = false)
+    private String discountPrice;
+
+    @Column(length = 500, nullable = false)
+    private String foodCount;
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String foodName;
 
 
     @Builder
-    public Posts(String price, String foodName) {
-        this.price = price;
+    public Posts(String originalPrice, String discountPrice, String foodCount, String foodName) {
+        this.originalPrice = originalPrice;
+        this.discountPrice = discountPrice;
+        this.foodCount = foodCount;
         this.foodName = foodName;
     }
-    public void update(String price, String foodName) {
-        this.price = price;
+    public void update(String originalPrice, String discountPrice, String foodCount, String foodName) {
+        this.originalPrice = originalPrice;
+        this.discountPrice = discountPrice;
+        this.foodCount = foodCount;
         this.foodName = foodName;
     }
 }

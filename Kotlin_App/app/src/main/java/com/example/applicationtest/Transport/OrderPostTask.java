@@ -3,6 +3,9 @@ package com.example.applicationtest.Transport;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.applicationtest.MainActivity;
+import com.example.applicationtest.MyApplication;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,44 +17,47 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class LoginTask extends AsyncTask<String, Void, String> {
+public class OrderPostTask extends AsyncTask<String, Void, String> {
     String sendMsg, receiveMsg;
+
     @Override
     protected String doInBackground(String... strings) {
-        try{
+        try {
             String str;
-            URL url = new URL("http://10.0.2.2:8080/user/login");
+            URL url = new URL("http://10.0.2.2:8080/post/order");
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type", "application/json");
 
-            //보내는방식
             conn.setRequestMethod("POST");
             conn.setDoOutput(true);
-            //서버에 보낼값포함해 요청함
             OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
 
+            String uid = MyApplication.prefs.getString("id", "0");
+
             JSONObject sendJson = new JSONObject();
-            sendJson.put("id", strings[0]);
-            sendJson.put("pw", strings[1]);
+            sendJson.put("uid", uid);
+            sendJson.put("pid", strings[0]);
+            sendJson.put("pname", strings[1]);
+            sendJson.put("price", strings[2]);
+            sendJson.put("pcount", strings[3]);
 
             osw.write(sendJson.toString());
             Log.d("value :", sendJson.toString());
             osw.flush();
 
-
-            //통신도 잘되고 서버에서 보낸값 받음
-            if(conn.getResponseCode() == conn.HTTP_OK){
+            if (conn.getResponseCode() == conn.HTTP_OK) {
                 InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), "UTF-8");
                 BufferedReader reader = new BufferedReader(tmp);
                 StringBuffer buffer = new StringBuffer();
-                while((str = reader.readLine()) != null){
+                while ((str = reader.readLine()) != null) {
                     buffer.append(str);
                 }
                 receiveMsg = buffer.toString();
-            }else{
-                Log.i("통신결과 : ", conn.getResponseCode()+"에러");
+            } else {
+                Log.i("통신결과 : ", conn.getResponseCode() + "에러");
             }
+
         }catch (MalformedURLException e){
             e.printStackTrace();
         }catch (IOException e){
