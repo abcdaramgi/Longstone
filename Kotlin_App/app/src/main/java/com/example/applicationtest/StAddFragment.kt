@@ -117,6 +117,7 @@ class StAddFragment : AppCompatActivity() {
         }
     }
 
+<<<<<<< Updated upstream
 //    @SuppressLint("MissingInflatedId")
 //    fun add() {
 //        send_btn = findViewById(R.id.button)
@@ -124,6 +125,8 @@ class StAddFragment : AppCompatActivity() {
 //        foodName_edit = findViewById(R.id.editTextFoodName)
 //    }
 
+=======
+>>>>>>> Stashed changes
     fun post() {
 
         if(imageview!!.drawable != null){ //이미지 뷰에 이미지가 올라갔을때

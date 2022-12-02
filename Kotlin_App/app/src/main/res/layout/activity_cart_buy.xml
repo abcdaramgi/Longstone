@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f7f7f7"
-    tools:context=".BuyActivity">
+    tools:context=".CartBuyActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -148,9 +148,9 @@
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:elevation="10dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="20dp"
+        android:elevation="6dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/constraintLayout2">
@@ -183,7 +183,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id = "@+id/ch_buy_today"
+        android:id = "@+id/ch_buy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -196,16 +196,17 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="주문내용 확인 및 결제 동의"
-            app:layout_constraintBottom_toTopOf="@+id/button4"
+            app:layout_constraintBottom_toTopOf="@+id/cart_buy"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/cart_buy"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="구매하기"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:layout_editor_absoluteX="0dp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -214,10 +215,10 @@
         android:layout_marginTop="4dp"
         android:background="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/ch_buy_today">
+        app:layout_constraintBottom_toTopOf="@id/ch_buy">
 
         <TextView
-            android:id="@+id/buy_count"
+            android:id="@+id/buy_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -229,7 +230,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/food_buy_cost"
+            android:id="@+id/textView28"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -238,7 +239,7 @@
             android:textColor="@color/black"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/buy_count" />
+            app:layout_constraintTop_toBottomOf="@id/buy_num" />
 
         <TextView
             android:id="@+id/textView24"
@@ -265,6 +266,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textView24" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

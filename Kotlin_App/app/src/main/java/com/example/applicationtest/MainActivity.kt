@@ -23,8 +23,9 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     var dataList: ArrayList<FoodData> = arrayListOf(
         FoodData("소금빵","용산동",2500,2300,R.drawable.image_bread1,5,"가게1",R.drawable.ic_baseline_home_24,2),
-        FoodData("오징어젓갈","신당동",10000,5500,R.drawable.image_bread1,6,"가게2",R.drawable.ic_baseline_home_24,5),
+        FoodData("오징어젓갈","신당동",10000,5500,R.drawable.food2,6,"가게2",R.drawable.ic_baseline_home_24,5),
         FoodData("샐러드","신당동",12000, 8000,R.drawable.image_food1,8,"가게3",R.drawable.ic_baseline_home_24,3),
+        FoodData("매추리알","신당동",5000, 3000,R.drawable.image_food3,8,"가게3",R.drawable.ic_baseline_home_24,3)
     )
     var storeList: MutableList<StoreData> = mutableListOf(
         StoreData("뚜레주르","빵, 음료, 샐러드",R.drawable.image_bread1),
