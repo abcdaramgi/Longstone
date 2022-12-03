@@ -42,9 +42,9 @@ class StReviewScreen : AppCompatActivity() {
         st_rv_reviewinfo.adapter = reviewAdapter
 
         datas.apply {
-            add(ItemReview("5점","바삭하고 맛있어요.",R.drawable.image_bread1))
-            add(ItemReview("5점","바삭하고 맛있어요.",R.drawable.image_bread1))
-            add(ItemReview("5점","바삭하고 맛있어요.",R.drawable.image_bread1))
+            add(ItemReview(5,"바삭하고 맛있어요.",R.drawable.image_bread1))
+            add(ItemReview(5,"바삭하고 맛있어요.",R.drawable.image_bread1))
+            add(ItemReview(5,"바삭하고 맛있어요.",R.drawable.image_bread1))
         }
         reviewAdapter.datas = datas
         reviewAdapter.notifyDataSetChanged()

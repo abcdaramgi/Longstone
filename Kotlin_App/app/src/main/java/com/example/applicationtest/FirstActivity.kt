@@ -9,6 +9,7 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.example.applicationtest.Singleton.PreferenceUtil
 import com.example.applicationtest.Singleton.SellerSingleton
+import com.example.applicationtest.Singleton.UserSingleton
 import com.example.applicationtest.Transport.LoginTask
 import com.example.applicationtest.Transport.SellerLoginTask
 import com.google.android.gms.common.util.SharedPreferencesUtils
@@ -32,33 +33,34 @@ class FirstActivity : AppCompatActivity() {
 
         //소비자 이동
         btn_login.setOnClickListener {
-            /*Log.d("Login", "login start...")
-            val result = login()
-            Log.d("result = ", result)
-            if (result == "true") {
+//            Log.d("Login", "login start...")
+//            val result = login()
+//            Log.d("result = ", result)
+//            if (result == "true") {
 
-                val id = login_id?.text.toString()
-                val pw = login_pw?.text.toString()
-
-                MyApplication.prefs.setString("id", id)
-                MyApplication.prefs.setString("pw", pw)
-
+                //==============================================================//
+                //이거뭔데
+                //==============================================================//
+//                val id = login_id?.text.toString()
+//                val pw = login_pw?.text.toString()
+//                MyApplication.prefs.setString("id", id)
+//                MyApplication.prefs.setString("pw", pw)
 //                preferences = getSharedPreferences("UserInfo", MODE_PRIVATE)
 //                val editor = preferences.edit()
 //                editor.putString("id", login_id!!.text.toString())
 //                editor.putString("pw", login_pw!!.text.toString())
 //                editor.commit()
-//
-                val testid = MyApplication.prefs.getString("id", "0")
-                val testpw = MyApplication.prefs.getString("pw", "0")
-                Log.d("연습용 아이디: ", testid.toString())
-                Log.d("연습용 비밀번호: ", testpw.toString())
+//                val testid = MyApplication.prefs.getString("id", "0")
+//                val testpw = MyApplication.prefs.getString("pw", "0")
+//                Log.d("연습용 아이디: ", testid.toString())
+//                Log.d("연습용 비밀번호: ", testpw.toString())
+                //==============================================================//
 
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-            } else {
-                Log.d("Login", "login fail...")
-            }*/
+//                val intent = Intent(this, MainActivity::class.java)
+//                startActivity(intent)
+//            } else {
+//                Log.d("Login", "login fail...")
+//            }
 
             //테스트시 이부분 주석풀고 위쪽 코드 주석달고 테스트
             val intent = Intent(this, MainActivity::class.java)
@@ -108,6 +110,10 @@ class FirstActivity : AppCompatActivity() {
             result = task.execute(id,pw).get()
 
             Log.d("받은값", result)
+            //사용자 로그인 성공시 사용자의 ID를 싱글톤 객체안에 넣는다
+            if(result == "true"){
+                UserSingleton.getInstance().userId = login_id!!.text.toString();
+            }
             Log.d("Login", "login end...")
         }catch(e : Exception){
             e.printStackTrace()

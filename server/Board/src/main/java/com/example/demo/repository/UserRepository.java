@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import com.example.demo.model.Favorites;
 import com.example.demo.model.User;
 //import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class UserRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-
+    //회원가입
     public String insertRegisterData(User user){
         String success = "False";
         String sql = "INSERT INTO UserTB(userId, userPassword, nickName, userName, birthDate, phoneNum, userMail)" +
@@ -29,6 +30,8 @@ public class UserRepository {
             success = "true";
         return success;
     }
+
+    //로그인
     public String selectLoginData(User user){
         String success = "False";
         String sql = "SELECT count(*) FROM UserTB WHERE userId=? AND userPassword=?";
@@ -37,6 +40,17 @@ public class UserRepository {
             success = "true";
         return success;
     }
+
+    //사용자 즐겨찾기
+    public String insertFavoritesData(Favorites favorites){
+        String success = "False";
+        String sql = "INSERT INTO UsertopicTB (userId, sellerId) VALUES (?, (SELECT sellerId FROM StoreTB WHERE storeName = ?))";
+        int result = jdbcTemplate.update(sql, favorites.getUserId(), favorites.getStoreName());
+        if(result != 0)
+            success = "true";
+        return success;
+    }
+
     //test
     public List<String> getAllUserNames(){
         List<String> usernameList = new ArrayList<>();
