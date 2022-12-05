@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.domain.posts.Posts;
 import com.example.demo.domain.posts.PostsRepository;
+import com.example.demo.model.ImageFile;
 import com.example.demo.model.OrderPost;
 import com.example.demo.model.Product;
 import com.example.demo.repository.OderPostRepository;
@@ -93,8 +94,12 @@ public class PostsController {
                 System.out.println("seller name : " + sellerId);
                 System.out.println("save file path : " + savePath);
 
+                ImageFile imagefile = new ImageFile();
+                imagefile.setsellerId(file.getName());
+                imagefile.setimgUrl(savePath);
+
                 file.transferTo(new File(savePath));
-                success = postRepository.insertProductImage(savePath);
+                success = postRepository.insertProductImage(imagefile);
             }
         }
 
