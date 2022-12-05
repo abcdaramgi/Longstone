@@ -9,6 +9,7 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.example.applicationtest.Singleton.PreferenceUtil
 import com.example.applicationtest.Singleton.SellerSingleton
+import com.example.applicationtest.Singleton.UserSingleton
 import com.example.applicationtest.Transport.LoginTask
 import com.example.applicationtest.Transport.SellerLoginTask
 import com.google.android.gms.common.util.SharedPreferencesUtils
@@ -49,10 +50,6 @@ class FirstActivity : AppCompatActivity() {
 ////                editor.putString("pw", login_pw!!.text.toString())
 ////                editor.commit()
 ////
-//                val testid = MyApplication.prefs.getString("id", "0")
-//                val testpw = MyApplication.prefs.getString("pw", "0")
-//                Log.d("연습용 아이디: ", testid.toString())
-//                Log.d("연습용 비밀번호: ", testpw.toString())
 //
 //                val intent = Intent(this, MainActivity::class.java)
 //                startActivity(intent)
@@ -70,19 +67,19 @@ class FirstActivity : AppCompatActivity() {
             //===================================================================//
             //판매자 로그인 부분
             //===================================================================//
-            Log.d("SellerLogin", "login start...")
-            val result = sellerLogin()
-            Log.d("result = ", result)
-            if(result == "true"){
-                val intent = Intent(this, StMainActivity::class.java)
-                startActivity(intent)
-            }else{
-                Log.d("SellerLogin", "login fail...")
-            }
+//            Log.d("SellerLogin", "login start...")
+//            val result = sellerLogin()
+//            Log.d("result = ", result)
+//            if(result == "true"){
+//                val intent = Intent(this, StMainActivity::class.java)
+//                startActivity(intent)
+//            }else{
+//                Log.d("SellerLogin", "login fail...")
+//            }
             //===================================================================//
 
-//            val intent = Intent(this, StMainActivity::class.java)
-//            startActivity(intent)
+            val intent = Intent(this, StMainActivity::class.java)
+            startActivity(intent)
         }
         //회원가입
         btn_register.setOnClickListener {
@@ -108,6 +105,10 @@ class FirstActivity : AppCompatActivity() {
             result = task.execute(id,pw).get()
 
             Log.d("받은값", result)
+            //사용자 로그인 성공시 사용자의 ID를 싱글톤 객체안에 넣는다
+            if(result == "true"){
+                UserSingleton.getInstance().userId = login_id!!.text.toString();
+            }
             Log.d("Login", "login end...")
         }catch(e : Exception){
             e.printStackTrace()

@@ -14,13 +14,13 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class LoginTask extends AsyncTask<String, Void, String> {
+public class FavoritesTask extends AsyncTask<String, Void, String> {
     String sendMsg, receiveMsg;
     @Override
     protected String doInBackground(String... strings) {
         try{
             String str;
-            URL url = new URL("http://210.91.133.222:8080/user/login");
+            URL url = new URL("http://210.91.133.222:8080/user/favorites");
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type", "application/json");
@@ -32,8 +32,8 @@ public class LoginTask extends AsyncTask<String, Void, String> {
             OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
 
             JSONObject sendJson = new JSONObject();
-            sendJson.put("id", strings[0]);
-            sendJson.put("pw", strings[1]);
+            sendJson.put("userId", strings[0]);
+            sendJson.put("storeName", strings[1]);
 
             osw.write(sendJson.toString());
             Log.d("value :", sendJson.toString());

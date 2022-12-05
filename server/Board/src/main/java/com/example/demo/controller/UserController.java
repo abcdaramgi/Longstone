@@ -1,4 +1,5 @@
 package com.example.demo.controller;
+import com.example.demo.model.Favorites;
 import com.example.demo.model.User;
 import com.example.demo.repository.SellerRepository;
 import com.example.demo.repository.UserRepository;
@@ -89,10 +90,25 @@ public class UserController {
         ServletInputStream inputStream = request.getInputStream();
         String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
 
+        System.out.println(messageBody);
         User userData = objectMapper.readValue(messageBody, User.class);
         System.out.println("id : " + userData.id + "\n" +
                 "pw : " + userData.pw);
         success = userRepository.selectLoginData(userData);
+        return success;
+    }
+
+    //즐겨찾기
+    @RequestMapping(value = "/favorites", method = {RequestMethod.POST})
+    public String favoritesUserData(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        String success = "false";
+        ServletInputStream inputStream = request.getInputStream();
+        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+
+        Favorites favorites = objectMapper.readValue(messageBody, Favorites.class);
+        System.out.println("userId : " + favorites.getUserId() + "\n" +
+                "storeName : " + favorites.getStoreName());
+        success = userRepository.insertFavoritesData(favorites);
         return success;
     }
 

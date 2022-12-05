@@ -4,35 +4,31 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.CompoundButton
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
 import com.example.applicationtest.Transport.OrderPostTask
-import kotlinx.android.synthetic.main.activity_buy.*
-import kotlinx.android.synthetic.main.item_today_food_detail.*
+import kotlinx.android.synthetic.main.activity_cart_buy.*
+import kotlinx.android.synthetic.main.item_menu_view.*
 
-class BuyActivity : AppCompatActivity() {
-    lateinit var datas : FoodData
+class CartBuyActivity : AppCompatActivity() {
+    lateinit var datas : ItemCart
     var num : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_buy)
+        setContentView(R.layout.activity_cart_buy)
 
-        datas = intent.getSerializableExtra("data") as FoodData
-        num = intent.getSerializableExtra("foodCount") as Int
+        datas = intent.getSerializableExtra("buy") as ItemCart
 
-        Glide.with(this).load(datas.img).into(buy_food_img)
-        Glide.with(this).load(datas.storeimg).into(img_store)
-        buy_food_name.text = datas.name
-        buy_store_name.text = datas.storename
-        buy_store_place.text = datas.place
-        buy_count.text = num.toString() + "개"
-        food_buy_cost.text = (datas.updatecost?.times(num)).toString() + "원"
+        Glide.with(this).load(datas.food_img).into(buy_food_img)
+        Glide.with(this).load(R.drawable.ic_baseline_home_24).into(img_store)
+        buy_food_name.text = datas.FoodName
+        buy_store_name.text = datas.StoreName
+        buy_food_cost.text = datas.cost.toString() + "원"
+        buy_num.text = datas.food_count.toString() + "개"
+        textView28.text = (datas.cost?.times(datas.food_count!!)).toString() + "원"
 
-        button4.setOnClickListener({
+        cart_buy.setOnClickListener({
             val builder = AlertDialog.Builder(this)
                 .setMessage("구매 확인에 동의해주세요.")
                 .setPositiveButton("확인",
@@ -43,21 +39,14 @@ class BuyActivity : AppCompatActivity() {
 
         buy_check.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                button4.setOnClickListener({
-                    val intent = Intent(this, CheckBuyActivity::class.java)
-                    intent.putExtra("foodCount",num)
+                cart_buy.setOnClickListener({
+                    val intent = Intent(this, CartCheckBuyActivity::class.java)
                     intent.putExtra("data",datas)
-
-                    /*val task = OrderPostTask()
-                    val result = task.execute("1", "ss치킨", "98000", num.toString()).get()
-
-                    //Log.d("받은값", result)*/
-
                     startActivity(intent)
                 })
             }
             else {
-                button4.setOnClickListener({
+                cart_buy.setOnClickListener({
                     val builder = AlertDialog.Builder(this)
                         .setMessage("구매 확인에 동의해주세요.")
                         .setPositiveButton("확인",

@@ -23,7 +23,6 @@ import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class StAddFragment : AppCompatActivity() {
     private var send_btn: Button? = null
 
@@ -124,7 +123,6 @@ class StAddFragment : AppCompatActivity() {
 //        foodName_edit = findViewById(R.id.editTextFoodName)
 //    }
 
-    
     fun post() {
 
         if(imageview!!.drawable != null){ //이미지 뷰에 이미지가 올라갔을때
@@ -223,4 +221,5 @@ class StAddFragment : AppCompatActivity() {
             return StAddFragment()
         }
     }
+
 }
