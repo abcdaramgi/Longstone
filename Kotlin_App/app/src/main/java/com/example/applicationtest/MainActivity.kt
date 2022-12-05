@@ -8,7 +8,9 @@ import android.util.Base64
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import com.example.applicationtest.FireBase.MyFirebaseMessagingService
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.toolbar
 import java.security.MessageDigest
@@ -37,8 +39,13 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         setContentView(R.layout.activity_main)
 
-        nav_view.setOnNavigationItemSelectedListener(this)
+        //test
+        MyFirebaseMessagingService().getFirebaseToken()
+        initDynamicLink()
 
+
+        nav_view.setOnNavigationItemSelectedListener(this)
+            getHashKey()
         setSupportActionBar(toolbar) //커스텀한 toolbar 액션바로 사용
         supportActionBar?.setDisplayShowTitleEnabled(false) //액션바에 표시되는 제목의 표시유무를 설정합니다. false로 해야 custom한 툴바의 이름이 화면에 보이게 됩니다.
 
@@ -140,4 +147,30 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             }
         }
     }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+
+    }
+
+    private fun initFirebase() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Log.d("알림알림!", task.result)
+            }
+        }
+    }
+
+    private fun initDynamicLink() {
+        val dynamicLinkData = intent.extras
+        if (dynamicLinkData != null) {
+            var dataStr = "DynamicLink 수신받은 값\n"
+            for (key in dynamicLinkData.keySet()) {
+                dataStr += "key: $key / value: ${dynamicLinkData.getString(key)}\n"
+            }
+            Log.d("알림알림@", dataStr)
+        }
+    }
+
 }

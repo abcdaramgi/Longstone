@@ -116,15 +116,13 @@ class StAddFragment : AppCompatActivity() {
             wrapSelectorWheel = false
         }
     }
-    
-<<<<<<< Updated upstream
-=======
-    @SuppressLint("MissingInflatedId")
-    fun add() {
-        send_btn = findViewById(R.id.button)
-        price_edit = findViewById(R.id.editTextOrigianlPrice)
-        foodName_edit = findViewById(R.id.editTextFoodName)
->>>>>>> Stashed changes
+
+//    @SuppressLint("MissingInflatedId")
+//    fun add() {
+//        send_btn = findViewById(R.id.button)
+//        price_edit = findViewById(R.id.editTextOrigianlPrice)
+//        foodName_edit = findViewById(R.id.editTextFoodName)
+//    }
 
     
     fun post() {

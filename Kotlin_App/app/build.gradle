@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android-extensions'
     id 'kotlin-android'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -74,4 +75,10 @@ dependencies {
     //gson
     implementation 'com.google.code.gson:gson:2.8.5'
 
+    //fcm
+    implementation platform('com.google.firebase:firebase-bom:31.1.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx:21.2.0'
+    implementation 'com.google.firebase:firebase-messaging-ktx'
 }
+
+apply plugin: 'com.google.gms.google-services'
