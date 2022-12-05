@@ -25,7 +25,7 @@ public class PostTask extends AsyncTask<String, Void, String>{
             String str;
 //            URL url = new URL("http://10.0.2.2:8080/api/v1/posts/");//url 객체 생성
 //            URL url = new URL("https://webhook.site/799b6f2b-bc27-48f0-8a12-7c774ba06ca8");
-            URL url = new URL("http://222.103.14.221:8080/post/product");
+            URL url = new URL("http://222.103.14.187:8080/post/product");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection(); //url 연결
             //content type json
             conn.setRequestProperty("Content-Type", "application/json");

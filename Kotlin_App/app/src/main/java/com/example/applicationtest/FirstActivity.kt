@@ -33,10 +33,10 @@ class FirstActivity : AppCompatActivity() {
 
         //소비자 이동
         btn_login.setOnClickListener {
-//            Log.d("Login", "login start...")
-//            val result = login()
-//            Log.d("result = ", result)
-//            if (result == "true") {
+            Log.d("Login", "login start...")
+            val result = login()
+            Log.d("result = ", result)
+            if (result == "true") {
 
                 //==============================================================//
                 //이거뭔데
@@ -56,15 +56,15 @@ class FirstActivity : AppCompatActivity() {
 //                Log.d("연습용 비밀번호: ", testpw.toString())
                 //==============================================================//
 
-//                val intent = Intent(this, MainActivity::class.java)
-//                startActivity(intent)
-//            } else {
-//                Log.d("Login", "login fail...")
-//            }
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            } else {
+                Log.d("Login", "login fail...")
+            }
 
             //테스트시 이부분 주석풀고 위쪽 코드 주석달고 테스트
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
         }
         //판매자 이동
         btn_store.setOnClickListener {
@@ -72,19 +72,19 @@ class FirstActivity : AppCompatActivity() {
             //===================================================================//
             //판매자 로그인 부분
             //===================================================================//
-//            Log.d("SellerLogin", "login start...")
-//            val result = sellerLogin()
-//            Log.d("result = ", result)
-//            if(result == "true"){
-//                val intent = Intent(this, StMainActivity::class.java)
-//                startActivity(intent)
-//            }else{
-//                Log.d("SellerLogin", "login fail...")
-//            }
+            Log.d("SellerLogin", "login start...")
+            val result = sellerLogin()
+            Log.d("result = ", result)
+            if(result == "true"){
+                val intent = Intent(this, StMainActivity::class.java)
+                startActivity(intent)
+            }else{
+                Log.d("SellerLogin", "login fail...")
+            }
             //===================================================================//
 
-            val intent = Intent(this, StMainActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(this, StMainActivity::class.java)
+//            startActivity(intent)
         }
         //회원가입
         btn_register.setOnClickListener {
