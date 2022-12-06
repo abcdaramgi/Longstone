@@ -102,7 +102,6 @@ public class PostsController {
                 success = postRepository.insertProductImage(imagefile);
             }
         }
-
         return success;
     }
 }

@@ -33,10 +33,10 @@ class FirstActivity : AppCompatActivity() {
 
         //소비자 이동
         btn_login.setOnClickListener {
-//            Log.d("Login", "login start...")
-//            val result = login()
-//            Log.d("result = ", result)
-//            if (result == "true") {
+            Log.d("Login", "login start...")
+            val result = login()
+            Log.d("result = ", result)
+            if (result == "true") {
 //
 //                val id = login_id?.text.toString()
 //                val pw = login_pw?.text.toString()
@@ -52,14 +52,14 @@ class FirstActivity : AppCompatActivity() {
 ////                val testid = MyApplication.prefs.getString("id", "0")
 ////                val testpw = MyApplication.prefs.getString("pw", "0")
 //
-//                val intent = Intent(this, MainActivity::class.java)
-//                startActivity(intent)
-//            } else {
-//                Log.d("Login", "login fail...")
-//            }
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            } else {
+                Log.d("Login", "login fail...")
+            }
             //테스트시 이부분 주석풀고 위쪽 코드 주석달고 테스트
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
         }
         //판매자 이동
         btn_store.setOnClickListener {
@@ -78,8 +78,8 @@ class FirstActivity : AppCompatActivity() {
             }
             //===================================================================//
 
-//            val intent = Intent(this, StMainActivity::class.java)
-//            startActivity(intent)
+            val intent = Intent(this, StMainActivity::class.java)
+            startActivity(intent)
         }
         //회원가입
         btn_register.setOnClickListener {
