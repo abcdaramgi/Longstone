@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.applicationtest.DTO.FoodData
 import com.example.applicationtest.MapScreen.Companion.newInstance
 import kotlinx.android.synthetic.main.activity_buy.*
 import kotlinx.android.synthetic.main.fragment_cart_screen.*
@@ -59,7 +60,7 @@ class FoodDetailActivity : AppCompatActivity() {
         review.text = datas.refood.toString() + "개"
 
         // 구매 버튼을 눌렀을 때, 구매창(BuyActivity)으로 넘어감
-        buy_bnt.setOnClickListener({
+        buy_bnt.setOnClickListener {
             val layout = layoutInflater.inflate(R.layout.item_alertdialog, null)
             val build = AlertDialog.Builder(it.context).apply {
                 setView(layout)
@@ -83,24 +84,24 @@ class FoodDetailActivity : AppCompatActivity() {
                 intent.putExtra("data", datas)
                 startActivity(intent)
             }
-        })
+        }
 
         // 가게 정보가 담긴 부분을 눌렀을 때, 가게 상세 정보(FoodStoreDetailActivity) 창으로 넘어감
-        store_box.setOnClickListener({
+        store_box.setOnClickListener {
             val intent = Intent(this, FoodStoreDetailActivity::class.java)
             intent.putExtra("data", datas)
             startActivityForResult(intent, NEW_STORE)
-        })
+        }
 
-        review_img.setOnClickListener({
+        review_img.setOnClickListener {
             val intent = Intent(this, ReviewActivity::class.java)
             startActivity(intent)
-        })
+        }
 
-        review.setOnClickListener({
+        review.setOnClickListener {
             val intent = Intent(this, ReviewActivity::class.java)
             startActivity(intent)
-        })
+        }
 
         button3.setOnClickListener{
             val layout = layoutInflater.inflate(R.layout.item_alertdialog, null)

@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.example.applicationtest.DTO.FoodData
 import com.example.applicationtest.DTO.StoreDTO
 import com.example.applicationtest.FireBase.MyFirebaseMessagingService
 import com.example.applicationtest.Singleton.UserSingleton

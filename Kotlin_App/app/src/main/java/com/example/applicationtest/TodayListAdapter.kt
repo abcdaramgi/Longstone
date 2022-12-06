@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.applicationtest.DTO.FoodData
 
 class TodayListAdapter(private var list: MutableList<FoodData>): RecyclerView.Adapter<TodayListAdapter.ListItemViewHolder> () {
 

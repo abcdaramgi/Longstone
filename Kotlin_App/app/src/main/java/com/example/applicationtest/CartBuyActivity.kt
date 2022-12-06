@@ -28,32 +28,32 @@ class CartBuyActivity : AppCompatActivity() {
         buy_num.text = datas.food_count.toString() + "개"
         textView28.text = (datas.cost?.times(datas.food_count!!)).toString() + "원"
 
-        cart_buy.setOnClickListener({
+        cart_buy.setOnClickListener {
             val builder = AlertDialog.Builder(this)
                 .setMessage("구매 확인에 동의해주세요.")
                 .setPositiveButton("확인",
                     DialogInterface.OnClickListener { dialog, id ->
                     })
             builder.show()
-        })
+        }
 
         buy_check.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                cart_buy.setOnClickListener({
+                cart_buy.setOnClickListener {
                     val intent = Intent(this, CartCheckBuyActivity::class.java)
-                    intent.putExtra("data",datas)
+                    intent.putExtra("data", datas)
                     startActivity(intent)
-                })
+                }
             }
             else {
-                cart_buy.setOnClickListener({
+                cart_buy.setOnClickListener {
                     val builder = AlertDialog.Builder(this)
                         .setMessage("구매 확인에 동의해주세요.")
                         .setPositiveButton("확인",
                             DialogInterface.OnClickListener { dialog, id ->
                             })
                     builder.show()
-                })
+                }
             }
         }
     }
