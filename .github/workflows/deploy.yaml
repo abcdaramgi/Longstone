@@ -3,7 +3,7 @@ name: deploy-action
 on:
   push:
     branches:
-      - master
+      - CI/CD]---TEST
   workflow_dispatch:
 
 env:
