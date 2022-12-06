@@ -1,17 +1,21 @@
 package com.example.applicationtest
 
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.example.applicationtest.DTO.StoreDTO
 import com.example.applicationtest.Singleton.SellerSingleton
-import com.example.applicationtest.Singleton.UserSingleton
-import com.example.applicationtest.Transport.LoginTask
+import com.example.applicationtest.Transport.StoreGetImgTask
 import com.example.applicationtest.Transport.StoreGetInfoTask
 import kotlinx.android.synthetic.main.activity_st_info_screen.*
 import kotlinx.android.synthetic.main.activity_st_review_screen.*
+import org.json.JSONArray
+import org.json.JSONObject
 
 class StInfoScreen : AppCompatActivity() {
     private var store_img : ImageView? = null;
@@ -37,8 +41,8 @@ class StInfoScreen : AppCompatActivity() {
         store_addr = findViewById(R.id.textView_st_address)
         store_openHour = findViewById(R.id.textView_st_openingtime)
         //데이터 불러오기 함수호출
-        Log.d("GET STORE DATA", "GET DATA start...")
         getStoreData()
+        getStoreImgData()
         //============================================================//
     }
 
@@ -57,25 +61,66 @@ class StInfoScreen : AppCompatActivity() {
     fun getStoreData(){
         var result = ""
         try{
-
-            val strName = store_name!!.text.toString()
-            val strPhone = store_phoneNum!!.text.toString()
-            val strAddr = store_addr!!.text.toString()
-            val strOpenHour = store_openHour!!.text.toString()
+            Log.d("GET STORE DATA", "GET DATA start...")
 
             val sellerId = SellerSingleton.getInstance().sellerId
             Log.d("앱에서 보낸값", sellerId)
 
             val task = StoreGetInfoTask()
-
             result = task.execute(sellerId).get()
-
             Log.d("받은값", result)
 
-            if(result == "true"){
+            if(result != null){
+                val `object` = JSONObject(result)
+                val array = `object`.get("store") as JSONArray
 
+                val row = array.getJSONObject(0)
+                val storeDTO = StoreDTO()
+
+                storeDTO.setName(row.getString("name"))
+                storeDTO.setNumber(row.getString("number"))
+                storeDTO.setOpenHour(row.getString("openHour"))
+                storeDTO.setStoreAddr(row.getString("storeAddr"))
+
+                Log.d("storeName : ", storeDTO.getName())
+                Log.d("storeNum : ", storeDTO.getNumber())
+                Log.d("openHour : ", storeDTO.getOpenHour())
+                Log.d("storeAddr : ", storeDTO.getStoreAddr())
+
+                store_name!!.setText(storeDTO.getName());
+                store_phoneNum!!.setText(storeDTO.getNumber());
+                store_addr!!.setText(storeDTO.getStoreAddr());
+                store_openHour!!.setText(storeDTO.getOpenHour());
+            }
+            else{
+                Log.d("GET STORE DATA", "GET DATA FAIL...")
             }
             Log.d("GET STORE DATA", "GET DATA end...")
+        }catch(e : Exception){
+            e.printStackTrace()
+        }
+    }
+
+    fun getStoreImgData(){
+        var result = ""
+        try{
+            Log.d("GET STORE IMG DATA", "GET DATA IMG start...")
+
+            val sellerId = SellerSingleton.getInstance().sellerId
+            Log.d("앱에서 보낸값", sellerId)
+
+            val task = StoreGetImgTask()
+            result = task.execute(sellerId).get()
+
+            if(result != null){
+//                store_img!!.setImageBitmap(result);
+                //imageView 에 append
+                Glide.with(this).load(result).into(store_img!!)
+            }
+            else{
+                Log.d("GET STORE IMG DATA", "GET DATA IMG FAIL...")
+            }
+            Log.d("GET STORE IMG DATA", "GET DATA IMG end...")
         }catch(e : Exception){
             e.printStackTrace()
         }

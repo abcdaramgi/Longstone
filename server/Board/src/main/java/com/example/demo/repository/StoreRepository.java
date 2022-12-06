@@ -32,5 +32,14 @@ public class StoreRepository {
         return result;
     }
 
+    public String findStoreImgData(String sellerId){
+        String result = "false";
+
+        String sql = "SELECT imgUrl FROM StoreTB WHERE sellerId = ?";
+        result = jdbcTemplate.queryForObject(sql, String.class ,sellerId);
+
+        return result;
+    }
+
 
 }

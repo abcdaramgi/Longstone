@@ -1,71 +1,63 @@
 package com.example.applicationtest.Transport;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.applicationtest.DTO.StoreDTO;
 import com.example.applicationtest.Singleton.SellerSingleton;
-import com.google.gson.Gson;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class StoreGetInfoTask extends AsyncTask<String, Void, String>{
+public class StoreGetImgTask extends AsyncTask<String, Void, String> {
     String sendMsg, receiveMsg;
-    String a = "sbial";
-    boolean success;
+    Bitmap bitmap = null;
     @Override
-    protected String doInBackground(String... strings) {
+    protected String doInBackground(String... Strings) {
         try{
             String str;
-            URL url = new URL("http://10.0.2.2:8080/store/info");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection(); //url 연결
-            //content type json
+            URL url = new URL("http://10.0.2.2:8080/store/imginfo");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type", "application/json");
 
-            //보내는방식 GET OR POST
+            //보내는방식
             conn.setRequestMethod("POST");
-            conn.setDoOutput(true); // OutputStream으로 POST 데이터를 넘겨주겠다..
+            conn.setDoOutput(true);
             //서버에 보낼값포함해 요청함
             OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
 
-//            JSONObject sendJson = new JSONObject();
-//            sendJson.put("sellerId", strings[0]);
-            String sendData = strings[0];
+            String sendData = Strings[0];
 
-//            osw.write(sendJson.toString());
             osw.write(sendData);
-//            Log.d("value :", sendJson.toString());
             Log.d("value :", sendData);
             osw.flush();
 
-            if(conn.getResponseCode() == conn.HTTP_OK){ //통신 ready?
+
+            //통신도 잘되고 서버에서 보낸값 받음
+            if(conn.getResponseCode() == conn.HTTP_OK){
                 InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), "UTF-8");
                 BufferedReader reader = new BufferedReader(tmp);
                 StringBuffer buffer = new StringBuffer();
                 while((str = reader.readLine()) != null){
                     buffer.append(str);
                 }
-
                 receiveMsg = buffer.toString();
-                receiveMsg = receiveMsg.toString();
-                Log.d("receiveMsg", receiveMsg);
-
             }else{
                 Log.i("통신결과 : ", conn.getResponseCode()+"에러");
             }
         }catch (MalformedURLException e){
             e.printStackTrace();
-        }catch (IOException e) {
+        }catch (IOException e){
             e.printStackTrace();
         }
         return receiveMsg;

@@ -90,7 +90,9 @@ public class PostsController {
                 System.out.println("file name : " + file.getName());
                 System.out.println("file size : " + file.getSize());
 
-                String savePath = "C:\\Users\\kddns\\Documents\\test\\" + file.getOriginalFilename();
+                //이미지저장경로를 src/main/resources/static/images 로 해야된다.
+                //http://(서버 아이피)/images/~~~.jpg로 들어갔을때 이미지가 보여야한다.
+                String savePath = "C:\\Users\\kddns\\Documents\\Longstone\\server\\Board\\src\\main\\resources\\static\\images\\" + file.getOriginalFilename();
                 System.out.println("seller name : " + sellerId);
                 System.out.println("save file path : " + savePath);
 
