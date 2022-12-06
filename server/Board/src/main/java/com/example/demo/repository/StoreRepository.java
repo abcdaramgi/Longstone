@@ -16,6 +16,7 @@ public class StoreRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    //가게 정보 가져오기
     public List<Store> findStoreData(String sellerId){
         String sql = "SELECT storeName,storeNum,openHour, storeAddr FROM StoreTB WHERE sellerId = ?";
         List<Store> result = jdbcTemplate.query(sql, new RowMapper<Store>() {
@@ -32,6 +33,7 @@ public class StoreRepository {
         return result;
     }
 
+    //가게 이미지 가져오기
     public String findStoreImgData(String sellerId){
         String result = "false";
 

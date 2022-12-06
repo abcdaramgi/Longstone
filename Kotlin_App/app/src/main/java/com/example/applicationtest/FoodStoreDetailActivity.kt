@@ -52,6 +52,7 @@ class FoodStoreDetailActivity : AppCompatActivity() {
             Log.d("result = ", result)
             if(result == "true"){
                 //대충 메세지로 즐겨찾기 등록성공 팝업창 띄워주셈.
+                //종모양 기본값을 빈 종모양 => 노란색으로 채워진 종모양으로 변경
             }else{
                 Log.d("Favorites", "Favorites fail...")
             }

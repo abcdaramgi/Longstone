@@ -17,7 +17,7 @@ import java.io.Serializable
 class StoreData(
     var storename: String? =null,
     var storeinfo: String? =null,
-    var img: Int? =null,
+    var img: String? =null,
 ): Serializable {
     fun getData1(): String? {
         return storename
@@ -31,10 +31,10 @@ class StoreData(
     fun setData2(info: String) {
         this.storeinfo = info
     }
-    fun getData3(): Int?{
+    fun getData3(): String?{
         return img
     }
-    fun setData3(type: Int) {
+    fun setData3(type: String) {
         this.img = img
     }
 }

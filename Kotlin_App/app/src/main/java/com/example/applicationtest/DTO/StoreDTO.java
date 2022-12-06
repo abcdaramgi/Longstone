@@ -1,5 +1,7 @@
 package com.example.applicationtest.DTO;
 
+import java.util.stream.Stream;
+
 public class StoreDTO {
     public String name;
     public String number;
@@ -72,4 +74,5 @@ public class StoreDTO {
         this.storeAddr = storeAddr;
         this.openHour = openHour;
     }
+
 }
