@@ -17,7 +17,13 @@ import com.example.applicationtest.DTO.postDTO
 import com.example.applicationtest.Singleton.SellerSingleton
 import com.example.applicationtest.Transport.FileUploadUtils
 import com.example.applicationtest.Transport.PostTask
+import kotlinx.android.synthetic.main.activity_st_add_object.*
+import kotlinx.android.synthetic.main.activity_st_info_screen.*
 import kotlinx.android.synthetic.main.fragment_st_add.*
+import kotlinx.android.synthetic.main.fragment_st_add.btn_registration
+import kotlinx.android.synthetic.main.fragment_st_add.button2
+import kotlinx.android.synthetic.main.fragment_st_add.hour_picker
+import kotlinx.android.synthetic.main.fragment_st_add.minute_picker
 import kotlinx.android.synthetic.main.item_alertdialog.view.*
 import java.io.*
 import java.text.SimpleDateFormat
@@ -73,7 +79,13 @@ class StAddFragment : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_st_add)
+        setContentView(R.layout.activity_st_add_object)
+
+        setSupportActionBar(st_toolbar_SalesAdd) //커스텀한 toolbar 액션바로 사용
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        //액션바에 표시되는 제목의 표시유무를 설정합니다. false로 해야 custom한 툴바의 이름이 화면에 보이게 됩니다.
+        supportActionBar?.setDisplayHomeAsUpEnabled(true) //액션바 뒤로가기 아이콘 표시
+
         timer()
 //        img_add()
 //        add()
