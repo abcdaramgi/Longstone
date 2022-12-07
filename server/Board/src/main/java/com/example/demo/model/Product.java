@@ -4,7 +4,7 @@ public class Product {
 
     public String strId;
     public String pdPrice;
-    public String pdTimer;
+    public Integer pdTimer;
     public String pdSale;
     public String topicName;
     public String pdCount;
@@ -19,8 +19,8 @@ public class Product {
         this.pdPrice = pdPrice;
     }
 
-    public String getPdTimer(){ return pdTimer;}
-    public void setPdTimer(String pdTimer){ this.pdTimer = pdTimer; }
+    public Integer getPdTimer(){ return pdTimer;}
+    public void setPdTimer(Integer pdTimer){ this.pdTimer = pdTimer; }
 
     public String getPdSale(){ return pdSale;}
     public void setPdSale(String pdSale){

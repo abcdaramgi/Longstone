@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.applicationtest.Transport.RegisterTask
 import com.example.applicationtest.Transport.SearchTask
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.*
@@ -28,10 +29,11 @@ class SearchScreen : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        search_bar.setOnQueryTextListener( object : SearchView.OnQueryTextListener {
+        search_bar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             //검색버튼 입력시 호출, 검색버튼이 없으므로 사용하지 않음
             override fun onQueryTextSubmit(s: String): Boolean {
+
                 try {
                     val content = s
                     val task = SearchTask()
@@ -75,7 +77,5 @@ class SearchScreen : Fragment() {
 //                }
 //            }
     }
-
-
 
 }

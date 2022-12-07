@@ -29,7 +29,6 @@ import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class StAddFragment : AppCompatActivity() {
     private var send_btn: Button? = null
 
@@ -104,16 +103,16 @@ class StAddFragment : AppCompatActivity() {
             openGallery()
         }
 
-        btn_registration.setOnClickListener({
+        btn_registration.setOnClickListener {
             post()
             val builder = AlertDialog.Builder(this)
             builder.setMessage("등록되었습니다.")
                 .setPositiveButton("확인",
-                    DialogInterface.OnClickListener{ dialog, id ->
+                    DialogInterface.OnClickListener { dialog, id ->
                         finish()
                     })
             builder.show()
-        })
+        }
     }
     //NumberPicker 활성화
     fun timer(){
@@ -234,4 +233,5 @@ class StAddFragment : AppCompatActivity() {
             return StAddFragment()
         }
     }
+
 }

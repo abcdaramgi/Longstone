@@ -44,7 +44,35 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".BuyListActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".OrderHistoryScreen"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".WriteReviewActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".CartCheckBuyActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".CartBuyActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -179,6 +207,13 @@
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="91a51bcb5915b515817ec1b48530df87" />
+        <service
+            android:name=".FireBase.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name ="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

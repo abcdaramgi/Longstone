@@ -29,7 +29,7 @@ public class LoginTask extends AsyncTask<String, Void, String> {
             conn.setRequestMethod("POST");
             conn.setDoOutput(true);
             //서버에 보낼값포함해 요청함
-            OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
+            OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
 
             JSONObject sendJson = new JSONObject();
             sendJson.put("id", strings[0]);

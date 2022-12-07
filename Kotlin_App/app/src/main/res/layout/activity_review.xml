@@ -32,7 +32,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView16"
+            android:id="@+id/sum_re"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -50,9 +50,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:layout_centerInParent="true"
+            android:isIndicator="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView16"
+            app:layout_constraintTop_toBottomOf="@id/sum_re"
             app:tint="#ffd400"
             tools:ignore="SpeakableTextPresentCheck" />
 
@@ -81,7 +82,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView18"
+            android:id="@+id/re_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"

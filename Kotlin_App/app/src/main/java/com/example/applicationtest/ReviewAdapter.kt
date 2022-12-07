@@ -30,7 +30,7 @@ class ReviewAdapter (private val context: Context) : RecyclerView.Adapter<Review
         private val reImg : ImageView = itemView.findViewById(R.id.imageView6)
 
         fun bind(item: ItemReview) {
-            txtScore.text = item.score
+            txtScore.text = item.score.toString() + "점"
             txtReview.text = item.review
             Glide.with(itemView).load(item.review_img).into(reImg)
         }

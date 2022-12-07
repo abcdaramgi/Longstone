@@ -1,5 +1,6 @@
 package com.example.applicationtest
 import android.content.Context.MODE_PRIVATE
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -28,11 +29,10 @@ class UserScreen : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        button.setOnClickListener({
-            val testid = MyApplication.prefs.getString("id", "0")
-            val testpw = MyApplication.prefs.getString("pw", "0")
-            Log.d("연습용 아이디: ", testid.toString())
-            Log.d("연습용 비밀번호: ", testpw.toString())
+
+        cardview_stinfo.setOnClickListener({
+            var intent = Intent(getActivity(), BuyListActivity::class.java)
+            startActivity(intent)
         })
     }
 }

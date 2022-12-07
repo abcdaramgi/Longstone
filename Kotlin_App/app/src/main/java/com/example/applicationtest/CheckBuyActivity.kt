@@ -2,6 +2,8 @@ package com.example.applicationtest
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
+import com.example.applicationtest.DTO.FoodData
 import kotlinx.android.synthetic.main.activity_check_buy.*
 import kotlinx.android.synthetic.main.fragment_bell_screen.*
 import kotlinx.android.synthetic.main.fragment_bell_screen.toolbar
@@ -31,5 +33,16 @@ class CheckBuyActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         //액션바에 표시되는 제목의 표시유무를 설정합니다. false로 해야 custom한 툴바의 이름이 화면에 보이게 됩니다.
         supportActionBar?.setDisplayHomeAsUpEnabled(true) //액션바 뒤로가기 아이콘 표시
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        when (id) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
