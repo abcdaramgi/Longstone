@@ -1,13 +1,11 @@
 package com.example.demo.controller;
 
-import com.example.demo.domain.posts.Posts;
 import com.example.demo.domain.posts.PostsRepository;
-import com.example.demo.model.ImageFile;
-import com.example.demo.model.OrderPost;
-import com.example.demo.model.Product;
+import com.example.demo.model.*;
 import com.example.demo.repository.OderPostRepository;
 import com.example.demo.repository.PostRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
@@ -47,6 +45,7 @@ public class PostsController {
 //        return "hello world";
 //    }
 
+
     @RequestMapping(value = "/order", method = {RequestMethod.POST})
     public String orderProductPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String success = "false";
@@ -60,7 +59,7 @@ public class PostsController {
     }
 
     @RequestMapping(value = "/product", method = {RequestMethod.POST})
-    public String uploadProduct(HttpServletRequest request, HttpServletResponse response ) throws IOException{
+    public String uploadProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String success = "false";
         ServletInputStream inputStream = request.getInputStream();
         String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
@@ -68,25 +67,25 @@ public class PostsController {
         Product product = objectMapper.readValue(messageBody, Product.class);
         System.out.println(
                 "strId : " + product.strId + "\n" +
-                "pdPrice : " + product.pdPrice + "\n" +
-                "pdTimer : " + product.pdTimer + "\n" +
-                "pdSale : " + product.pdSale + "\n" +
-                "topicName : " + product.topicName + "\n" +
-                "pdCount : " + product.pdCount);
+                        "pdPrice : " + product.pdPrice + "\n" +
+                        "pdTimer : " + product.pdTimer + "\n" +
+                        "pdSale : " + product.pdSale + "\n" +
+                        "topicName : " + product.topicName + "\n" +
+                        "pdCount : " + product.pdCount);
         success = postRepository.insertProductData(product);
         return success;
     }
 
     @RequestMapping(value = "/image", method = {RequestMethod.POST})
-    public String uploadProductImage(HttpServletRequest request, HttpServletResponse response) throws IOException{
+    public String uploadProductImage(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String success = "false";
         String sellerId = "";
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         Iterator<String> iterator = multipartRequest.getFileNames();
 
-        while(iterator.hasNext()){
+        while (iterator.hasNext()) {
             String key = (String) iterator.next();
-            for(MultipartFile file : multipartRequest.getFiles(key)){
+            for (MultipartFile file : multipartRequest.getFiles(key)) {
                 System.out.println("file name : " + file.getName());
                 System.out.println("file size : " + file.getSize());
 
@@ -105,5 +104,14 @@ public class PostsController {
             }
         }
         return success;
+    }
+
+    //판매중인거 다 땡겨오기
+    @RequestMapping(value = "/onsalepost", method = {RequestMethod.POST})
+    public JSONObject getTodayFoodData(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        List<Post> post = postRepository.getOnsalePost();
+        JSONObject data = new JSONObject();
+        data.put("store", post);
+        return data;
     }
 }
