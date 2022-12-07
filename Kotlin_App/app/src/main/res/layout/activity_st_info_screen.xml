@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StoreDetailActivity">
+    tools:context=".StInfoScreen">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/store_de_box"
@@ -47,7 +47,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/st_toolbar_review">
+            app:layout_constraintTop_toBottomOf="@+id/st_toolbar_stinfo">
 
             <ScrollView
                 android:id="@+id/scrollView2"
