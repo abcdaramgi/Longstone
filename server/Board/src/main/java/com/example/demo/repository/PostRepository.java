@@ -20,9 +20,9 @@ public class PostRepository {
 
     public String insertProductData(Product product){
         String success = "false";
-        String sql = "INSERT INTO ProductTB(sellerId, pdPrice, pdTimer, pdSale, topicName, pdCount) VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO ProductTB(sellerId, pdPrice, pdTimer, pdSale, pdName, pdCount, pdContents) VALUES(?,?,?,?,?,?,?)";
         int result = jdbcTemplate.update(sql, product.getstrId(), product.getPdPrice(),
-                product.getPdTimer(), product.getPdSale(), product.getTopicName(), product.getPdCount());
+                product.getPdTimer(), product.getPdSale(), product.getpdName(), product.getPdCount(), product.getpdContents());
         if(result != 0)
             success = "true";
         Singleton.getInstance().AutoIncresePdId = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
@@ -45,7 +45,8 @@ public class PostRepository {
     }
 
     public List<Post> getOnsalePost(String status){
-        String sql = "SELECT pdId, sellerId, pdContents, pdPrice, pdTimer, pdSale, pdName FROM ProductTB WHERE expire < ? AND status = ?;";
+        String sql = "SELECT ProductTB.pdId, ProductTB.sellerId, pdContents, pdPrice, pdTimer, pdSale, pdName, PdimageTB.imgUrl FROM ProductTB, PdimageTB WHERE (expire < ? AND status = ?) \n" +
+                "AND (ProductTB.pdId = PdimageTB.pdId);";
         SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String timeStamp = date.format(new Date());
         System.out.println(timeStamp);
@@ -60,7 +61,8 @@ public class PostRepository {
                 Integer discount = rs.getInt("pdSale");
                 price = price * (discount / 100);
                 post.setSaleprice(price);
-                post.setImg("please img url");
+                post.setImg(rs.getString("imgUrl"));
+                System.out.println(post.getImg());
                 post.setPdContents(rs.getString("pdContents"));
 
                 String strSql = "SELECT storeName,storeAddr FROM StoreTB WHERE sellerId = ?";

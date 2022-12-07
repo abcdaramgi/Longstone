@@ -36,6 +36,7 @@ class StAddFragment : AppCompatActivity() {
     private var discount_price_edit: EditText? = null
     private var foodName_edit: EditText? = null
     private var food_count: EditText? = null
+    private var food_content: EditText? = null
     private var hourPicker : NumberPicker? = null
     private var minutePicker :NumberPicker? = null
     private var imageview : ImageView? = null
@@ -93,6 +94,7 @@ class StAddFragment : AppCompatActivity() {
         foodName_edit = findViewById(R.id.editTextFoodName)
         discount_price_edit = findViewById((R.id.editTextDiscountPrice))
         food_count = findViewById((R.id.editTextNumber))
+        food_content = findViewById(R.id.editTextContent)
         hourPicker = findViewById(R.id.hour_picker)
         minutePicker = findViewById(R.id.minute_picker)
         imageview = findViewById(R.id.imageView)
@@ -152,12 +154,13 @@ class StAddFragment : AppCompatActivity() {
             var discountPrice = discount_price_edit!!.text.toString()
             var foodCount = food_count!!.text.toString()
             val foodName = foodName_edit!!.text.toString()
+            val foodContent = food_content!!.text.toString()
             var timePicker = ((hourPicker!!.value * 60) + (minutePicker!!.value)).toString()
 
             Log.d("앱에서 보낸값", "${SellerSingleton.getInstance().sellerId} ,$originalPrice, " +
-                    "$discountPrice, $foodCount, $foodName, $timePicker")
+                    "$discountPrice, $foodCount, $foodName, $foodContent, $timePicker")
             val task = PostTask()
-            val result = task.execute(originalPrice, discountPrice, foodCount, foodName, timePicker).get()
+            val result = task.execute(originalPrice, discountPrice, foodCount, foodName, foodContent ,timePicker).get()
             Log.d("받은값", result)
             Log.d("post", "posting end...")
 

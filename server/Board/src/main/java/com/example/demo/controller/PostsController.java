@@ -70,8 +70,9 @@ public class PostsController {
                         "pdPrice : " + product.pdPrice + "\n" +
                         "pdTimer : " + product.pdTimer + "\n" +
                         "pdSale : " + product.pdSale + "\n" +
-                        "topicName : " + product.topicName + "\n" +
-                        "pdCount : " + product.pdCount);
+                        "pdName : " + product.pdName + "\n" +
+                        "pdCount : " + product.pdCount + "\n" +
+                        "pdContents : " + product.pdContents);
         success = postRepository.insertProductData(product);
         return success;
     }
@@ -92,12 +93,14 @@ public class PostsController {
                 //이미지저장경로를 src/main/resources/static/images 로 해야된다.
                 //http://(서버 아이피)/images/~~~.jpg로 들어갔을때 이미지가 보여야한다.
                 String savePath = "C:\\Users\\kddns\\Documents\\Longstone\\server\\Board\\src\\main\\resources\\static\\images\\" + file.getOriginalFilename();
+                String dbSavePath = "http://222.103.14.187:8080/images/" + file.getOriginalFilename();
+
                 System.out.println("seller name : " + sellerId);
                 System.out.println("save file path : " + savePath);
 
                 ImageFile imagefile = new ImageFile();
                 imagefile.setsellerId(file.getName());
-                imagefile.setimgUrl(savePath);
+                imagefile.setimgUrl(dbSavePath);
 
                 file.transferTo(new File(savePath));
                 success = postRepository.insertProductImage(imagefile);

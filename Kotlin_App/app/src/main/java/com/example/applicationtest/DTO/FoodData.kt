@@ -7,7 +7,7 @@ class FoodData(
     var place: String? =null,
     var cost: Int? =null,
     var updatecost: Int? =null,
-    var img: Int? =null,
+    var img: String? =null,
     var count: Int? =null,
     var storename: String? =null,
     var storeimg: Int? =null,
@@ -34,10 +34,10 @@ class FoodData(
     fun setData3(type: Int) {
         this.cost = cost
     }
-    fun getData4(): Int?{
+    fun getData4(): String?{
         return img
     }
-    fun setData4(type: Int) {
+    fun setData4(type: String) {
         this.img = img
     }
     fun getData5(): Int? {
