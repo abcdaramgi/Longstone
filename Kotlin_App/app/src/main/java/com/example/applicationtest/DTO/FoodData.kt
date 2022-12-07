@@ -16,34 +16,57 @@ class FoodData(
     var pdId: Int? =null,
     var sellerId: String? =null
 ): Serializable {
-    fun getData1(): String? {
+    @JvmName("getName1")
+    fun getName(): String? {
         return name
     }
-    fun setData1(name: String) {
+    @JvmName("setName1")
+    fun setName(name: String) {
         this.name = name
     }
-    fun getData2(): String? {
+
+    @JvmName("getPlace1")
+    fun getPlace(): String? {
         return place
     }
-    fun setData2(address: String) {
+    @JvmName("setPlace1")
+    fun setPlace(address: String) {
         this.place = place
     }
-    fun getData3(): Int? {
+    @JvmName("getCost1")
+    fun getCost(): Int? {
         return cost
     }
-    fun setData3(type: Int) {
+    fun setCost(type: Int) {
         this.cost = cost
     }
-    fun getData4(): Int?{
+    @JvmName("getImg1")
+    fun getImg(): Int?{
         return img
     }
-    fun setData4(type: Int) {
+    fun setImg(type: Int) {
         this.img = img
     }
-    fun getData5(): Int? {
+    @JvmName("getUpdatecost1")
+    fun getUpdatecost(): Int? {
         return updatecost
     }
-    fun setData5(type: Int) {
+    fun setUpdatecost(type: Int) {
         this.updatecost = updatecost
+    }
+    @JvmName("getCount1")
+    fun getCount(): Int?{
+        return count
+    }
+    fun setCount(type: Int) {
+        this.count = count
+    }
+
+    @JvmName("getStorename1")
+    fun getStorename(): String?{
+        return storename
+    }
+    fun setStorename(type: Int) {
+        this.storename = storename
     }
 }

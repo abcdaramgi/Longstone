@@ -5,11 +5,12 @@ import java.sql.Time;
 public class Post {
     private String pdName;
     private String address;
-    private Integer price;
+    private Float price;
     private Integer saleprice;
     private String img;
     private String storeName;
     private String pdContents;
+    private Integer count;
 
     private Integer pdid;
     private String sellerid;
@@ -29,7 +30,7 @@ public class Post {
         return pdid;
     }
 
-    public Integer getPrice() {
+    public Float getPrice() {
         return price;
     }
 
@@ -53,7 +54,7 @@ public class Post {
         this.pdTimer = pdTimer;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
@@ -74,7 +75,7 @@ public class Post {
     }
 
     public void setAddress(String address) {
-        this.address = this.address;
+        this.address = address;
     }
 
     public void setPdName(String pdName) {
@@ -111,5 +112,13 @@ public class Post {
 
     public String getStoreName() {
         return storeName;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public Integer getCount() {
+        return count;
     }
 }

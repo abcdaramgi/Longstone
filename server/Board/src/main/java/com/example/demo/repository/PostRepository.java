@@ -45,7 +45,7 @@ public class PostRepository {
     }
 
     public List<Post> getOnsalePost(String status){
-        String sql = "SELECT pdId, sellerId, pdContents, pdPrice, pdTimer, pdSale, pdName FROM ProductTB WHERE expire < ? AND status = ?;";
+        String sql = "SELECT pdId, sellerId, pdContents, pdPrice, pdTimer, pdSale, pdName, pdCount FROM ProductTB WHERE expire < ? AND status = ?;";
         SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String timeStamp = date.format(new Date());
         System.out.println(timeStamp);
@@ -55,13 +55,14 @@ public class PostRepository {
                 Post post = new Post();
                 post.setPdName(rs.getString("pdName"));
 
-                Integer price = rs.getInt("pdPrice");
+                Float price = rs.getFloat("pdPrice");
                 post.setPrice(price);
-                Integer discount = rs.getInt("pdSale");
-                price = price * (discount / 100);
-                post.setSaleprice(price);
+                Float discount = rs.getFloat("pdSale");
+                price = price * ((100 - discount) / 100);
+                post.setSaleprice(Math.round(price));
                 post.setImg("please img url");
                 post.setPdContents(rs.getString("pdContents"));
+                post.setCount(rs.getInt("pdCount"));
 
                 String strSql = "SELECT storeName,storeAddr FROM StoreTB WHERE sellerId = ?";
                 List<Store> strResult = jdbcTemplate.query(strSql, new RowMapper<Store>() {

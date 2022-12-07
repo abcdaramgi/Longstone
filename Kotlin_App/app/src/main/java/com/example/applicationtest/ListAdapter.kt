@@ -22,10 +22,10 @@ class ListAdapter(private var list: ArrayList<FoodData>): RecyclerView.Adapter<L
         // onBindViewHolder의 역할을 대신한다.
         fun bind(data: FoodData, position: Int) {
             Log.d("ListAdapter", "===== ===== ===== ===== bind ===== ===== ===== =====")
-            Log.d("ListAdapter", data.getData1()+" "+data.getData2()+" "+data.getData3())
-            data1Text.text = data.getData1()
-            data2Text.text = data.getData2()
-            data3Text.text = data.getData3().toString()
+            Log.d("ListAdapter", data.getName()+" "+data.getPlace()+" "+data.getCost())
+            data1Text.text = data.getName()
+            data2Text.text = data.getPlace()
+            data3Text.text = data.getCost().toString()
         }
     }
 

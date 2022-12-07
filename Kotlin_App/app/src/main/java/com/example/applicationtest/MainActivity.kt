@@ -239,7 +239,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             //Log.d("앱에서 보낸값", "$userId")
 
             val task = OnsaleListTask()
-            result = task.execute("1").get()
+            result = task.execute("Y").get()
             Log.d("받은값", result)
 
             if(result != null){
@@ -252,17 +252,16 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
 
                     //여기 그냥 그대로 다 보내고 그대로 다 받자
-                    //진짜로 데이터 관리가 왜 이따위냐 어떻게 푸트데이터에 주소를 넣을생각을하지
                     onSalePostDTO.setPdName(row.getString("pdName"))
                     onSalePostDTO.setAddress(row.getString("address"))
                     onSalePostDTO.setPrice(row.getInt("price"))
                     onSalePostDTO.setSaleprice(row.getInt("saleprice"))
                     onSalePostDTO.setImg(row.getString("img"))
                     onSalePostDTO.setPdContents(row.getString("pdContents"))
+                    onSalePostDTO.setCount(row.getInt("count"))
 
                     onSalePostDTO.setPdid(row.getInt("pdid"))
                     onSalePostDTO.setSellerid(row.getString("sellerid"))
-
 
                     dataList!!.add(FoodData(
                         onSalePostDTO.getPdName(),
@@ -270,7 +269,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                         onSalePostDTO.getPrice(),
                         onSalePostDTO.getSaleprice(),
                         null,
-                        null,
+                        onSalePostDTO.getCount(),
                         onSalePostDTO.getStoreName(),
                         null,
                         null,
@@ -282,7 +281,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             else{
                 Log.d("Onsale", "Onsale fail...")
             }
-            Log.d("zebalzebal", dataList!!.get(0).getData1().toString())
             Log.d("Onsale List", "Onsale List end...")
         }catch(e : Exception){
             e.printStackTrace()
