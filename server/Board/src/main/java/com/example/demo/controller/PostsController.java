@@ -109,9 +109,13 @@ public class PostsController {
     //판매중인거 다 땡겨오기
     @RequestMapping(value = "/onsalepost", method = {RequestMethod.POST})
     public JSONObject getTodayFoodData(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        List<Post> post = postRepository.getOnsalePost();
+        ServletInputStream inputStream = request.getInputStream();
+        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+
+        System.out.println("postStatus : " + messageBody);
+        List<Post> post = postRepository.getOnsalePost(messageBody);
         JSONObject data = new JSONObject();
-        data.put("store", post);
+        data.put("post", post);
         return data;
     }
 }

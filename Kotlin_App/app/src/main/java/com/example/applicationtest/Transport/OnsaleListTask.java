@@ -31,7 +31,7 @@ public class OnsaleListTask extends AsyncTask<String, Void, String> {
             String sendData = strings[0];
 
             osw.write(sendData);
-            Log.d("value :", sendData);
+            Log.d("status value :", sendData);
             osw.flush();
 
             //통신도 잘되고 서버에서 보낸값 받음

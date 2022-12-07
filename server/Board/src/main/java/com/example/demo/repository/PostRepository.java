@@ -1,9 +1,6 @@
 package com.example.demo.repository;
 
-import com.example.demo.model.ImageFile;
-import com.example.demo.model.Post;
-import com.example.demo.model.Product;
-import com.example.demo.model.Singleton;
+import com.example.demo.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -47,23 +44,46 @@ public class PostRepository {
         return success;
     }
 
-    public List<Post> getOnsalePost(){
-        String sql = "SELECT pdId, sellerId, pdContents, pdPrice, pdTimer, pdSale FROM ProductTB WHERE expire <= ?;";
-        SimpleDateFormat date = new SimpleDateFormat("yyyy.MM.dd.HH:mm:ss");
+    public List<Post> getOnsalePost(String status){
+        String sql = "SELECT pdId, sellerId, pdContents, pdPrice, pdTimer, pdSale, pdName FROM ProductTB WHERE expire < ? AND status = ?;";
+        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String timeStamp = date.format(new Date());
+        System.out.println(timeStamp);
         List<Post> result = jdbcTemplate.query(sql, new RowMapper<Post>() {
             @Override
             public Post mapRow(ResultSet rs, int rowNum) throws SQLException {
                 Post post = new Post();
                 post.setPdName(rs.getString("pdName"));
+
+                Integer price = rs.getInt("pdPrice");
+                post.setPrice(price);
+                Integer discount = rs.getInt("pdSale");
+                price = price * (discount / 100);
+                post.setSaleprice(price);
+                post.setImg("please img url");
+                post.setPdContents(rs.getString("pdContents"));
+
+                String strSql = "SELECT storeName,storeAddr FROM StoreTB WHERE sellerId = ?";
+                List<Store> strResult = jdbcTemplate.query(strSql, new RowMapper<Store>() {
+                    @Override
+                    public Store mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Store store = new Store();
+                        store.setName(rs.getString("storeName"));
+                        store.setStoreAddr(rs.getString("storeAddr"));
+                        return store;
+                    }
+                }, rs.getString("sellerId"));
+                Store store = strResult.get(0);
+                post.setStoreName(store.getName());
+                post.setAddress(store.getStoreAddr());
+
                 post.setPdid(rs.getInt("pdId"));
                 post.setSellerid(rs.getString("sellerId"));
-                post.setPdContents(rs.getString("pdContents"));
-                post.setPrice(rs.getInt("pdPrice"));
                 post.setPdTimer(rs.getInt("pdTimer"));
                 return post;
             }
-        }, timeStamp);
+        }, timeStamp, status);
+        System.out.println(result);
         return result;
     }
 }
