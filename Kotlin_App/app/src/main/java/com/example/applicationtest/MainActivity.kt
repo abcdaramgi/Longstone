@@ -268,7 +268,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                         onSalePostDTO.getAddress(),
                         onSalePostDTO.getPrice(),
                         onSalePostDTO.getSaleprice(),
-                        null,
+                        onSalePostDTO.getImg(),
                         onSalePostDTO.getCount(),
                         onSalePostDTO.getStoreName(),
                         null,

@@ -20,9 +20,9 @@ public class PostRepository {
 
     public String insertProductData(Product product){
         String success = "false";
-        String sql = "INSERT INTO ProductTB(sellerId, pdPrice, pdTimer, pdSale, topicName, pdCount) VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO ProductTB(sellerId, pdPrice, pdTimer, pdSale, pdName, pdCount, pdContents) VALUES(?,?,?,?,?,?,?)";
         int result = jdbcTemplate.update(sql, product.getstrId(), product.getPdPrice(),
-                product.getPdTimer(), product.getPdSale(), product.getTopicName(), product.getPdCount());
+                product.getPdTimer(), product.getPdSale(), product.getpdName(), product.getPdCount(), product.getpdContents());
         if(result != 0)
             success = "true";
         Singleton.getInstance().AutoIncresePdId = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
@@ -45,7 +45,10 @@ public class PostRepository {
     }
 
     public List<Post> getOnsalePost(String status){
-        String sql = "SELECT pdId, sellerId, pdContents, pdPrice, pdTimer, pdSale, pdName, pdCount FROM ProductTB WHERE expire < ? AND status = ?;";
+
+        String sql = "SELECT ProductTB.pdId, ProductTB.sellerId, pdContents, pdPrice, pdTimer, pdSale, pdName, PdimageTB.imgUrl FROM ProductTB, PdimageTB WHERE (expire < ? AND status = ?) \n" +
+                "AND (ProductTB.pdId = PdimageTB.pdId);";
+
         SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String timeStamp = date.format(new Date());
         System.out.println(timeStamp);
@@ -60,7 +63,7 @@ public class PostRepository {
                 Float discount = rs.getFloat("pdSale");
                 price = price * ((100 - discount) / 100);
                 post.setSaleprice(Math.round(price));
-                post.setImg("please img url");
+                post.setImg(rs.getString("imgUrl"));
                 post.setPdContents(rs.getString("pdContents"));
                 post.setCount(rs.getInt("pdCount"));
 

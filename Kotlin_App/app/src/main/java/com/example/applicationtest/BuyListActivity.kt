@@ -46,9 +46,9 @@ class BuyListActivity : AppCompatActivity() {
 
 
         data.apply {
-            add(BuyListItem("돈가스","가게1","5",R.drawable.image_food1))
-            add(BuyListItem("소금빵","가게1","3",R.drawable.image_bread1))
-            add(BuyListItem("오징어볶음","가게1","5",R.drawable.image_food1))
+            add(BuyListItem("돈가스","가게1","5",R.drawable.image_food1.toString()))
+            add(BuyListItem("소금빵","가게1","3",R.drawable.image_bread1.toString()))
+            add(BuyListItem("오징어볶음","가게1","5",R.drawable.image_food1.toString()))
         }
 
             buyListAdapter.data = data

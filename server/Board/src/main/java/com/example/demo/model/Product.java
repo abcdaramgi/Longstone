@@ -8,6 +8,8 @@ public class Product {
     public String pdSale;
     public String topicName;
     public String pdCount;
+    public String pdContents;
+    public String pdName;
 
     public String getstrId(){ return strId;}
     public void setStrId(String strId){
@@ -37,5 +39,13 @@ public class Product {
         this.pdCount = pdCount;
     }
 
+    public String getpdContents(){ return pdContents;}
+    public void setpdContents(String pdContents){
+        this.pdContents = pdContents;
+    }
 
+    public String getpdName(){ return pdName;}
+    public void setpdName(String pdName){
+        this.pdName = pdName;
+    }
 }

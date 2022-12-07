@@ -41,11 +41,12 @@ public class PostTask extends AsyncTask<String, Void, String>{
             String strId = SellerSingleton.getInstance().sellerId.toString();
             sendJson.put("strId", strId);
             sendJson.put("pdPrice", strings[0]);
-            sendJson.put("pdTimer", strings[4]);
+            sendJson.put("pdTimer", strings[5]);
             sendJson.put("pdSale", pdSale);
 //            sendJson.put("discountPrice", strings[1]);
-            sendJson.put("topicName", strings[3]);
+            sendJson.put("pdName", strings[3]);
             sendJson.put("pdCount", strings[2]);
+            sendJson.put("pdContents", strings[4]);
 
 
 

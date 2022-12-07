@@ -7,7 +7,7 @@ class FoodData(
     var place: String? =null,
     var cost: Int? =null,
     var updatecost: Int? =null,
-    var img: Int? =null,
+    var img: String? =null,
     var count: Int? =null,
     var storename: String? =null,
     var storeimg: Int? =null,
@@ -40,11 +40,13 @@ class FoodData(
     fun setCost(type: Int) {
         this.cost = cost
     }
+
     @JvmName("getImg1")
-    fun getImg(): Int?{
+    fun getImg(): String?{
         return img
     }
-    fun setImg(type: Int) {
+    @JvmName("setImg1")
+    fun setImg(type: String) {
         this.img = img
     }
     @JvmName("getUpdatecost1")
