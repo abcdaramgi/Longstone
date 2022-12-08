@@ -74,6 +74,10 @@ class FirstActivity : AppCompatActivity() {
             val result = sellerLogin()
             Log.d("result = ", result)
             if(result == "true"){
+                val id = login_id?.text.toString()
+                val pw = login_pw?.text.toString()
+                MyApplication.prefs.setString("id", id)
+                MyApplication.prefs.setString("pw", pw)
                 val intent = Intent(this, StMainActivity::class.java)
                 startActivity(intent)
             }else{

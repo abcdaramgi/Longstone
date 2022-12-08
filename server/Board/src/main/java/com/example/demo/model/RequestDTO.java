@@ -10,4 +10,6 @@ public class RequestDTO {
     private String topic;
     private String title;
     private String body;
+    private String type;
+    private String id;
 }

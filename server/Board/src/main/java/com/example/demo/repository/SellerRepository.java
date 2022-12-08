@@ -18,4 +18,14 @@ public class SellerRepository {
             success = "true";
         return success;
     }
+
+    public String saveToken(String id, String token){
+        String success = "False";
+        String sql = "UPDATE SellTB SET nToken = ? WHERE sellerId = ?";
+        int result = jdbcTemplate.update(sql, token, id);
+        if(result != 0)
+            success = "true";
+        return success;
+    }
+
 }

@@ -188,7 +188,7 @@ class StAddFragment : AppCompatActivity() {
                 Log.d("Notification", "Notification fail...")
             }
             Log.d("post", "posting end...")
-            
+
         } catch (e: Exception) {
         }
     }
