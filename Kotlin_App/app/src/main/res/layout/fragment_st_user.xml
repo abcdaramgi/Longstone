@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     app:cardUseCompatPadding="true"
-    android:background="@color/background">
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/title_catagory"

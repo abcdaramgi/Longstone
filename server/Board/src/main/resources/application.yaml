@@ -1,0 +1,28 @@
+# application.yml
+
+logging-module:
+  version: 0.0.1
+
+spring:
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: 'true'
+      force: 'true'
+  datasource:
+    password: KDkd4813*
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: kddnswlr
+    url: jdbc:mysql://3.35.255.89:3306/longstonedb?serverTimezone=UTC&characterEncoding=UTF-8
+server: ''
+string: ''
+//DB: ''
+hibernate: ''
+error: ''
+enabled: 'false'
+port: ${PORT:8080}
+jpa: ''
+whitelabel: ''
+properties: ''
+show_sql: 'true'
+

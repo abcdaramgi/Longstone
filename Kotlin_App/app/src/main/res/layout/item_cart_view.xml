@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="14dp"
             android:text="음식이름"
             android:textSize="18dp"
             android:textColor="@color/black"
@@ -56,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="4dp"
             android:text="가게위치"
             android:textSize="14dp"
             android:textColor="@color/black"
@@ -64,16 +64,16 @@
             app:layout_constraintTop_toBottomOf="@id/data2Text" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/data3Text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="82dp"
-            android:layout_marginTop="41dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="4dp"
             android:text="수량"
             android:textColor="@color/black"
             android:textSize="14dp"
-            app:layout_constraintStart_toEndOf="@+id/data2Text"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintTop_toBottomOf="@id/data3Text" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

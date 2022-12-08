@@ -76,11 +76,6 @@ class StAddFragment : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_st_add_object)
 
-        setSupportActionBar(st_toolbar_SalesAdd) //커스텀한 toolbar 액션바로 사용
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-        //액션바에 표시되는 제목의 표시유무를 설정합니다. false로 해야 custom한 툴바의 이름이 화면에 보이게 됩니다.
-        supportActionBar?.setDisplayHomeAsUpEnabled(true) //액션바 뒤로가기 아이콘 표시
-
         timer()
 //        img_add()
 //        add()
@@ -133,16 +128,6 @@ class StAddFragment : AppCompatActivity() {
 //    }
 
     fun post() {
-
-        if(imageview!!.drawable != null){ //이미지 뷰에 이미지가 올라갔을때
-            Log.d("imagePost", "imagePost start...")
-            FileUploadUtils.send2Server(tempSelectFile)
-            Log.d("imagePost", "imagePost end...")
-        }
-        else{ //이미지뷰에 아무것도 없을때
-            Log.d("Debug", "imageView is null...")
-        }
-
         try {
             Log.d("post", "post start...")
             val originalPrice = original_price_edit!!.text.toString()
@@ -160,6 +145,14 @@ class StAddFragment : AppCompatActivity() {
             Log.d("post", "posting end...")
 
         } catch (e: Exception) {
+        }
+        if(imageview!!.drawable != null){ //이미지 뷰에 이미지가 올라갔을때
+            Log.d("imagePost", "imagePost start...")
+            FileUploadUtils.send2Server(tempSelectFile)
+            Log.d("imagePost", "imagePost end...")
+        }
+        else{ //이미지뷰에 아무것도 없을때
+            Log.d("Debug", "imageView is null...")
         }
     }
 

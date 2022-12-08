@@ -40,7 +40,7 @@ class CartAdapter (private val context: Context) : RecyclerView.Adapter<CartAdap
         private val txtFood: TextView = itemView.findViewById(R.id.data3Text)
         private val txtStore: TextView = itemView.findViewById(R.id.data2Text)
         private val foodImg : ImageView = itemView.findViewById(R.id.imageView3)
-        private val foodcount : TextView = itemView.findViewById(R.id.textView12)
+        private val foodcount : TextView = itemView.findViewById(R.id.data3Text2)
         val checkBox : CheckBox = itemView.findViewById(R.id.checkBox2)
 
         fun bind(item: ItemCart) {
@@ -48,7 +48,7 @@ class CartAdapter (private val context: Context) : RecyclerView.Adapter<CartAdap
             txtFood.text = item.FoodName
             txtStore.text = item.StoreName
             Glide.with(itemView).load(item.food_img).into(foodImg)
-            foodcount.text = item.food_count.toString()
+            foodcount.text = "수량" + item.food_count.toString() + "개"
 
             checkBox.setOnClickListener(View.OnClickListener { v ->
                 val cb = v as CheckBox

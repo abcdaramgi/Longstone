@@ -4,6 +4,7 @@ import com.example.demo.domain.posts.PostsRepository;
 import com.example.demo.model.*;
 import com.example.demo.repository.OderPostRepository;
 import com.example.demo.repository.PostRepository;
+import com.example.demo.repository.SellerFoodRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class PostsController {
     @Autowired
     OderPostRepository oderPostRepository;
 
+    @Autowired
+    SellerFoodRepository sellerFoodRepository;
+
     private ObjectMapper objectMapper = new ObjectMapper();
 
 //    @GetMapping
@@ -56,6 +60,18 @@ public class PostsController {
         oderPostRepository.getPostMatchOrderPost(oderPost);
 
         return "hi";
+    }
+
+    @RequestMapping(value = "/orderlist", method = {RequestMethod.POST})
+    public JSONObject orderListPost(HttpServletRequest request, HttpServletResponse response) throws  IOException{
+        ServletInputStream inputStream = request.getInputStream();
+        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+
+        System.out.println("userId : " + messageBody);
+        List<OrderList> orderList = oderPostRepository.getOrderListData(messageBody);
+        JSONObject data = new JSONObject();
+        data.put("orderList", orderList);
+        return data;
     }
 
     @RequestMapping(value = "/product", method = {RequestMethod.POST})
@@ -124,6 +140,20 @@ public class PostsController {
         List<Post> post = postRepository.getOnsalePost(messageBody);
         JSONObject data = new JSONObject();
         data.put("post", post);
+        return data;
+    }
+
+    //판매자 자기가 올린 글
+    @RequestMapping (value = "/storeFood", method = {RequestMethod.POST})
+    public JSONObject getSellerFood(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        ServletInputStream inputStream = request.getInputStream();
+        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+
+        System.out.println("sellerId : " + messageBody);
+        List<storeFood> resultList = sellerFoodRepository.selectStoreFoodData(messageBody);
+        JSONObject data = new JSONObject();
+
+        data.put("post", resultList);
         return data;
     }
 }
