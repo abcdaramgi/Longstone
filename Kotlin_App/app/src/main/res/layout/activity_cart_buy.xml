@@ -102,6 +102,7 @@
             android:layout_marginTop="18dp"
             android:text="구매정보"
             android:textSize="16sp"
+            android:textColor="@color/mossriver"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -204,6 +205,9 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="구매하기"
+            android:textColor="@color/mossriver"
+            android:textStyle="bold"
+            android:backgroundTint="@color/golden"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:layout_editor_absoluteX="0dp" />
 
