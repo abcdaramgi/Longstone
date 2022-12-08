@@ -92,7 +92,7 @@ public class FcmService {
                         .title(title)
                         .build())
                 .priority("high").to("/topics/" + topic).build();
-        
+
 //        FcmMessage fcmMessage = FcmMessage.builder()
 //                .message(FcmMessage.Message.builder()
 //                        .topic("/topics/" + topic)

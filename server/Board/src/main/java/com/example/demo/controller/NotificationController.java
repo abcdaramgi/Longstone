@@ -18,7 +18,7 @@ public class NotificationController {
     @PostMapping(value = "/notification/topics/{topic}")
     public ResponseEntity notificationTopics(@PathVariable("topic") String topic, @RequestBody RequestDTO requestDTO) throws IOException {
         fcmService.sendTopicMessageTo(
-                requestDTO.getTopic(),
+                topic,
                 requestDTO.getTitle(),
                 requestDTO.getBody());
         return ResponseEntity.ok().build();
