@@ -74,6 +74,11 @@ public class PostsController {
                         "pdCount : " + product.pdCount + "\n" +
                         "pdContents : " + product.pdContents);
         success = postRepository.insertProductData(product);
+
+        //알림생성
+
+
+
         return success;
     }
 

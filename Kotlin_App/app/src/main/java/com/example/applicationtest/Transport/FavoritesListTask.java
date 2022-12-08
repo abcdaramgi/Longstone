@@ -20,7 +20,7 @@ public class FavoritesListTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... strings) {
         try{
             String str;
-            URL url = new URL("http://222.103.14.187:8080/user/infofavorites");
+            URL url = new URL("http://10.0.2.2:8080/user/infofavorites");
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type", "application/json");
