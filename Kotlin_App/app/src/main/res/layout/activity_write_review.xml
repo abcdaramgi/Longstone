@@ -6,26 +6,49 @@
     android:layout_height="match_parent"
     tools:context=".WriteReviewActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
     <TextView
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="20dp"
         android:text="가게이름"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar2" />
 
+    <ImageView
+        android:id="@+id/reimg"
+        android:layout_width="143dp"
+        android:layout_height="138dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar4"
+        tools:srcCompat="@drawable/ic_baseline_camera_alt_24" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="104dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="182dp"
         android:text="사진 첨부하기"
+        android:textSize="16sp"
+        android:backgroundTint="#554B4A"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ratingBar4" />
 
@@ -33,14 +56,14 @@
         android:id="@+id/editTextFoodName2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="24dp"
         android:ems="12"
-        android:hint="리뷰내용"
         android:enabled="true"
+        android:gravity="top|left"
+        android:hint="리뷰내용"
         android:inputType="text|textMultiLine"
         android:lines="5"
-        android:gravity="top|left"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
@@ -50,6 +73,8 @@
         android:layout_height="60dp"
         android:layout_marginBottom="1dp"
         android:text="리뷰작성"
+        android:textSize="18sp"
+        android:backgroundTint="#554B4A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -57,9 +82,21 @@
         android:id="@+id/ratingBar4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
+        android:layout_marginStart="64dp"
         android:layout_marginTop="18dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="104dp"
+        android:text="별점"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/ratingBar4"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

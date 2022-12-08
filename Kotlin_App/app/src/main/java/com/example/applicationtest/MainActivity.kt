@@ -97,11 +97,12 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 supportFragmentManager.beginTransaction().replace(R.id.fl_container, homeScreen).commit()*/
             }
             R.id.second -> {
-                    transaction.replace(
-                        R.id.fl_container,
-                        SearchScreen()
-                    )
-                    transaction.commit()
+                transaction.replace(
+                    R.id.fl_container,
+                    SearchScreen()
+                )
+                transaction.commit()
+                intent.putExtra("DataList",storeList as ArrayList)
                 /*searchScreen = SearchScreen.newInstance()
                 supportFragmentManager.beginTransaction().replace(R.id.fl_container, searchScreen).commit()*/
             }

@@ -15,10 +15,10 @@
             android:id="@+id/txt_exercise_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:layout_marginTop="5dp"
+            android:gravity="center"
             android:text="상품 구매 수량"
-            android:textColor="#0067ad"
+            android:textColor="#554B4A"
             android:textSize="22sp"
             android:textStyle="bold"
             android:visibility="visible"
@@ -60,14 +60,15 @@
 
         <Button
             android:id="@+id/btn_ok"
-            android:layout_width="match_parent"
+            android:layout_width="333dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="@color/white"
-            android:text="확인"
+            android:drawableRight="@drawable/ic_baseline_shopping_cart_24"
+            android:text="장바구니"
+            android:textColor="#554B4A"
             android:textSize="15sp"
-            android:textStyle="bold"
-            android:textColor="#0067ad"/>
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btn_no"
@@ -75,10 +76,10 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="@color/white"
-            android:text="취소"
+            android:text="구매하기"
+            android:textColor="#554B4A"
             android:textSize="15sp"
-            android:textStyle="bold"
-            android:textColor="#0067ad"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 
