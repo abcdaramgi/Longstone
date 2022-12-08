@@ -128,16 +128,6 @@ class StAddFragment : AppCompatActivity() {
 //    }
 
     fun post() {
-
-        if(imageview!!.drawable != null){ //이미지 뷰에 이미지가 올라갔을때
-            Log.d("imagePost", "imagePost start...")
-            FileUploadUtils.send2Server(tempSelectFile)
-            Log.d("imagePost", "imagePost end...")
-        }
-        else{ //이미지뷰에 아무것도 없을때
-            Log.d("Debug", "imageView is null...")
-        }
-
         try {
             Log.d("post", "post start...")
             val originalPrice = original_price_edit!!.text.toString()
@@ -155,6 +145,14 @@ class StAddFragment : AppCompatActivity() {
             Log.d("post", "posting end...")
 
         } catch (e: Exception) {
+        }
+        if(imageview!!.drawable != null){ //이미지 뷰에 이미지가 올라갔을때
+            Log.d("imagePost", "imagePost start...")
+            FileUploadUtils.send2Server(tempSelectFile)
+            Log.d("imagePost", "imagePost end...")
+        }
+        else{ //이미지뷰에 아무것도 없을때
+            Log.d("Debug", "imageView is null...")
         }
     }
 

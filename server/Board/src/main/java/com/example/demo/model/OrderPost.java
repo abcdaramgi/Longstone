@@ -7,7 +7,6 @@ public class OrderPost {
     private Long price;
     private Long pcount;
 
-
     public String getPname() {
         return pname;
     }

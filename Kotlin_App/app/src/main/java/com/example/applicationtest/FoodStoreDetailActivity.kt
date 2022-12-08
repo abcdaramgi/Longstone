@@ -85,7 +85,7 @@ class FoodStoreDetailActivity : AppCompatActivity() {
 
     fun setFavorites(): String {
         var result = ""
-        val sellerId = "seller1123"
+        val sellerId = data.getSellerId()
         try{
             val userId = UserSingleton.getInstance().userId.toString();
             val storeName = data.storename.toString();
@@ -102,7 +102,7 @@ class FoodStoreDetailActivity : AppCompatActivity() {
             e.printStackTrace()
         }
 
-        FirebaseMessaging.getInstance().subscribeToTopic(sellerId).addOnCompleteListener { task ->
+        FirebaseMessaging.getInstance().subscribeToTopic(sellerId.toString()).addOnCompleteListener { task ->
             var msg = "Subscribed"
             if (!task.isSuccessful) {
                 msg = "Subscribe failed"
