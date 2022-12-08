@@ -65,7 +65,7 @@ public class UserRepository {
 
     //사용자가 즐겨찾기한 가게정보 가져오기
     public List<Store> getFavoritesData(String userId){
-        String sql = "SELECT storeName, pdName, imgUrl FROM StoreTB WHERE sellerId = any(SELECT sellerId FROM UsertopicTB WHERE userId = ?)";
+        String sql = "SELECT storeName, pdName, imgUrl FROM StoreTB WHERE StoreTB.sellerId = any(SELECT sellerId FROM UsertopicTB WHERE userId = ?)";
         List<Store> result = jdbcTemplate.query(sql, new RowMapper<Store>() {
             @Override
             public Store mapRow(ResultSet rs, int rowNum) throws SQLException {

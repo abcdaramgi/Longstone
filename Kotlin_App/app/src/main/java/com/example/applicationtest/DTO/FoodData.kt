@@ -12,6 +12,7 @@ class FoodData(
     var storename: String? =null,
     var storeimg: Int? =null,
     var refood: Int? =null,
+    var pdContents: String? =null,
 
     var pdId: Int? =null,
     var sellerId: String? =null
@@ -70,5 +71,25 @@ class FoodData(
     }
     fun setStorename(type: Int) {
         this.storename = storename
+    }
+
+    @JvmName("getPdContents1")
+    fun getPdContents(): String?{
+        return pdContents
+    }
+
+    @JvmName("setPdContents1")
+    fun setPdContents(type: String){
+        this.pdContents = pdContents
+    }
+
+    @JvmName("getSellerId1")
+    fun getSellerId(): String?{
+        return sellerId
+    }
+
+    @JvmName("setSellerId1")
+    fun setSellerId(type: String){
+        this.sellerId = sellerId
     }
 }

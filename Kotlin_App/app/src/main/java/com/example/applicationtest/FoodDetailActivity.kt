@@ -55,9 +55,10 @@ class FoodDetailActivity : AppCompatActivity() {
         Glide.with(this).load(datas.storeimg).into(img_store_photo)
         detail_food_name.text = datas.name
         ad_count = datas.count!!
-        store_de_name.text = datas.storename
+        store_de_name.text = datas.getStorename()
         store_de_place.text = datas.place
         review.text = datas.refood.toString() + "개"
+        textView20.text = datas.getPdContents()
 
         // 구매 버튼을 눌렀을 때, 구매창(BuyActivity)으로 넘어감
         buy_bnt.setOnClickListener {

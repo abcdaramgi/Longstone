@@ -262,6 +262,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
                     onSalePostDTO.setPdid(row.getInt("pdid"))
                     onSalePostDTO.setSellerid(row.getString("sellerid"))
+                    onSalePostDTO.setStoreName(row.getString("storeName"))
+
 
                     dataList!!.add(FoodData(
                         onSalePostDTO.getPdName(),
@@ -273,6 +275,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                         onSalePostDTO.getStoreName(),
                         null,
                         null,
+                        onSalePostDTO.getPdContents(),
                         onSalePostDTO.getPdid(),
                         onSalePostDTO.getSellerid()
                     ));
