@@ -2,7 +2,9 @@ package com.example.applicationtest
 
 import android.app.Activity
 import android.content.Intent
+import android.content.IntentSender.OnFinished
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
@@ -27,10 +29,13 @@ import kotlinx.android.synthetic.main.item_today_food_detail.store_de_place
 class FoodDetailActivity : AppCompatActivity() {
     lateinit var datas : FoodData
     lateinit var cartAdapter: CartAdapter
+    lateinit var countDownTimer: CountDownTimer
     lateinit var cart : ItemCart
     var ad_count : Int = 0
     var selectNum : Int = 0
     val NEW_STORE = 22
+    var time = 0L
+    var tempTime = 0L
     val list : java.util.ArrayList<StoreData> = MainActivity().storeList as ArrayList
     lateinit var storeAdapter : StoreAdapter
 
@@ -43,6 +48,9 @@ class FoodDetailActivity : AppCompatActivity() {
         supportFragmentManager.executePendingTransactions()
 
         fragment?.storeAdapter = StoreAdapter(list)
+
+        startTimer()
+
         /*fragment.st_listView.layoutManager = LinearLayoutManager(fragment.activity, RecyclerView.VERTICAL, false)
         fragment.st_listView.adapter = fragment.storeAdapter
 
@@ -72,51 +80,17 @@ class FoodDetailActivity : AppCompatActivity() {
             layout.number_picker.maxValue = ad_count
             if (selectNum != 0) layout.number_picker.value = selectNum
 
-            layout.btn_no.setOnClickListener {
+            layout.back.setOnClickListener{
                 dialog.dismiss()
             }
 
-            layout.btn_ok.setOnClickListener {
+            layout.btn_no.setOnClickListener {
                 selectNum = layout.number_picker.value
 
                 val intent = Intent(this, BuyActivity::class.java)
                 intent.putExtra("foodCount", selectNum)
                 intent.putExtra("data", datas)
                 startActivity(intent)
-            }
-        }
-
-        // 가게 정보가 담긴 부분을 눌렀을 때, 가게 상세 정보(FoodStoreDetailActivity) 창으로 넘어감
-        store_box.setOnClickListener {
-            val intent = Intent(this, FoodStoreDetailActivity::class.java)
-            intent.putExtra("data", datas)
-            startActivityForResult(intent, NEW_STORE)
-        }
-
-        review_img.setOnClickListener {
-            val intent = Intent(this, ReviewActivity::class.java)
-            startActivity(intent)
-        }
-
-        review.setOnClickListener {
-            val intent = Intent(this, ReviewActivity::class.java)
-            startActivity(intent)
-        }
-
-        button3.setOnClickListener{
-            val layout = layoutInflater.inflate(R.layout.item_alertdialog, null)
-            val build = AlertDialog.Builder(it.context).apply {
-                setView(layout)
-            }
-            val dialog = build.create()
-            dialog.show()
-
-            layout.number_picker.minValue = 1
-            layout.number_picker.maxValue = ad_count
-            if (selectNum != 0) layout.number_picker.value = selectNum
-
-            layout.btn_no.setOnClickListener {
-                dialog.dismiss()
             }
 
             layout.btn_ok.setOnClickListener {
@@ -142,5 +116,57 @@ class FoodDetailActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+
+        // 가게 정보가 담긴 부분을 눌렀을 때, 가게 상세 정보(FoodStoreDetailActivity) 창으로 넘어감
+        store_box.setOnClickListener {
+            val intent = Intent(this, FoodStoreDetailActivity::class.java)
+            intent.putExtra("data", datas)
+            startActivityForResult(intent, NEW_STORE)
+        }
+
+        review_img.setOnClickListener {
+            val intent = Intent(this, ReviewActivity::class.java)
+            startActivity(intent)
+        }
+
+        review.setOnClickListener {
+            val intent = Intent(this, ReviewActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun startTimer(){
+        val sHour:Long = 2
+        val sMin:Long = 0
+        val sSec:Long = 0
+
+        time = (sHour*3600000) + (sMin*60000) + (sSec * 1000) + 1000
+
+        countDownTimer = object : CountDownTimer(time, 1000) {
+            override fun onTick(millisUnitFinished: Long) {
+                tempTime = millisUnitFinished
+                updateTime()
+            }
+
+            override fun onFinish() {}
+        }.start()
+    }
+
+    private fun updateTime(){
+        val hour = tempTime/3600000
+        val min = tempTime%3600000/60000
+        val sec = tempTime%3600000%60000/1000
+
+        var timeLeftText = "$hour :"
+
+        if(min<10) timeLeftText += "0"
+
+        timeLeftText += "$min :"
+
+        if(sec<10) timeLeftText += "0"
+
+        timeLeftText += sec
+
+        textView21.text = timeLeftText
     }
 }

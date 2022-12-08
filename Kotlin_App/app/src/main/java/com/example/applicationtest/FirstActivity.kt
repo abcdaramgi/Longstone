@@ -22,44 +22,44 @@ class FirstActivity : AppCompatActivity() {
     private var login_id : EditText? = null
     private var login_pw : EditText? = null
     private var login_btn : Button? = null
-//    lateinit var prefs: PreferenceUtil
+    lateinit var prefs: PreferenceUtil
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
-//        prefs = PreferenceUtil(applicationContext)
+        prefs = PreferenceUtil(applicationContext)
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_first)
 
         //소비자 이동
         btn_login.setOnClickListener {
-//            Log.d("Login", "login start...")
-//            val result = login()
-//            Log.d("result = ", result)
-//            if (result == "true") {
-////
-////                val id = login_id?.text.toString()
-////                val pw = login_pw?.text.toString()
-////
-////                MyApplication.prefs.setString("id", id)
-////                MyApplication.prefs.setString("pw", pw)
-////
-//////                preferences = getSharedPreferences("UserInfo", MODE_PRIVATE)
-//////                val editor = preferences.edit()
-//////                editor.putString("id", login_id!!.text.toString())
-//////                editor.putString("pw", login_pw!!.text.toString())
-//////                editor.commit()
-//////                val testid = MyApplication.prefs.getString("id", "0")
-//////                val testpw = MyApplication.prefs.getString("pw", "0")
-////
-//                val intent = Intent(this, MainActivity::class.java)
-//                startActivity(intent)
-//            } else {
-//                Log.d("Login", "login fail...")
-//            }
+            Log.d("Login", "login start...")
+            val result = login()
+            Log.d("result = ", result)
+            if (result == "true") {
+
+                val id = login_id?.text.toString()
+                val pw = login_pw?.text.toString()
+
+                MyApplication.prefs.setString("id", id)
+                MyApplication.prefs.setString("pw", pw)
+
+                /*preferences = getSharedPreferences("UserInfo", MODE_PRIVATE)
+                val editor = preferences.edit()
+                editor.putString("id", login_id!!.text.toString())
+                editor.putString("pw", login_pw!!.text.toString())
+                editor.commit()
+                val testid = MyApplication.prefs.getString("id", "0")
+                val testpw = MyApplication.prefs.getString("pw", "0")*/
+
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            } else {
+                Log.d("Login", "login fail...")
+            }
             //테스트시 이부분 주석풀고 위쪽 코드 주석달고 테스트
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
         }
         //판매자 이동
         btn_store.setOnClickListener {
