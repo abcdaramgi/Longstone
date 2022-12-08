@@ -3,6 +3,7 @@ package com.example.applicationtest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import com.example.applicationtest.DTO.FoodData
 import kotlinx.android.synthetic.main.activity_check_buy.*
 import kotlinx.android.synthetic.main.fragment_bell_screen.*
 import kotlinx.android.synthetic.main.fragment_bell_screen.toolbar

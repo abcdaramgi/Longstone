@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.applicationtest.DTO.FoodData
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_st_main.*
 import kotlinx.android.synthetic.main.fragment_st_home.*
@@ -22,9 +23,9 @@ class StMainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationIte
     private lateinit var stuserfragment: StUserFragment
 
     var stfoodList: ArrayList<FoodData> = arrayListOf(
-        FoodData("소금빵","용산동",2500,2300,R.drawable.image_bread1,5,"가게1",R.drawable.ic_baseline_home_24,2),
-        FoodData("오징어젓갈","신당동",12000,8000,R.drawable.image_bread1,6,"가게2",R.drawable.ic_baseline_home_24,5),
-        FoodData("샐러드","신당동",25200, 17000,R.drawable.image_bread1,8,"가게3",R.drawable.ic_baseline_home_24,3),
+        FoodData("소금빵","용산동",2500,2300,R.drawable.image_bread1.toString(),5,"가게1",R.drawable.ic_baseline_home_24,2),
+        FoodData("오징어젓갈","신당동",12000,8000,R.drawable.image_bread1.toString(),6,"가게2",R.drawable.ic_baseline_home_24,5),
+        FoodData("샐러드","신당동",25200, 17000,R.drawable.image_bread1.toString(),8,"가게3",R.drawable.ic_baseline_home_24,3),
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

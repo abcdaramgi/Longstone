@@ -1,11 +1,8 @@
-package com.example.demo.model;
+package com.example.applicationtest.DTO;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import java.util.stream.Stream;
 
-@Getter
-@NoArgsConstructor
-public class Store {
+public class StoreDTO {
     public String name;
     public String number;
     public String pdname;
@@ -62,16 +59,20 @@ public class Store {
         this.imgUrl = imgUrl;
     }
 
-    public Store(String name, String number, String pdname){
+    public StoreDTO(){
+
+    }
+    public StoreDTO(String name, String number, String pdname){
         this.name = name;
         this.number = number;
         this.pdname = pdname;
     }
 
-    public Store(String name, String number, String storeAddr, String openHour){
+    public StoreDTO(String name, String number, String storeAddr, String openHour){
         this.name = name;
         this.number = number;
-        this.openHour = openHour;
         this.storeAddr = storeAddr;
+        this.openHour = openHour;
     }
+
 }

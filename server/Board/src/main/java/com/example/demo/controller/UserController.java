@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 import com.example.demo.model.Favorites;
+import com.example.demo.model.Store;
 import com.example.demo.model.User;
 import com.example.demo.repository.SellerRepository;
 import com.example.demo.repository.UserRepository;
@@ -111,6 +112,35 @@ public class UserController {
         success = userRepository.insertFavoritesData(favorites);
         return success;
     }
+
+    //즐겨찾기 해제
+    @RequestMapping(value = "/clearfavorites", method = {RequestMethod.POST})
+    public String clearFavoritesUserData(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        String success = "false";
+        ServletInputStream inputStream = request.getInputStream();
+        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+
+        Favorites favorites = objectMapper.readValue(messageBody, Favorites.class);
+        System.out.println("userId : " + favorites.getUserId() + "\n" +
+                "storeName : " + favorites.getStoreName());
+        success = userRepository.updateFavoritesData(favorites);
+        return success;
+    }
+
+    //즐겨찾기한 가게정보 가져오기
+    @RequestMapping(value = "/infofavorites", method = {RequestMethod.POST})
+    public JSONObject getFavoritesStoreData(HttpServletRequest request, HttpServletResponse response) throws IOException{
+
+        ServletInputStream inputStream = request.getInputStream();
+        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+
+        System.out.println("userId : " + messageBody);
+        List<Store> store = userRepository.getFavoritesData(messageBody);
+        JSONObject data = new JSONObject();
+        data.put("store", store);
+        return data;
+    }
+
 
     //판매자로그인
     @RequestMapping(value = "/sellerlogin", method = {RequestMethod.POST})

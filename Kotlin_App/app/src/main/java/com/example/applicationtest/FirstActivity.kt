@@ -37,21 +37,21 @@ class FirstActivity : AppCompatActivity() {
 //            val result = login()
 //            Log.d("result = ", result)
 //            if (result == "true") {
-//
-//                val id = login_id?.text.toString()
-//                val pw = login_pw?.text.toString()
-//
-//                MyApplication.prefs.setString("id", id)
-//                MyApplication.prefs.setString("pw", pw)
-//
-////                preferences = getSharedPreferences("UserInfo", MODE_PRIVATE)
-////                val editor = preferences.edit()
-////                editor.putString("id", login_id!!.text.toString())
-////                editor.putString("pw", login_pw!!.text.toString())
-////                editor.commit()
-////                val testid = MyApplication.prefs.getString("id", "0")
-////                val testpw = MyApplication.prefs.getString("pw", "0")
-//
+////
+////                val id = login_id?.text.toString()
+////                val pw = login_pw?.text.toString()
+////
+////                MyApplication.prefs.setString("id", id)
+////                MyApplication.prefs.setString("pw", pw)
+////
+//////                preferences = getSharedPreferences("UserInfo", MODE_PRIVATE)
+//////                val editor = preferences.edit()
+//////                editor.putString("id", login_id!!.text.toString())
+//////                editor.putString("pw", login_pw!!.text.toString())
+//////                editor.commit()
+//////                val testid = MyApplication.prefs.getString("id", "0")
+//////                val testpw = MyApplication.prefs.getString("pw", "0")
+////
 //                val intent = Intent(this, MainActivity::class.java)
 //                startActivity(intent)
 //            } else {

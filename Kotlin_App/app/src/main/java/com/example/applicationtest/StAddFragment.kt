@@ -17,7 +17,13 @@ import com.example.applicationtest.DTO.postDTO
 import com.example.applicationtest.Singleton.SellerSingleton
 import com.example.applicationtest.Transport.FileUploadUtils
 import com.example.applicationtest.Transport.PostTask
+import kotlinx.android.synthetic.main.activity_st_add_object.*
+import kotlinx.android.synthetic.main.activity_st_info_screen.*
 import kotlinx.android.synthetic.main.fragment_st_add.*
+import kotlinx.android.synthetic.main.fragment_st_add.btn_registration
+import kotlinx.android.synthetic.main.fragment_st_add.button2
+import kotlinx.android.synthetic.main.fragment_st_add.hour_picker
+import kotlinx.android.synthetic.main.fragment_st_add.minute_picker
 import kotlinx.android.synthetic.main.item_alertdialog.view.*
 import java.io.*
 import java.text.SimpleDateFormat
@@ -30,6 +36,7 @@ class StAddFragment : AppCompatActivity() {
     private var discount_price_edit: EditText? = null
     private var foodName_edit: EditText? = null
     private var food_count: EditText? = null
+    private var food_content: EditText? = null
     private var hourPicker : NumberPicker? = null
     private var minutePicker :NumberPicker? = null
     private var imageview : ImageView? = null
@@ -72,7 +79,13 @@ class StAddFragment : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_st_add)
+        setContentView(R.layout.activity_st_add_object)
+
+        setSupportActionBar(st_toolbar_SalesAdd) //커스텀한 toolbar 액션바로 사용
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        //액션바에 표시되는 제목의 표시유무를 설정합니다. false로 해야 custom한 툴바의 이름이 화면에 보이게 됩니다.
+        supportActionBar?.setDisplayHomeAsUpEnabled(true) //액션바 뒤로가기 아이콘 표시
+
         timer()
 //        img_add()
 //        add()
@@ -81,6 +94,7 @@ class StAddFragment : AppCompatActivity() {
         foodName_edit = findViewById(R.id.editTextFoodName)
         discount_price_edit = findViewById((R.id.editTextDiscountPrice))
         food_count = findViewById((R.id.editTextNumber))
+        food_content = findViewById(R.id.editTextContent)
         hourPicker = findViewById(R.id.hour_picker)
         minutePicker = findViewById(R.id.minute_picker)
         imageview = findViewById(R.id.imageView)
@@ -91,16 +105,16 @@ class StAddFragment : AppCompatActivity() {
             openGallery()
         }
 
-        btn_registration.setOnClickListener({
+        btn_registration.setOnClickListener {
             post()
             val builder = AlertDialog.Builder(this)
             builder.setMessage("등록되었습니다.")
                 .setPositiveButton("확인",
-                    DialogInterface.OnClickListener{ dialog, id ->
+                    DialogInterface.OnClickListener { dialog, id ->
                         finish()
                     })
             builder.show()
-        })
+        }
     }
     //NumberPicker 활성화
     fun timer(){
@@ -140,12 +154,13 @@ class StAddFragment : AppCompatActivity() {
             var discountPrice = discount_price_edit!!.text.toString()
             var foodCount = food_count!!.text.toString()
             val foodName = foodName_edit!!.text.toString()
+            val foodContent = food_content!!.text.toString()
             var timePicker = ((hourPicker!!.value * 60) + (minutePicker!!.value)).toString()
 
             Log.d("앱에서 보낸값", "${SellerSingleton.getInstance().sellerId} ,$originalPrice, " +
-                    "$discountPrice, $foodCount, $foodName, $timePicker")
+                    "$discountPrice, $foodCount, $foodName, $foodContent, $timePicker")
             val task = PostTask()
-            val result = task.execute(originalPrice, discountPrice, foodCount, foodName, timePicker).get()
+            val result = task.execute(originalPrice, discountPrice, foodCount, foodName, foodContent ,timePicker).get()
             Log.d("받은값", result)
             Log.d("post", "posting end...")
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StoreDetailActivity">
+    tools:context=".StInfoScreen">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/store_de_box"
@@ -47,7 +47,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/st_toolbar_review">
+            app:layout_constraintTop_toBottomOf="@+id/st_toolbar_stinfo">
 
             <ScrollView
                 android:id="@+id/scrollView2"
@@ -148,8 +148,8 @@
 
                             <TextView
                                 android:id="@+id/textView_st_address"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="248dp"
+                                android:layout_height="49dp"
                                 android:layout_marginStart="56dp"
                                 android:layout_marginTop="16dp"
                                 android:text="대구"

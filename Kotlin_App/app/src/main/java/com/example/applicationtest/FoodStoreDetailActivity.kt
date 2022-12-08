@@ -4,13 +4,17 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.applicationtest.DTO.FoodData
+import com.example.applicationtest.FireBase.MyFirebaseMessagingService
 import com.example.applicationtest.Singleton.SellerSingleton
 import com.example.applicationtest.Singleton.UserSingleton
 import com.example.applicationtest.Transport.FavoritesTask
 import com.example.applicationtest.Transport.SellerLoginTask
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_food_store_detail.*
 import kotlinx.android.synthetic.main.activity_store_detile.*
 import kotlinx.android.synthetic.main.activity_store_detile.img_prefer
@@ -42,7 +46,7 @@ class FoodStoreDetailActivity : AppCompatActivity() {
             var storeData = StoreData()
             storeData.storename = data.storename
             storeData.storeinfo = data.place
-            storeData.img = data.img
+            storeData.img = data.img.toString()
 
             //===================================================================//
             //즐겨찾기 설정 부분
@@ -52,6 +56,7 @@ class FoodStoreDetailActivity : AppCompatActivity() {
             Log.d("result = ", result)
             if(result == "true"){
                 //대충 메세지로 즐겨찾기 등록성공 팝업창 띄워주셈.
+                //종모양 기본값을 빈 종모양 => 노란색으로 채워진 종모양으로 변경
             }else{
                 Log.d("Favorites", "Favorites fail...")
             }
@@ -80,6 +85,7 @@ class FoodStoreDetailActivity : AppCompatActivity() {
 
     fun setFavorites(): String {
         var result = ""
+        val sellerId = "seller1123"
         try{
             val userId = UserSingleton.getInstance().userId.toString();
             val storeName = data.storename.toString();
@@ -95,6 +101,16 @@ class FoodStoreDetailActivity : AppCompatActivity() {
         }catch(e : Exception){
             e.printStackTrace()
         }
+
+        FirebaseMessaging.getInstance().subscribeToTopic(sellerId).addOnCompleteListener { task ->
+            var msg = "Subscribed"
+            if (!task.isSuccessful) {
+                msg = "Subscribe failed"
+            }
+            Log.d(MyFirebaseMessagingService.TAG, msg!!)
+            Toast.makeText(baseContext, msg, Toast.LENGTH_LONG).show()
+        }
+
         return result
     }
 }

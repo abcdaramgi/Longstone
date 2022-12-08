@@ -6,7 +6,7 @@ data class ItemCart (
     var isChecked: Boolean = false,
     var StoreName : String? = null,
     var FoodName : String? = null,
-    var food_img : Int? = null,
+    var food_img : String? = null,
     var cost : Int? = null,
     var food_count : Int? = null
 ): Serializable {
@@ -22,5 +22,5 @@ data class BuyListItem (
     var buyliste_fd_name : String? =null,
     var buyliste_st_name : String? =null,
     var buyliste_fd_count : String? =null,
-    var buylist_img : Int? =null,
+    var buylist_img : String? =null,
         )

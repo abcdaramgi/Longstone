@@ -28,6 +28,10 @@ class StUserFragment : AppCompatActivity() {
             val intent = Intent(this, OrderHistoryScreen::class.java)
             startActivity(intent)
         })
+        cardview_Salesdetails.setOnClickListener({
+            val intent = Intent(this, SalesDetailsScreen::class.java)
+            startActivity(intent)
+        })
         cardview_streview.setOnClickListener({
             val intent = Intent(this, StReviewScreen::class.java)
             startActivity(intent)

@@ -4,10 +4,12 @@ public class Product {
 
     public String strId;
     public String pdPrice;
-    public String pdTimer;
+    public Integer pdTimer;
     public String pdSale;
     public String topicName;
     public String pdCount;
+    public String pdContents;
+    public String pdName;
 
     public String getstrId(){ return strId;}
     public void setStrId(String strId){
@@ -19,8 +21,8 @@ public class Product {
         this.pdPrice = pdPrice;
     }
 
-    public String getPdTimer(){ return pdTimer;}
-    public void setPdTimer(String pdTimer){ this.pdTimer = pdTimer; }
+    public Integer getPdTimer(){ return pdTimer;}
+    public void setPdTimer(Integer pdTimer){ this.pdTimer = pdTimer; }
 
     public String getPdSale(){ return pdSale;}
     public void setPdSale(String pdSale){
@@ -37,5 +39,13 @@ public class Product {
         this.pdCount = pdCount;
     }
 
+    public String getpdContents(){ return pdContents;}
+    public void setpdContents(String pdContents){
+        this.pdContents = pdContents;
+    }
 
+    public String getpdName(){ return pdName;}
+    public void setpdName(String pdName){
+        this.pdName = pdName;
+    }
 }
