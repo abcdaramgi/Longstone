@@ -3,7 +3,7 @@ name: deploy-action
 on:
   push:
     branches:
-      - CI/CD]---TEST
+       [ main ]
   workflow_dispatch:
 
 env:
@@ -12,6 +12,10 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+       working-directory: "./server/Board"
 
     steps:
       - name: Checkout
@@ -23,7 +27,7 @@ jobs:
           java-version: 11
 
       - name: Grant execute permission for gradlew
-        run: chmod +x ./gradlew
+        run: chmod +x gradlew
         shell: bash
 
       - name: Build with Gradle
@@ -42,4 +46,11 @@ jobs:
           aws-region: ap-northeast-2
           
       - name: Upload to S3
-        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://$S3_BUCKET_NAME/$GITHUB_SHA.zip
+        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://$S3_BUCKET_NAME/Board.zip
+        
+          ### 새로 추가한 부분 ###
+      - name: Code Deploy
+        env:
+          AWS_ACCESS_KEY_ID: AKIASGQNGYKOFON2ORVP
+          AWS_SECRET_ACCESS_KEY: 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
+        run: aws deploy create-deployment --application-name GoldenHour_code_deploy --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name goldenhour-server --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=$PROJECT_NAME/Board.zip
