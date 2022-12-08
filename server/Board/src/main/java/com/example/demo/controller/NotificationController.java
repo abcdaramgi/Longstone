@@ -1,32 +1,40 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.FcmMessage;
-import com.example.demo.model.RequestPushMessage;
+import com.example.demo.model.RequestDTO;
 import com.example.demo.services.posts.FcmService;
-import com.google.firebase.messaging.FirebaseMessagingException;
-import org.aspectj.bridge.Message;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.management.Notification;
-import java.util.Optional;
+import java.io.IOException;
 
 @RestController
-@RequestMapping(path="/notification")
+@RequiredArgsConstructor
 public class NotificationController {
 
-    @Autowired
-    FcmService fcmService;
+    private final FcmService fcmService;
 
     //토픽
-    @PostMapping(value = "/notification/topic/{topic}")
-    public void notificationTopics(@PathVariable("topic") String topic, @RequestBody RequestPushMessage data) throws FirebaseMessagingException {
-        com.google.firebase.messaging.Notification notification = com.google.firebase.messaging.Notification.builder().setTitle(data.getTitle()).setBody(data.getBody()).build();
-        com.google.firebase.messaging.Message.Builder builder = com.google.firebase.messaging.Message.builder();
-        //Optional.ofNullable(data.getData()).ifPresent(sit -> builder.putAllData(sit));
-        System.out.println(topic);
-        com.google.firebase.messaging.Message msg = builder.setTopic(topic).setNotification(notification).build();
-        fcmService.sendMessage(msg);
+    @PostMapping(value = "/notification/topics/{topic}")
+    public ResponseEntity notificationTopics(@PathVariable("topic") String topic, @RequestBody RequestDTO requestDTO) throws IOException {
+        fcmService.sendTopicMessageTo(
+                requestDTO.getTopic(),
+                requestDTO.getTitle(),
+                requestDTO.getBody());
+        return ResponseEntity.ok().build();
+    }
+
+    //유저
+    @PostMapping("/notification/user/{user}")
+    public ResponseEntity pushMessage(@RequestBody RequestDTO requestDTO) throws IOException {
+        System.out.println(requestDTO.getTargetToken() + " "
+                +requestDTO.getTitle() + " " + requestDTO.getBody());
+
+        fcmService.sendMessageTo(
+                requestDTO.getTargetToken(),
+                requestDTO.getTitle(),
+                requestDTO.getBody());
+        return ResponseEntity.ok().build();
     }
 
     //특정고객
@@ -41,6 +49,17 @@ public class NotificationController {
 //            Message msg = builder.setToken(it.getPushToken()).setNotification(notification).build();
 //            fcmService.sendMessage(msg);
 //        }
+//    }
+
+    //토픽
+//    @PostMapping(value = "/notification/topic/{topic}")
+//    public void notificationTopics(@PathVariable("topic") String topic, @RequestBody RequestPushMessage data) throws FirebaseMessagingException {
+//        com.google.firebase.messaging.Notification notification = com.google.firebase.messaging.Notification.builder().setTitle(data.getTitle()).setBody(data.getBody()).build();
+//        com.google.firebase.messaging.Message.Builder builder = com.google.firebase.messaging.Message.builder();
+//        //Optional.ofNullable(data.getData()).ifPresent(sit -> builder.putAllData(sit));
+//        System.out.println(topic);
+//        com.google.firebase.messaging.Message msg = builder.setTopic(topic).setNotification(notification).build();
+//        fcmService.sendMessage(msg);
 //    }
 
 
