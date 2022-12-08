@@ -163,7 +163,6 @@
     <LinearLayout
         android:id="@+id/timer"
         android:layout_width="match_parent"
-        android:backgroundTint="#ff0000"
         android:layout_height="40dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/button3"
@@ -175,24 +174,28 @@
             android:layout_height="wrap_content"
             android:text="00 : 00 : 00"
             android:gravity="center"
-            android:textSize="32dp"/>
+            android:textSize="34dp"/>
     </LinearLayout>
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="205dp"
+        android:layout_width="206dp"
         android:layout_height="50dp"
         android:text="장바구니"
-        android:backgroundTint="@color/golden"
+        android:backgroundTint="#554B4A"
+        android:textSize="16sp"
+        android:elevation="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/buy_bnt"
-        android:layout_width="205dp"
+        android:layout_width="206dp"
         android:layout_height="50dp"
-        android:backgroundTint="@color/golden"
         android:text="구매하기"
+        android:backgroundTint="#554B4A"
+        android:elevation="30dp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

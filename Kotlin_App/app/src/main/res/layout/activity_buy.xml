@@ -204,6 +204,8 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="구매하기"
+            android:textSize="20sp"
+            android:backgroundTint="#554B4A"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:layout_editor_absoluteX="0dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>

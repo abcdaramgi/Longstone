@@ -8,6 +8,7 @@ public class OnSalePostDTO {
     private String img;
     private String storeName;
     private String pdContents;
+    private Integer count;
 
     private Integer pdid;
     private String sellerid;
@@ -72,7 +73,7 @@ public class OnSalePostDTO {
     }
 
     public void setAddress(String address) {
-        this.address = this.address;
+        this.address = address;
     }
 
     public void setPdName(String pdName) {
@@ -110,4 +111,8 @@ public class OnSalePostDTO {
     public String getStoreName() {
         return storeName;
     }
+
+    public Integer getCount() { return count; }
+
+    public void setCount(Integer count) { this.count = count; }
 }

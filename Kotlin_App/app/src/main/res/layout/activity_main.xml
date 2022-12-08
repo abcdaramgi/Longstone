@@ -36,7 +36,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,8 +48,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="FOODTIME"
-            android:textColor="@color/white"
-            android:textSize="25sp"
+            android:textColor="#554B4A"
+            android:textSize="26sp"
             android:textStyle="bold" />
 
     </androidx.appcompat.widget.Toolbar>

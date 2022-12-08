@@ -1,9 +1,6 @@
 package com.example.demo.repository;
 
-import com.example.demo.model.ImageFile;
-import com.example.demo.model.Post;
-import com.example.demo.model.Product;
-import com.example.demo.model.Singleton;
+import com.example.demo.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -23,9 +20,9 @@ public class PostRepository {
 
     public String insertProductData(Product product){
         String success = "false";
-        String sql = "INSERT INTO ProductTB(sellerId, pdPrice, pdTimer, pdSale, topicName, pdCount) VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO ProductTB(sellerId, pdPrice, pdTimer, pdSale, pdName, pdCount, pdContents) VALUES(?,?,?,?,?,?,?)";
         int result = jdbcTemplate.update(sql, product.getstrId(), product.getPdPrice(),
-                product.getPdTimer(), product.getPdSale(), product.getTopicName(), product.getPdCount());
+                product.getPdTimer(), product.getPdSale(), product.getpdName(), product.getPdCount(), product.getpdContents());
         if(result != 0)
             success = "true";
         Singleton.getInstance().AutoIncresePdId = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
@@ -47,23 +44,50 @@ public class PostRepository {
         return success;
     }
 
-    public List<Post> getOnsalePost(){
-        String sql = "SELECT pdId, sellerId, pdContents, pdPrice, pdTimer, pdSale FROM ProductTB WHERE expire <= ?;";
-        SimpleDateFormat date = new SimpleDateFormat("yyyy.MM.dd.HH:mm:ss");
+    public List<Post> getOnsalePost(String status){
+
+        String sql = "SELECT ProductTB.pdId, ProductTB.sellerId, pdContents, pdPrice, pdTimer, pdSale, pdName, PdimageTB.imgUrl FROM ProductTB, PdimageTB WHERE (expire < ? AND status = ?) \n" +
+                "AND (ProductTB.pdId = PdimageTB.pdId);";
+
+        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String timeStamp = date.format(new Date());
+        System.out.println(timeStamp);
         List<Post> result = jdbcTemplate.query(sql, new RowMapper<Post>() {
             @Override
             public Post mapRow(ResultSet rs, int rowNum) throws SQLException {
                 Post post = new Post();
                 post.setPdName(rs.getString("pdName"));
+
+                Float price = rs.getFloat("pdPrice");
+                post.setPrice(price);
+                Float discount = rs.getFloat("pdSale");
+                price = price * ((100 - discount) / 100);
+                post.setSaleprice(Math.round(price));
+                post.setImg(rs.getString("imgUrl"));
+                post.setPdContents(rs.getString("pdContents"));
+                post.setCount(rs.getInt("pdCount"));
+
+                String strSql = "SELECT storeName,storeAddr FROM StoreTB WHERE sellerId = ?";
+                List<Store> strResult = jdbcTemplate.query(strSql, new RowMapper<Store>() {
+                    @Override
+                    public Store mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Store store = new Store();
+                        store.setName(rs.getString("storeName"));
+                        store.setStoreAddr(rs.getString("storeAddr"));
+                        return store;
+                    }
+                }, rs.getString("sellerId"));
+                Store store = strResult.get(0);
+                post.setStoreName(store.getName());
+                post.setAddress(store.getStoreAddr());
+
                 post.setPdid(rs.getInt("pdId"));
                 post.setSellerid(rs.getString("sellerId"));
-                post.setPdContents(rs.getString("pdContents"));
-                post.setPrice(rs.getInt("pdPrice"));
                 post.setPdTimer(rs.getInt("pdTimer"));
                 return post;
             }
-        }, timeStamp);
+        }, timeStamp, status);
+        System.out.println(result);
         return result;
     }
 }

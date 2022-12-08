@@ -16,7 +16,7 @@ import com.example.applicationtest.Singleton.UserSingleton
 import com.example.applicationtest.Transport.FavoritesListTask
 import com.example.applicationtest.Transport.OnsaleListTask
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.messaging.FirebaseMessaging
+//import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -59,11 +59,13 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         supportActionBar?.setDisplayShowTitleEnabled(false) //액션바에 표시되는 제목의 표시유무를 설정합니다. false로 해야 custom한 툴바의 이름이 화면에 보이게 됩니다.
 
         val transaction = supportFragmentManager.beginTransaction()
+        getTodayData()
         transaction.replace(
             R.id.fl_container,
             HomeScreen(),
         )
         transaction.commit()
+        intent.putExtra("DataList",dataList as ArrayList)
         //intent.putExtra("DataList",dataList)
 
         /*homeScreen = HomeScreen.newInstance()
@@ -106,11 +108,12 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 supportFragmentManager.beginTransaction().replace(R.id.fl_container, homeScreen).commit()*/
             }
             R.id.second -> {
-                    transaction.replace(
-                        R.id.fl_container,
-                        SearchScreen()
-                    )
-                    transaction.commit()
+                transaction.replace(
+                    R.id.fl_container,
+                    SearchScreen()
+                )
+                transaction.commit()
+                intent.putExtra("DataList",storeList as ArrayList)
                 /*searchScreen = SearchScreen.newInstance()
                 supportFragmentManager.beginTransaction().replace(R.id.fl_container, searchScreen).commit()*/
             }
@@ -166,13 +169,13 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     }
 
-    private fun initFirebase() {
-        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                Log.d("알림알림!", task.result)
-            }
-        }
-    }
+//    private fun initFirebase() {
+//        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+//            if (task.isSuccessful) {
+//                Log.d("알림알림!", task.result)
+//            }
+//        }
+//    }
 
     private fun initDynamicLink() {
         val dynamicLinkData = intent.extras
@@ -237,37 +240,48 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             //Log.d("앱에서 보낸값", "$userId")
 
             val task = OnsaleListTask()
-            result = task.execute().get()
+            result = task.execute("Y").get()
             Log.d("받은값", result)
 
             if(result != null){
                 val `object` = JSONObject(result)
-                val array = `object`.get("store") as JSONArray
+                val array = `object`.get("post") as JSONArray
 
                 for(i: Int in 0..array.length()-1){
                     var row = array.getJSONObject(i)
                     var onSalePostDTO = OnSalePostDTO()
 
+
                     //여기 그냥 그대로 다 보내고 그대로 다 받자
                     onSalePostDTO.setPdName(row.getString("pdName"))
+                    onSalePostDTO.setAddress(row.getString("address"))
+                    onSalePostDTO.setPrice(row.getInt("price"))
+                    onSalePostDTO.setSaleprice(row.getInt("saleprice"))
+                    onSalePostDTO.setImg(row.getString("img"))
                     onSalePostDTO.setPdContents(row.getString("pdContents"))
-                    onSalePostDTO.setAddress(row.getString("Address"))
-                    onSalePostDTO.setPrice(row.getInt("pdPrice"))
-                    onSalePostDTO.setSaleprice(row.getInt("price"))
-                    onSalePostDTO.setImg(row.getString("pdPrice"))
-                    onSalePostDTO.setPrice(row.getInt("pdPrice"))
+                    onSalePostDTO.setCount(row.getInt("count"))
 
+                    onSalePostDTO.setPdid(row.getInt("pdid"))
+                    onSalePostDTO.setSellerid(row.getString("sellerid"))
 
-                    dataList!!.add(FoodData(onSalePostDTO.getPdName(),
+                    dataList!!.add(FoodData(
+                        onSalePostDTO.getPdName(),
                         onSalePostDTO.getAddress(),
                         onSalePostDTO.getPrice(),
-                        onSalePostDTO.getpdSale));
+                        onSalePostDTO.getSaleprice(),
+                        onSalePostDTO.getImg(),
+                        onSalePostDTO.getCount(),
+                        onSalePostDTO.getStoreName(),
+                        null,
+                        null,
+                        onSalePostDTO.getPdid(),
+                        onSalePostDTO.getSellerid()
+                    ));
                 }
             }
             else{
                 Log.d("Onsale", "Onsale fail...")
             }
-
             Log.d("Onsale List", "Onsale List end...")
         }catch(e : Exception){
             e.printStackTrace()

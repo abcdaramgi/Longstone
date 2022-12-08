@@ -15,11 +15,11 @@
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="15dp"
-                    android:text="즐겨찾기"
+                    android:text="찜한스토어"
                     android:textColor="#000000"
-                    android:textSize="18dp"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 

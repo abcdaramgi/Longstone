@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_st_home.listView
 class HomeScreen : Fragment() {
 
     private lateinit var onsaleListAdapter: OnsaleListAdapter
-    var list: ArrayList<FoodData> = ArrayList()
+    var list: MutableList<FoodData> = ArrayList()
     // 뷰가 생성되었을 때, 프래그먼트와 레이아웃을 연결시켜주는 부분
 
     override fun onCreateView(
@@ -30,7 +30,7 @@ class HomeScreen : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        list = requireActivity().intent!!.extras!!.get("DataList") as ArrayList<FoodData>
+        list = requireActivity().intent!!.extras!!.get("DataList") as MutableList<FoodData>
 
         Log.e("FirstFragment", "Data List: ${list}")
 
