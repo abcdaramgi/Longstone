@@ -1,0 +1,27 @@
+# appspec.yml
+
+version: 0.0
+os: linux
+files:
+  - source: / #전부
+    destination: /home/ec2-user/Board/ #인스턴스에서 파일이 복사되어야 하는 위치 식별
+    overwrite: yes #선택 값으로, 동일한 파일이 있을 경우 덮어쓰기 여부
+
+#정의한 파일이 인스턴스에 복사된 후 해당 파일에 권한이 어떻게 적용되어야 하는 지를 지정
+permissions:
+  - object: / #문자열을 사용하여 대상을 지정합니다. /는 전부
+    pattern: "**" #권한을 적용할 패턴을 지정합니다. 특수 문자"**"를 사용하여 지정하면 권한이 type에 따라 일치하는 모든 파일에 적용됩니다.
+    owner: ec2-user # object의 소유자 이름, 지정하지 않으면 원본 파일에 적용된 기존의 모든 소유자가 복사 작업 후에도 아무것도 변경되지 않습니다.
+    group: ec2-user # object의 그룹 이름, 지정하지 않으면 원본 파일에 적용된 기존의 모든 소유자가 복사 작업 후에도 아무것도 변경되지 않습니다.
+### 새로 추가한 부분 ###
+hooks:
+  ApplicationStart:
+    - location: scripts/run_new_was.sh
+      timeout: 180
+      runas: ec2-user
+    - location: scripts/health_check.sh
+      timeout: 180
+      runas: ec2-user
+    - location: scripts/switch.sh
+      timeout: 180
+      runas: ec2-user
