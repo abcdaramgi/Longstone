@@ -58,6 +58,18 @@ public class PostsController {
         return "hi";
     }
 
+    @RequestMapping(value = "/orderlist", method = {RequestMethod.POST})
+    public JSONObject orderListPost(HttpServletRequest request, HttpServletResponse response) throws  IOException{
+        ServletInputStream inputStream = request.getInputStream();
+        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+
+        System.out.println("userId : " + messageBody);
+        List<OrderList> orderList = oderPostRepository.getOrderListData(messageBody);
+        JSONObject data = new JSONObject();
+        data.put("orderList", orderList);
+        return data;
+    }
+
     @RequestMapping(value = "/product", method = {RequestMethod.POST})
     public String uploadProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String success = "false";
