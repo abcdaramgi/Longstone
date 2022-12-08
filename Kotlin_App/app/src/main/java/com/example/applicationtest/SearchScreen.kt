@@ -6,16 +6,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.applicationtest.Transport.RegisterTask
 import com.example.applicationtest.Transport.SearchTask
-import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.*
@@ -40,29 +36,31 @@ class SearchScreen : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-            Log.e("FirstFragment", "Data List: ${list}")
+        search_bar.setOnClickListener(View.OnClickListener { search_bar.setIconified(false) })
 
-            list = requireActivity().intent!!.extras!!.get("DataList") as ArrayList<StoreData>
+        Log.e("FirstFragment", "Data List: ${list}")
 
-            // Fragment에서 전달받은 list를 넘기면서 ListAdapter 생성
-            storeAdapter = StoreAdapter(list)
-            search_re.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-            // RecyclerView.adapter에 지정
-            search_re.adapter = storeAdapter
+        list = requireActivity().intent!!.extras!!.get("DataList") as ArrayList<StoreData>
 
-            // fragment 리스트에 구분선 넣기
-            search_re.addItemDecoration(DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL))
+        // Fragment에서 전달받은 list를 넘기면서 ListAdapter 생성
+        storeAdapter = StoreAdapter(list)
+        search_re.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+        // RecyclerView.adapter에 지정
+        search_re.adapter = storeAdapter
 
-            storeAdapter.setOnItemClickListener(object : StoreAdapter.OnItemClickListener
-            {
-                override fun onItemClick(v: View, data: StoreData, pos: Int){
-                    val intent = Intent(requireActivity(), StoreDetailActivity::class.java)
-                    intent.putExtra("data",data)
-                    intent.putExtra("list",list)
-                    //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    startActivityForResult(intent,NEW_STORE)
-                }
-            })
+        // fragment 리스트에 구분선 넣기
+        search_re.addItemDecoration(DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL))
+
+        storeAdapter.setOnItemClickListener(object : StoreAdapter.OnItemClickListener
+        {
+            override fun onItemClick(v: View, data: StoreData, pos: Int){
+                val intent = Intent(requireActivity(), StoreDetailActivity::class.java)
+                intent.putExtra("data",data)
+                intent.putExtra("list",list)
+                //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivityForResult(intent,NEW_STORE)
+            }
+        })
 
         search_bar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 

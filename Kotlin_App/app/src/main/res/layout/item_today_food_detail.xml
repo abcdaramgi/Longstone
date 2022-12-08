@@ -165,7 +165,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@id/button3"
+        app:layout_constraintBottom_toTopOf="@id/buy_bnt"
         app:layout_constraintTop_toBottomOf="@id/food_box">
 
         <TextView
@@ -178,19 +178,8 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button3"
-        android:layout_width="206dp"
-        android:layout_height="50dp"
-        android:text="장바구니"
-        android:backgroundTint="#554B4A"
-        android:textSize="16sp"
-        android:elevation="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
         android:id="@+id/buy_bnt"
-        android:layout_width="206dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="구매하기"
         android:backgroundTint="#554B4A"

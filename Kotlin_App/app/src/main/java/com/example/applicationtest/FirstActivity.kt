@@ -22,11 +22,11 @@ class FirstActivity : AppCompatActivity() {
     private var login_id : EditText? = null
     private var login_pw : EditText? = null
     private var login_btn : Button? = null
-//    lateinit var prefs: PreferenceUtil
+    lateinit var prefs: PreferenceUtil
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
-//        prefs = PreferenceUtil(applicationContext)
+        prefs = PreferenceUtil(applicationContext)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_first)
 
@@ -49,6 +49,13 @@ class FirstActivity : AppCompatActivity() {
 //                editor.commit()
 //                val testid = MyApplication.prefs.getString("id", "0")
 //                val testpw = MyApplication.prefs.getString("pw", "0")
+                /*preferences = getSharedPreferences("UserInfo", MODE_PRIVATE)
+                val editor = preferences.edit()
+                editor.putString("id", login_id!!.text.toString())
+                editor.putString("pw", login_pw!!.text.toString())
+                editor.commit()
+                val testid = MyApplication.prefs.getString("id", "0")
+                val testpw = MyApplication.prefs.getString("pw", "0")*/
 
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
