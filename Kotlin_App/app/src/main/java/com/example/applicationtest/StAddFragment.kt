@@ -19,11 +19,6 @@ import com.example.applicationtest.Transport.FileUploadUtils
 import com.example.applicationtest.Transport.PostTask
 import kotlinx.android.synthetic.main.activity_st_add_object.*
 import kotlinx.android.synthetic.main.activity_st_info_screen.*
-import kotlinx.android.synthetic.main.fragment_st_add.*
-import kotlinx.android.synthetic.main.fragment_st_add.btn_registration
-import kotlinx.android.synthetic.main.fragment_st_add.button2
-import kotlinx.android.synthetic.main.fragment_st_add.hour_picker
-import kotlinx.android.synthetic.main.fragment_st_add.minute_picker
 import kotlinx.android.synthetic.main.item_alertdialog.view.*
 import java.io.*
 import java.text.SimpleDateFormat

@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     app:cardUseCompatPadding="true"
-    >
+    android:background="@color/background">
 
     <TextView
         android:id="@+id/title_catagory"
@@ -15,18 +15,19 @@
         android:layout_marginLeft="50dp"
         android:layout_marginTop="30dp"
         android:text="My Page"
-        android:textColor="@color/black"
+        android:textColor="#323339"
         android:textSize="30dp"
         android:textStyle="bold" />
 
     <Button
         android:id="@+id/btn_st_logout"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="280dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="290dp"
+        android:backgroundTint="@color/golden"
         android:text="Logout"
-        android:textColor="#FFFFFF"
-        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:textSize="14dp"
         android:textStyle="bold"
         tools:ignore="TouchTargetSizeCheck" />
 
@@ -47,7 +48,7 @@
             android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:layout_margin="8dp"
-            android:background="#FFFFFF"
+            android:backgroundTint="@color/golden"
             app:cardCornerRadius="15dp"
             app:cardElevation="8dp">
 
@@ -58,16 +59,13 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_baseline_person_24" />
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="가게 정보"
                     android:textAlignment="center"
+                    android:textSize="25dp"
+                    android:textColor="@color/black"
                     android:textStyle="bold" />
 
 
@@ -84,7 +82,7 @@
             android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:layout_margin="8dp"
-            android:background="#FFFFFF"
+            android:backgroundTint="@color/golden"
             app:cardCornerRadius="15dp"
             app:cardElevation="8dp">
 
@@ -95,16 +93,13 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_baseline_person_24" />
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="주문 정보"
                     android:textAlignment="center"
+                    android:textSize="25dp"
+                    android:textColor="@color/black"
                     android:textStyle="bold" />
 
 
@@ -121,7 +116,7 @@
             android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:layout_margin="8dp"
-            android:background="#FFFFFF"
+            android:backgroundTint="@color/golden"
             app:cardCornerRadius="15dp"
             app:cardElevation="8dp">
 
@@ -132,16 +127,13 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_baseline_person_24" />
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="판매내역"
                     android:textAlignment="center"
+                    android:textSize="25dp"
+                    android:textColor="@color/black"
                     android:textStyle="bold" />
 
 
@@ -158,7 +150,7 @@
             android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:layout_margin="8dp"
-            android:background="#FFFFFF"
+            android:backgroundTint="@color/golden"
             app:cardCornerRadius="15dp"
             app:cardElevation="8dp">
 
@@ -169,16 +161,13 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_baseline_person_24" />
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="리뷰"
                     android:textAlignment="center"
+                    android:textSize="25dp"
+                    android:textColor="@color/black"
                     android:textStyle="bold" />
 
             </LinearLayout>

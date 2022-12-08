@@ -9,8 +9,8 @@
         android:id="@+id/add_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-29dp">
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="-186dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,6 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="?attr/colorPrimary"
+                android:backgroundTint="@color/golden"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +38,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="15dp"
                     android:text="상품 등록"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="25dp"
                     android:textStyle="bold" />
             </androidx.appcompat.widget.Toolbar>
@@ -47,7 +48,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
                 android:hint="상품명"
                 android:inputType="textPersonName"
                 android:textColorHint="@color/black" />
@@ -57,17 +60,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="8dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
                 android:hint="원가격"
                 android:inputType="number"
-                android:textColorHint="@color/black"/>
+                android:textColorHint="@color/black" />
 
             <EditText
                 android:id="@+id/editTextDiscountPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="8dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
                 android:hint="할인가격"
                 android:inputType="number"
                 android:textColorHint="@color/black" />
@@ -77,7 +84,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="8dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginBottom="10dp"
                 android:hint="수량"
                 android:inputType="number"
@@ -88,18 +97,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginBottom="10dp"
                 android:hint="상품 설명"
                 android:inputType="text|textMultiLine"
                 android:textColorHint="@color/black" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp">
 
                     <TextView
                         android:id="@+id/textViewTimer"
@@ -125,10 +140,10 @@
                         android:id="@+id/minute_picker"
                         android:layout_width="150dp"
                         android:layout_height="match_parent"
-                        android:keepScreenOn="false"
                         android:layout_marginEnd="4dp"
+                        android:keepScreenOn="false"
                         app:layout_constraintEnd_toEndOf="parent"
-                        tools:layout_editor_absoluteY="0dp"/>
+                        tools:layout_editor_absoluteY="0dp" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
@@ -138,7 +153,7 @@
                 android:layout_width="182dp"
                 android:layout_height="172dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp" />
 
             <Button
                 android:id="@+id/button2"
@@ -146,14 +161,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="이미지 등록" />
+                android:text="이미지 등록"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/golden"/>
 
             <Button
                 android:id="@+id/btn_registration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="상품 등록"/>
+                android:backgroundTint="@color/golden"
+                android:textColor="@color/black"
+                android:text="상품 등록" />
         </LinearLayout>
 
     </ScrollView>

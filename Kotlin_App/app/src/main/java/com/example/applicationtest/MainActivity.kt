@@ -16,7 +16,7 @@ import com.example.applicationtest.Singleton.UserSingleton
 import com.example.applicationtest.Transport.FavoritesListTask
 import com.example.applicationtest.Transport.OnsaleListTask
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.messaging.FirebaseMessaging
+//import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -108,11 +108,12 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 supportFragmentManager.beginTransaction().replace(R.id.fl_container, homeScreen).commit()*/
             }
             R.id.second -> {
-                    transaction.replace(
-                        R.id.fl_container,
-                        SearchScreen()
-                    )
-                    transaction.commit()
+                transaction.replace(
+                    R.id.fl_container,
+                    SearchScreen()
+                )
+                transaction.commit()
+                intent.putExtra("DataList",storeList as ArrayList)
                 /*searchScreen = SearchScreen.newInstance()
                 supportFragmentManager.beginTransaction().replace(R.id.fl_container, searchScreen).commit()*/
             }
@@ -168,13 +169,13 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     }
 
-    private fun initFirebase() {
-        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                Log.d("알림알림!", task.result)
-            }
-        }
-    }
+//    private fun initFirebase() {
+//        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+//            if (task.isSuccessful) {
+//                Log.d("알림알림!", task.result)
+//            }
+//        }
+//    }
 
     private fun initDynamicLink() {
         val dynamicLinkData = intent.extras
