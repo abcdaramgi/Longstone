@@ -13,13 +13,18 @@ import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.applicationtest.DTO.StoreDTO
 import com.example.applicationtest.DTO.postDTO
 import com.example.applicationtest.Singleton.SellerSingleton
 import com.example.applicationtest.Transport.FileUploadUtils
+import com.example.applicationtest.Transport.NotificationTask
 import com.example.applicationtest.Transport.PostTask
+import com.example.applicationtest.Transport.StoreGetInfoTask
 import kotlinx.android.synthetic.main.activity_st_add_object.*
 import kotlinx.android.synthetic.main.activity_st_info_screen.*
 import kotlinx.android.synthetic.main.item_alertdialog.view.*
+import org.json.JSONArray
+import org.json.JSONObject
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -76,11 +81,6 @@ class StAddFragment : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_st_add_object)
 
-        setSupportActionBar(st_toolbar_SalesAdd) //커스텀한 toolbar 액션바로 사용
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-        //액션바에 표시되는 제목의 표시유무를 설정합니다. false로 해야 custom한 툴바의 이름이 화면에 보이게 됩니다.
-        supportActionBar?.setDisplayHomeAsUpEnabled(true) //액션바 뒤로가기 아이콘 표시
-
         timer()
 //        img_add()
 //        add()
@@ -102,6 +102,7 @@ class StAddFragment : AppCompatActivity() {
 
         btn_registration.setOnClickListener {
             post()
+            sendNotification()
             val builder = AlertDialog.Builder(this)
             builder.setMessage("등록되었습니다.")
                 .setPositiveButton("확인",
@@ -133,16 +134,6 @@ class StAddFragment : AppCompatActivity() {
 //    }
 
     fun post() {
-
-        if(imageview!!.drawable != null){ //이미지 뷰에 이미지가 올라갔을때
-            Log.d("imagePost", "imagePost start...")
-            FileUploadUtils.send2Server(tempSelectFile)
-            Log.d("imagePost", "imagePost end...")
-        }
-        else{ //이미지뷰에 아무것도 없을때
-            Log.d("Debug", "imageView is null...")
-        }
-
         try {
             Log.d("post", "post start...")
             val originalPrice = original_price_edit!!.text.toString()
@@ -161,9 +152,46 @@ class StAddFragment : AppCompatActivity() {
 
         } catch (e: Exception) {
         }
+        if(imageview!!.drawable != null){ //이미지 뷰에 이미지가 올라갔을때
+            Log.d("imagePost", "imagePost start...")
+            FileUploadUtils.send2Server(tempSelectFile)
+            Log.d("imagePost", "imagePost end...")
+        }
+        else{ //이미지뷰에 아무것도 없을때
+            Log.d("Debug", "imageView is null...")
+        }
     }
 
+    fun sendNotification(){
+        try {
+            Log.d("Notification", "Notification start...")
+            val foodName = foodName_edit!!.text.toString()
+            val sellerId = SellerSingleton.getInstance().sellerId
 
+            val sttask = StoreGetInfoTask()
+            val stresult = sttask.execute(sellerId).get()
+
+            if(stresult != null){
+                val `object` = JSONObject(stresult)
+                val array = `object`.get("store") as JSONArray
+
+                val row = array.getJSONObject(0)
+                val storeDTO = StoreDTO()
+
+                storeDTO.setName(row.getString("name"))
+
+                val task = NotificationTask()
+                val result = task.execute(sellerId, storeDTO.getName(), foodName + "의 할인이 시작되었습니다").get()
+                Log.d("받은값", result)
+            }
+            else{
+                Log.d("Notification", "Notification fail...")
+            }
+            Log.d("post", "posting end...")
+
+        } catch (e: Exception) {
+        }
+    }
 
     private fun openGallery(){
         Intent(Intent.ACTION_GET_CONTENT).apply {

@@ -3,13 +3,19 @@ package com.example.applicationtest
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.applicationtest.DTO.OrderListDTO
+import com.example.applicationtest.Singleton.UserSingleton
+import com.example.applicationtest.Transport.OrderListTask
 import kotlinx.android.synthetic.main.activity_buy_list.*
 import kotlinx.android.synthetic.main.fragment_bell_screen.*
 import kotlinx.android.synthetic.main.item_buy_list_view.*
+import org.json.JSONArray
+import org.json.JSONObject
 
 class BuyListActivity : AppCompatActivity() {
     // BuyListAdapter CartAdapter 안에 작성되어 있음
@@ -44,14 +50,54 @@ class BuyListActivity : AppCompatActivity() {
         buyListAdapter = BuyListAdapter(this)
         buy_list.adapter = buyListAdapter
 
+        //=========================================================//
+        data!!.clear();
+        var result = ""
+        try{
+            Log.d("Order List", "Order List Start...")
+            val userId = UserSingleton.getInstance().userId.toString()
+            Log.d("앱에서 보낸값", "$userId")
 
-        data.apply {
-            add(BuyListItem("돈가스","가게1","5",R.drawable.image_food1.toString()))
-            add(BuyListItem("소금빵","가게1","3",R.drawable.image_bread1.toString()))
-            add(BuyListItem("오징어볶음","가게1","5",R.drawable.image_food1.toString()))
+            val task = OrderListTask()
+            result = task.execute(userId).get()
+            Log.d("받은값", result)
+
+            if(result != null){
+                val `object` = JSONObject(result)
+                val array = `object`.get("orderList") as JSONArray
+
+                for(i: Int in 0 .. array.length()-1){
+                    var row = array.getJSONObject(i)
+                    var orderListDTO = OrderListDTO()
+
+                    orderListDTO.setpdName(row.getString("pdName"))
+                    orderListDTO.setstoreName(row.getString("storeName"))
+                    orderListDTO.setorderCount(row.getString("orderCount"))
+                    orderListDTO.setimgUrl(row.getString("imgUrl"))
+
+                    Log.d("pdName : ", orderListDTO.getpdName())
+                    Log.d("storeName : ", orderListDTO.getstoreName())
+                    Log.d("orderCount : ", orderListDTO.getorderCount())
+                    Log.d("imgUrl : ", orderListDTO.getimgUrl())
+
+                    data!!.add(BuyListItem(orderListDTO.getpdName(), orderListDTO.getstoreName(),
+                                        orderListDTO.getorderCount(), orderListDTO.getimgUrl()))
+                }
+            }
+            else{
+                Log.d("Order List", "Order List Fail...")
+            }
+            Log.d("Order List", "Order List end...")
+        }catch (e : Exception){
+            e.printStackTrace()
         }
-
-            buyListAdapter.data = data
-            buyListAdapter.notifyDataSetChanged()
+        //=========================================================//
+//        data.apply {
+//            add(BuyListItem("돈가스","가게1","5",R.drawable.image_food1.toString()))
+//            add(BuyListItem("소금빵","가게1","3",R.drawable.image_bread1.toString()))
+//            add(BuyListItem("오징어볶음","가게1","5",R.drawable.image_food1.toString()))
+//        }
+        buyListAdapter.data = data
+        buyListAdapter.notifyDataSetChanged()
     }
 }

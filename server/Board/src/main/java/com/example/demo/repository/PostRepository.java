@@ -28,8 +28,8 @@ public class PostRepository {
         Singleton.getInstance().AutoIncresePdId = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
 
         //방금 넣은거 expiredate timestamp식으로 찍어줄라고
-        String expireSql = "UPDATE ProductTB SET expire = createAt + ? WHERE pdId = ?";
-        jdbcTemplate.update(expireSql, product.getPdTimer(),Singleton.getInstance().AutoIncresePdId);
+        String expireSql = "UPDATE ProductTB SET expire = DATE_ADD(createAt, interval ? second) WHERE pdId = ?";
+        jdbcTemplate.update(expireSql, product.getPdTimer(), Singleton.getInstance().AutoIncresePdId);
 
         return success;
     }

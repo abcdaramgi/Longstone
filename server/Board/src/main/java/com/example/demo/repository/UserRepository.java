@@ -65,7 +65,7 @@ public class UserRepository {
 
     //사용자가 즐겨찾기한 가게정보 가져오기
     public List<Store> getFavoritesData(String userId){
-        String sql = "SELECT storeName, pdName, imgUrl FROM StoreTB WHERE StoreTB.sellerId = any(SELECT sellerId FROM UsertopicTB WHERE userId = ?)";
+        String sql = "SELECT storeName, pdName, imgUrl, sellerId FROM StoreTB WHERE StoreTB.sellerId = any(SELECT sellerId FROM UsertopicTB WHERE userId = ?)";
         List<Store> result = jdbcTemplate.query(sql, new RowMapper<Store>() {
             @Override
             public Store mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -73,10 +73,20 @@ public class UserRepository {
                 store.setName(rs.getString("storeName"));
                 store.setPdname(rs.getString("pdName"));
                 store.setImgUrl(rs.getString("imgUrl"));
+                store.setSellerId(rs.getString("sellerId"));
                 return store;
             }
         }, userId);
         return result;
+    }
+
+    public String saveToken(String id, String token){
+        String success = "False";
+        String sql = "UPDATE UserTB SET nToken = ? WHERE userId = ?";
+        int result = jdbcTemplate.update(sql, token, id);
+        if(result != 0)
+            success = "true";
+        return success;
     }
 
     //test

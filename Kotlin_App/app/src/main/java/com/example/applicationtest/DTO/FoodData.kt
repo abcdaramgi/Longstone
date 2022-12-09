@@ -112,7 +112,16 @@ class FoodData(
     }
 
     @JvmName("setExpire1")
-    fun setExpire(type: String){
+    fun setExpire(type: String) {
         this.expire = expire
+    }
+
+    @JvmName("getPdId1")
+    fun getPdId(): Int?{
+        return pdId
+    }
+
+    fun setPdId(type: Int){
+        this.pdId = pdId
     }
 }

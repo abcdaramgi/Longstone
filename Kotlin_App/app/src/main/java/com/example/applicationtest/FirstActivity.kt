@@ -28,7 +28,6 @@ class FirstActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         prefs = PreferenceUtil(applicationContext)
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_first)
 
         //소비자 이동
@@ -37,13 +36,18 @@ class FirstActivity : AppCompatActivity() {
             val result = login()
             Log.d("result = ", result)
             if (result == "true") {
-
                 val id = login_id?.text.toString()
                 val pw = login_pw?.text.toString()
-
                 MyApplication.prefs.setString("id", id)
                 MyApplication.prefs.setString("pw", pw)
 
+//                preferences = getSharedPreferences("UserInfo", MODE_PRIVATE)
+//                val editor = preferences.edit()
+//                editor.putString("id", login_id!!.text.toString())
+//                editor.putString("pw", login_pw!!.text.toString())
+//                editor.commit()
+//                val testid = MyApplication.prefs.getString("id", "0")
+//                val testpw = MyApplication.prefs.getString("pw", "0")
                 /*preferences = getSharedPreferences("UserInfo", MODE_PRIVATE)
                 val editor = preferences.edit()
                 editor.putString("id", login_id!!.text.toString())
@@ -63,7 +67,6 @@ class FirstActivity : AppCompatActivity() {
         }
         //판매자 이동
         btn_store.setOnClickListener {
-
             //===================================================================//
             //판매자 로그인 부분
             //===================================================================//
@@ -71,6 +74,10 @@ class FirstActivity : AppCompatActivity() {
             val result = sellerLogin()
             Log.d("result = ", result)
             if(result == "true"){
+                val id = login_id?.text.toString()
+                val pw = login_pw?.text.toString()
+                MyApplication.prefs.setString("id", id)
+                MyApplication.prefs.setString("pw", pw)
                 val intent = Intent(this, StMainActivity::class.java)
                 startActivity(intent)
             }else{

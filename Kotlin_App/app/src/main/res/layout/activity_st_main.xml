@@ -49,8 +49,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:itemIconTint="@color/icon_color"
-        app:itemTextColor="@color/icon_color"/>
+        app:itemIconTint="@color/mossriver"
+        app:itemTextColor="@color/mossriver"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
