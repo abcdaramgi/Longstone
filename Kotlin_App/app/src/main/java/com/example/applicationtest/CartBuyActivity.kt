@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
 import com.example.applicationtest.Transport.OrderPostTask
@@ -42,6 +43,11 @@ class CartBuyActivity : AppCompatActivity() {
                 cart_buy.setOnClickListener {
                     val intent = Intent(this, CartCheckBuyActivity::class.java)
                     intent.putExtra("data", datas)
+
+//                    val task = OrderPostTask()
+//                    val result = task.execute(datas., datas., , num.toString()).get()
+//                    Log.d("받은값", result)
+
                     startActivity(intent)
                 }
             }
