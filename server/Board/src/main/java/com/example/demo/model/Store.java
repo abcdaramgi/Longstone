@@ -15,6 +15,7 @@ public class Store {
     public String storeAddr;
 
     public String imgUrl;
+    public String sellerId;
 
     public String getName() {
         return name;
@@ -60,6 +61,14 @@ public class Store {
     }
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public void setSellerId(String sellerId) {
+        this.sellerId = sellerId;
+    }
+
+    public String getSellerId() {
+        return sellerId;
     }
 
     public Store(String name, String number, String pdname){

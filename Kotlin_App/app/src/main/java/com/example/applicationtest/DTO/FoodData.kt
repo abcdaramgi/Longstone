@@ -92,4 +92,13 @@ class FoodData(
     fun setSellerId(type: String){
         this.sellerId = sellerId
     }
+
+    @JvmName("getPdId1")
+    fun getPdId(): Int?{
+        return pdId
+    }
+
+    fun setPdId(type: Int){
+        this.pdId = pdId
+    }
 }

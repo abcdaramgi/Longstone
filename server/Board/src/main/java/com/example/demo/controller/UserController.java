@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 import com.example.demo.model.Favorites;
+import com.example.demo.model.RequestDTO;
 import com.example.demo.model.Store;
 import com.example.demo.model.User;
 import com.example.demo.repository.SellerRepository;
@@ -11,10 +12,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.util.StreamUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -141,7 +139,6 @@ public class UserController {
         return data;
     }
 
-
     //판매자로그인
     @RequestMapping(value = "/sellerlogin", method = {RequestMethod.POST})
     public String loginSellerData(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -155,4 +152,18 @@ public class UserController {
         success = sellerRepository.selectSellerLoginData(userData);
         return success;
     }
+
+    @PostMapping(value = "/savetoken")
+    public String saveToken(@RequestBody RequestDTO requestDTO) throws IOException {
+        String success = "false";
+
+        if(requestDTO.getType() == "user"){
+            success = userRepository.saveToken(requestDTO.getId(), requestDTO.getTargetToken());
+        }else{
+            success = sellerRepository.saveToken(requestDTO.getId(), requestDTO.getTargetToken());
+        }
+
+        return success;
+    }
+
 }

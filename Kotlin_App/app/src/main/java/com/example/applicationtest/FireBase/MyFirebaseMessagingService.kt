@@ -13,10 +13,16 @@ import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.applicationtest.MainActivity
+import com.example.applicationtest.MyApplication
 import com.example.applicationtest.R
+import com.example.applicationtest.Singleton.SellerSingleton
+import com.example.applicationtest.Singleton.UserSingleton
+import com.example.applicationtest.Transport.FavoritesListTask
+import com.example.applicationtest.Transport.SaveTokenTask
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import javax.inject.Singleton
 
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
@@ -37,7 +43,29 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val editor = pref.edit()
         editor.putString("token", token).apply()
         editor.commit()
+
+        sendRegistrationToServer(token)
+
         Log.i(TAG, "성공적으로 토큰을 저장함")
+    }
+
+    private fun sendRegistrationToServer(token: String) {
+        val testid = MyApplication.prefs.getString("id", "0")
+        if(testid == UserSingleton.getInstance().userId){
+            val task = SaveTokenTask()
+            val result = task.execute( UserSingleton.getInstance().userId, token, "user").get()
+            if(result == "true"){
+                Log.i("saveToken", "성공적으로 소비자 토큰을 저장함")
+            }
+        }else if (testid == SellerSingleton.getInstance().sellerId){
+            val task = SaveTokenTask()
+            val result = task.execute( SellerSingleton.getInstance().sellerId, token, "seller").get()
+            if(result == "true"){
+                Log.i("saveToken", "성공적으로 판매자 토큰을 저장함")
+            } 
+        }else{
+            Log.i("saveToken", "토큰저장 실패")
+        }
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
@@ -111,122 +139,4 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             Log.d(TAG, "token=${it}")
         }
     }
-
-
-//    override fun onMessageReceived(remoteMessage: RemoteMessage) {
-//        super.onMessageReceived(remoteMessage)
-//        val notificationManager = NotificationManagerCompat.from(
-//            applicationContext
-//        )
-//        var builder: NotificationCompat.Builder? = null
-//        builder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            if (notificationManager.getNotificationChannel(CHANNEL_ID) == null) {
-//                val channel = NotificationChannel(
-//                    CHANNEL_ID,
-//                    CHANNEL_NAME,
-//                    NotificationManager.IMPORTANCE_DEFAULT
-//                )
-//                notificationManager.createNotificationChannel(channel)
-//            }
-//            NotificationCompat.Builder(applicationContext, CHANNEL_ID)
-//        } else {
-//            NotificationCompat.Builder(applicationContext)
-//        }
-//        val title = remoteMessage.notification!!.title
-//        val body = remoteMessage.notification!!.body
-//        builder.setContentTitle(title)
-//            .setContentText(body)
-//            .setSmallIcon(R.drawable.ic_launcher_background)
-//        val notification = builder.build()
-//        notificationManager.notify(1, notification)
-//    }
-
-//    override fun onMessageReceived(remoteMessage: RemoteMessage) {
-//        super.onMessageReceived(remoteMessage)
-//        Log.d(TAG, "onMessageReceived() - remoteMessage : $remoteMessage")
-//        Log.d(TAG, "onMessageReceived() - from : ${remoteMessage.from}")
-//        Log.d(TAG, "onMessageReceived() - notification : ${remoteMessage.notification?.body}")
-//
-//        val type = remoteMessage.data["type"]?.let { NotificationType.valueOf(it) } ?: kotlin.run {
-//            NotificationType.NORMAL  //type 이 null 이면 NORMAL type 으로 처리
-//        }
-//        val title = remoteMessage.data["title"]
-//        val message = remoteMessage.data["message"]
-//
-//        Log.d(TAG, "onMessageReceived() - type : $type")
-//        Log.d(TAG, "onMessageReceived() - title : $title")
-//        Log.d(TAG, "onMessageReceived() - message : $message")
-//
-//        sendNotification(type, title, message)
-//    }
-//
-//    private fun sendNotification(
-//        type: NotificationType,
-//        title: String?,
-//        message: String?
-//    ) {
-//        val notificationManager =
-//            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-//
-//        //Oreo(26) 이상 버전에는 channel 필요
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            val channel = NotificationChannel(
-//                CHANNEL_ID,
-//                CHANNEL_NAME,
-//                NotificationManager.IMPORTANCE_DEFAULT
-//            )
-//            channel.description = CHANNEL_DESCRIPTION
-//            notificationManager.createNotificationChannel(channel)
-//        }
-//
-//        //알림 생성
-//        NotificationManagerCompat.from(this)
-//            .notify((System.currentTimeMillis()/100).toInt(), createNotification(type, title, message))  //알림이 여러개 표시되도록 requestCode 를 추가
-//    }
-
-//    private fun createNotification(
-//        type: NotificationType,
-//        title: String?,
-//        message: String?
-//    ): Notification {
-//
-//        val intent = Intent(this, MainActivity::class.java).apply {
-//            putExtra("notificationType", " ${type.title} 타입 ")
-//            addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-//        }
-//        val pendingIntent = PendingIntent.getActivity(this, (System.currentTimeMillis()/100).toInt(), intent, FLAG_UPDATE_CURRENT)  //알림이 여러개 표시되도록 requestCode 를 추가
-//
-//        val notificationBuilder = NotificationCompat.Builder(this, CHANNEL_ID)
-//            .setSmallIcon(R.drawable.ic_baseline_notifications_active_24)
-//            .setContentTitle(title)
-//            .setContentText(message)
-//            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-//            .setContentIntent(pendingIntent)  //알림 눌렀을 때 실행할 Intent 설정
-//            .setAutoCancel(true)  //클릭 시 자동으로 삭제되도록 설정
-//
-//        when (type) {
-//            NotificationType.NORMAL -> Unit
-//            NotificationType.EXPANDABLE -> {
-//                notificationBuilder.setStyle(
-//                    NotificationCompat.BigTextStyle()
-//                        .bigText("$message \n 😀 😃 😄 😁 😆 😅 😂 🤣 🥲 ☺️ 😊 😇 🙂 🙃 😉 😌 😍 🥰 😘 😗 😙 😚 😋 😛 😝 😜 🤪 🤨 🧐 🤓 😎 🥸 🤩 🥳 😏 😒 😞 😔 😟 😕 🙁 ☹️ 😣 😖 😫 😩 🥺 😢 😭 😤 😠 😡 🤬 🤯 😳 🥵 🥶 😱 😨 😰 😥 😓 🤗 🤔 🤭 🤫 🤥 😶 😐 😑 😬 🙄 😯 😦 😧 😮 😲 🥱 😴 🤤 😪 😵 🤐 🥴 🤢 🤮 🤧 😷 🤒 🤕")
-//                )
-//            }
-//            NotificationType.CUSTOM -> {
-//                notificationBuilder.setStyle(
-//                    NotificationCompat.DecoratedCustomViewStyle()
-//                )
-//                    .setCustomContentView(
-//                        RemoteViews(
-//                            packageName,
-//                            R.layout.view_custom_notification
-//                        ).apply {
-//                            setTextViewText(R.id.tv_custom_title, title)
-//                            setTextViewText(R.id.tv_custom_message, message)
-//                        }
-//                    )
-//            }
-//        }
-//        return notificationBuilder.build()
-//    }
 }

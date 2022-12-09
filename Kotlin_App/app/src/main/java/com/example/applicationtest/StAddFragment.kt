@@ -13,13 +13,18 @@ import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.applicationtest.DTO.StoreDTO
 import com.example.applicationtest.DTO.postDTO
 import com.example.applicationtest.Singleton.SellerSingleton
 import com.example.applicationtest.Transport.FileUploadUtils
+import com.example.applicationtest.Transport.NotificationTask
 import com.example.applicationtest.Transport.PostTask
+import com.example.applicationtest.Transport.StoreGetInfoTask
 import kotlinx.android.synthetic.main.activity_st_add_object.*
 import kotlinx.android.synthetic.main.activity_st_info_screen.*
 import kotlinx.android.synthetic.main.item_alertdialog.view.*
+import org.json.JSONArray
+import org.json.JSONObject
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -97,6 +102,7 @@ class StAddFragment : AppCompatActivity() {
 
         btn_registration.setOnClickListener {
             post()
+            sendNotification()
             val builder = AlertDialog.Builder(this)
             builder.setMessage("등록되었습니다.")
                 .setPositiveButton("확인",
@@ -156,7 +162,36 @@ class StAddFragment : AppCompatActivity() {
         }
     }
 
+    fun sendNotification(){
+        try {
+            Log.d("Notification", "Notification start...")
+            val foodName = foodName_edit!!.text.toString()
+            val sellerId = SellerSingleton.getInstance().sellerId
 
+            val sttask = StoreGetInfoTask()
+            val stresult = sttask.execute(sellerId).get()
+
+            if(stresult != null){
+                val `object` = JSONObject(stresult)
+                val array = `object`.get("store") as JSONArray
+
+                val row = array.getJSONObject(0)
+                val storeDTO = StoreDTO()
+
+                storeDTO.setName(row.getString("name"))
+
+                val task = NotificationTask()
+                val result = task.execute(sellerId, storeDTO.getName(), foodName + "의 할인이 시작되었습니다").get()
+                Log.d("받은값", result)
+            }
+            else{
+                Log.d("Notification", "Notification fail...")
+            }
+            Log.d("post", "posting end...")
+
+        } catch (e: Exception) {
+        }
+    }
 
     private fun openGallery(){
         Intent(Intent.ACTION_GET_CONTENT).apply {

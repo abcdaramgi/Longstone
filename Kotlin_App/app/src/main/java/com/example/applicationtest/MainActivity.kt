@@ -7,6 +7,7 @@ import android.util.Base64
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.applicationtest.DTO.FoodData
 import com.example.applicationtest.DTO.OnSalePostDTO
@@ -16,6 +17,7 @@ import com.example.applicationtest.Singleton.UserSingleton
 import com.example.applicationtest.Transport.FavoritesListTask
 import com.example.applicationtest.Transport.OnsaleListTask
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.messaging.FirebaseMessaging
 //import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONArray
@@ -51,6 +53,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         //test
         MyFirebaseMessagingService().getFirebaseToken()
         initDynamicLink()
+        getNotificationList()
 
 
         nav_view.setOnNavigationItemSelectedListener(this)
@@ -186,6 +189,50 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             }
             Log.d("알림알림@", dataStr)
         }
+    }
+
+    fun getNotificationList(){
+        try{
+            Log.d("Favorites List", "Favorites List start...")
+
+            val userId = UserSingleton.getInstance().userId.toString();
+            Log.d("앱에서 보낸값", "$userId")
+
+            val task = FavoritesListTask()
+            val result = task.execute(userId).get()
+            Log.d("받은값", result)
+
+            if(result != null){
+                val `object` = JSONObject(result)
+                val array = `object`.get("store") as JSONArray
+
+                for(i: Int in 0..array.length()-1){
+                    var row = array.getJSONObject(i)
+                    var storeDTO = StoreDTO()
+
+                    storeDTO.setName(row.getString("sellerId"))
+                    val sellerId = storeDTO.getName()
+
+                    FirebaseMessaging.getInstance().subscribeToTopic(sellerId.toString()).addOnCompleteListener { task ->
+                        var msg = "Subscribed"
+                        if (!task.isSuccessful) {
+                            msg = "Subscribe failed"
+                        }
+                        Log.d(MyFirebaseMessagingService.TAG, msg!!)
+                        Toast.makeText(baseContext, msg, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+            else{
+                Log.d("Favorites", "Favorites fail...")
+            }
+
+            Log.d("Favorites List", "Favorites List end...")
+        }catch(e : Exception){
+            e.printStackTrace()
+        }
+
+
     }
 
     fun getFavoritesData(){
