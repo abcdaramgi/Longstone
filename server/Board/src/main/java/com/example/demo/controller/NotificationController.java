@@ -37,7 +37,7 @@ public class NotificationController {
         String count = requestDTO.getBody() + "개를 구매하셨습니다";
         String success = sellerRepository.selectSellerToken(pdid);
 
-        fcmService.sendTopicMessageTo(
+        fcmService.sendMessageTo(
                 success,
                 uid,
                 count);

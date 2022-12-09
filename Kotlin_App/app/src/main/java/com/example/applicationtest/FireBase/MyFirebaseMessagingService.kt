@@ -51,6 +51,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     private fun sendRegistrationToServer(token: String) {
         val testid = MyApplication.prefs.getString("id", "0")
+        Log.i("plz", testid)
+        Log.i("plz", UserSingleton.getInstance().userId)
         if(testid == UserSingleton.getInstance().userId){
             val task = SaveTokenTask()
             val result = task.execute( UserSingleton.getInstance().userId, token, "user").get()

@@ -108,6 +108,7 @@ public class FcmService {
         System.out.println(fcmMessage.getData());
         System.out.println(fcmMessage.getData().getBody());
         System.out.println(fcmMessage.getData().getTitle());
+        System.out.println("zzd");
 
 
         return objectMapper.writeValueAsString(fcmMessage);
