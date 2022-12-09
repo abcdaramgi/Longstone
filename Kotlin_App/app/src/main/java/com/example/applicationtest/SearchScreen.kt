@@ -72,6 +72,7 @@ class SearchScreen : Fragment() {
                 //검색버튼 입력시 호출, 검색버튼이 없으므로 사용하지 않음
                 override fun onQueryTextSubmit(s: String): Boolean {
                     try {
+                        list!!.clear();
                         val content = s
                         val task = SearchTask()
                         val result = task.execute(content).get()
