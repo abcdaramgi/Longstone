@@ -15,6 +15,7 @@ public class OnSalePostDTO {
     private String status;
     private Integer pdTimer;
     private Float pdSale;
+    private String expire;
 
     public Float getPdSale() {
         return pdSale;
@@ -115,4 +116,8 @@ public class OnSalePostDTO {
     public Integer getCount() { return count; }
 
     public void setCount(Integer count) { this.count = count; }
+
+    public String getExpire(){return expire;}
+
+    public void setExpire(String expire){this.expire = expire;}
 }

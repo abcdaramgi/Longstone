@@ -1,4 +1,4 @@
-package com.example.demo.services.posts;
+/*package com.example.demo.services.posts;
 
 import com.example.demo.model.FcmMessage;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -90,4 +90,4 @@ public class FcmService {
         System.out.printf("ddasertasdfG??S?EDF???");
         return this.instance.send(message);
     }
-}
+}*/

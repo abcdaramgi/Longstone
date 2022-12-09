@@ -17,6 +17,7 @@ public class Post {
     private String status;
     private Integer pdTimer;
     private Float pdSale;
+    private String expire;
 
     public Float getPdSale() {
         return pdSale;
@@ -121,4 +122,7 @@ public class Post {
     public Integer getCount() {
         return count;
     }
+
+    public String getExpire(){return expire;}
+    public void setExpire(String expire){this.expire = expire;}
 }

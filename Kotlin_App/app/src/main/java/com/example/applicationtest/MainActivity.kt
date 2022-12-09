@@ -261,9 +261,11 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                     onSalePostDTO.setPdContents(row.getString("pdContents"))
                     onSalePostDTO.setCount(row.getInt("count"))
 
+                    onSalePostDTO.setPdTimer(row.getInt("pdTimer"))
                     onSalePostDTO.setPdid(row.getInt("pdid"))
                     onSalePostDTO.setSellerid(row.getString("sellerid"))
                     onSalePostDTO.setStoreName(row.getString("storeName"))
+                    onSalePostDTO.setExpire(row.getString("expire"))
 
 
                     dataList!!.add(FoodData(
@@ -277,8 +279,10 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                         null,
                         null,
                         onSalePostDTO.getPdContents(),
+                        onSalePostDTO.getPdTimer(),
                         onSalePostDTO.getPdid(),
-                        onSalePostDTO.getSellerid()
+                        onSalePostDTO.getSellerid(),
+                        onSalePostDTO.getExpire(),
                     ));
                 }
             }

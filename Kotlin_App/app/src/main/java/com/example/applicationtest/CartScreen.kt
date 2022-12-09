@@ -77,7 +77,7 @@ class CartScreen : AppCompatActivity() {
         when (id) {
             android.R.id.home -> {
                 finish()
-                val intent = Intent(this, SignupActivity::class.java)
+                val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 return true
             }

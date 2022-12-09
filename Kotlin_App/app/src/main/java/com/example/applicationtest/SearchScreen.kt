@@ -62,35 +62,35 @@ class SearchScreen : Fragment() {
             }
         })
 
-        search_bar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        button6.setOnClickListener{
+            search_bar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                //검색버튼 입력시 호출, 검색버튼이 없으므로 사용하지 않음
+                override fun onQueryTextSubmit(s: String): Boolean {
+                    try {
+                        val content = s
+                        val task = SearchTask()
+                        val result = task.execute(content).get()
 
-            //검색버튼 입력시 호출, 검색버튼이 없으므로 사용하지 않음
-            override fun onQueryTextSubmit(s: String): Boolean {
+                        val gson = Gson()
+                        val listType: Type = object : TypeToken<ArrayList<StoreData2?>?>() {}.type
+                        val yourClassList: List<StoreData2> = Gson().fromJson(result, listType)
 
-                try {
-                    val content = s
-                    val task = SearchTask()
-                    val result = task.execute(content).get()
+                        Log.d("받은값", result)
+                        Log.d("Register", "register end...")
+                        Log.d("리스트변환했냐", yourClassList.get(1).name.toString())
+                    } catch (e: Exception) {
+                    }
 
-                    val gson = Gson()
-                    val listType: Type = object : TypeToken<ArrayList<StoreData2?>?>() {}.type
-                    val yourClassList: List<StoreData2> = Gson().fromJson(result, listType)
-
-                    Log.d("받은값", result)
-                    Log.d("Register", "register end...")
-                    Log.d("리스트변환했냐", yourClassList.get(1).name.toString())
-                } catch (e: Exception) {
+                    return false
                 }
 
-                return false
-            }
-
-            //텍스트 입력/수정시에 호출
-            override fun onQueryTextChange(s: String): Boolean {
-                Log.d("나오냐?", s)
-                return true
-            }
-        })
+                //텍스트 입력/수정시에 호출
+                override fun onQueryTextChange(s: String): Boolean {
+                    Log.d("나오냐?", s)
+                    return true
+                }
+            })
+        }
 
 //        var searchViewTextListener: SearchView.OnQueryTextListener =
 //            object : SearchView.OnQueryTextListener {

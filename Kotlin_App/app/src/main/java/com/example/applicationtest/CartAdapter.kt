@@ -75,10 +75,11 @@ class BuyListAdapter(private val context: Context) : RecyclerView.Adapter<BuyLis
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(data[position])
-        holder.button.setOnClickListener{
+        // - 리뷰 작성버튼 삭제
+        /*holder.button.setOnClickListener{
             val intent = Intent(holder.button?.context,WriteReviewActivity::class.java)
             ContextCompat.startActivity(holder.button.context, intent, null)
-        }
+        }*/
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -87,7 +88,7 @@ class BuyListAdapter(private val context: Context) : RecyclerView.Adapter<BuyLis
         private val txtstName: TextView = itemView.findViewById(R.id.buy_list_st_name)
         private val txtfdCount: TextView = itemView.findViewById(R.id.buy_list_fd_count)
         private val txtImg: ImageView = itemView.findViewById(R.id.buy_list_fd_img)
-        val button : Button = itemView.findViewById(R.id.buy_list_bt)
+        //val button : Button = itemView.findViewById(R.id.buy_list_bt)
 
         fun bind(item: BuyListItem) {
             txtstName.text = item.buyliste_st_name

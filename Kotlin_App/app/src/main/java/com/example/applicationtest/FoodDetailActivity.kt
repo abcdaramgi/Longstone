@@ -5,6 +5,8 @@ import android.content.Intent
 import android.content.IntentSender.OnFinished
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.Handler
+import android.os.Message
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
@@ -24,6 +26,14 @@ import kotlinx.android.synthetic.main.item_today_food_detail.*
 import kotlinx.android.synthetic.main.item_today_food_detail.store_box
 import kotlinx.android.synthetic.main.item_today_food_detail.store_de_name
 import kotlinx.android.synthetic.main.item_today_food_detail.store_de_place
+import okhttp3.internal.format
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.concurrent.thread
 
 // 메인 화면 상품 리스트를 클릭했을 때, 상품의 정보를 자세히 보여주는 화면
 class FoodDetailActivity : AppCompatActivity() {
@@ -34,30 +44,49 @@ class FoodDetailActivity : AppCompatActivity() {
     var ad_count : Int = 0
     var selectNum : Int = 0
     val NEW_STORE = 22
-    var time = 0L
-    var tempTime = 0L
     val list : java.util.ArrayList<StoreData> = MainActivity().storeList as ArrayList
-    lateinit var storeAdapter : StoreAdapter
+
+    var started = false
+    var set = 0
+    var total : Int? = null
+
+    val handler = object: Handler(){
+        override fun handleMessage(msg: Message) {
+            val total = msg.what
+            textView21.text = formatTime(total)
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.item_today_food_detail)
 
+        datas = intent.getSerializableExtra("data") as FoodData
+
+        val now = LocalDateTime.now() // 현재 시간
+        val time = datas.getExpire() // 변환할 문자열
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss") //포맷
+
+        val convertTime = LocalDateTime.parse(time, formatter)
+
+        val compareTime = ChronoUnit.SECONDS.between(now, convertTime) //분단위 비교
+
+        total = compareTime.toInt()
+
         val fragment: PreferScreen? =
             supportFragmentManager.findFragmentByTag("fragment_prefer_screen") as PreferScreen?
         supportFragmentManager.executePendingTransactions()
 
+        start()
+
         fragment?.storeAdapter = StoreAdapter(list)
 
-        startTimer()
 
         /*fragment.st_listView.layoutManager = LinearLayoutManager(fragment.activity, RecyclerView.VERTICAL, false)
         fragment.st_listView.adapter = fragment.storeAdapter
 
         list.add(StoreData("hi","hell",R.drawable.image_bread1))
         storeAdapter.notifyDataSetChanged()*/
-
-        datas = intent.getSerializableExtra("data") as FoodData
 
         Glide.with(this).load(datas.img).into(img_profile)
         Glide.with(this).load(datas.storeimg).into(img_store_photo)
@@ -136,38 +165,26 @@ class FoodDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun startTimer(){
-        val sHour:Long = 2
-        val sMin:Long = 0
-        val sSec:Long = 0
-
-        time = (sHour*3600000) + (sMin*60000) + (sSec * 1000) + 1000
-
-        countDownTimer = object : CountDownTimer(time, 1000) {
-            override fun onTick(millisUnitFinished: Long) {
-                tempTime = millisUnitFinished
-                updateTime()
+    fun start(){
+        started = true
+        thread(start=true){
+            while (true){
+                Thread.sleep(1000)
+                total = total?.minus(1)
+                total?.let { handler.sendEmptyMessage(it) }
             }
-
-            override fun onFinish() {}
-        }.start()
+        }
     }
 
-    private fun updateTime(){
-        val hour = tempTime/3600000
-        val min = tempTime%3600000/60000
-        val sec = tempTime%3600000%60000/1000
-
-        var timeLeftText = "$hour :"
-
-        if(min<10) timeLeftText += "0"
-
-        timeLeftText += "$min :"
-
-        if(sec<10) timeLeftText += "0"
-
-        timeLeftText += sec
-
-        textView21.text = timeLeftText
+    fun formatTime(time:Int) : String{
+        var min = time?.div(60)
+        val hour = String.format("%02d",min?.div(60))
+        val sec = String.format("%02d",time?.rem(60))
+        var nmin: String? = null
+        if (min != null) {
+            nmin = String.format("%02d",min%60)
+        }
+        return "$hour : $nmin : $sec"
     }
+
 }

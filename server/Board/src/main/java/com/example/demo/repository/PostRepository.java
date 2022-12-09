@@ -47,7 +47,7 @@ public class PostRepository {
     public List<Post> getOnsalePost(String status){
 
 
-        String sql = "SELECT ProductTB.pdId, ProductTB.sellerId, pdContents, pdPrice, pdTimer, pdSale, pdName, pdCount, PdimageTB.imgUrl FROM ProductTB, PdimageTB WHERE (expire < ? AND status = ?) \n" +
+        String sql = "SELECT ProductTB.pdId, ProductTB.sellerId, pdContents, pdPrice, pdTimer, pdSale, expire, pdName, pdCount, PdimageTB.imgUrl FROM ProductTB, PdimageTB WHERE (expire > ? AND status = ?) \n" +
                 "AND (ProductTB.pdId = PdimageTB.pdId);";
 
         SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -85,6 +85,7 @@ public class PostRepository {
                 post.setPdid(rs.getInt("pdId"));
                 post.setSellerid(rs.getString("sellerId"));
                 post.setPdTimer(rs.getInt("pdTimer"));
+                post.setExpire(rs.getString("expire"));
                 return post;
             }
         }, timeStamp, status);

@@ -14,8 +14,11 @@ class FoodData(
     var refood: Int? =null,
     var pdContents: String? =null,
 
+    var pdTimer: Int? =null,
     var pdId: Int? =null,
-    var sellerId: String? =null
+    var sellerId: String? =null,
+    var expire: String? =null
+
 ): Serializable {
     @JvmName("getName1")
     fun getName(): String? {
@@ -91,5 +94,25 @@ class FoodData(
     @JvmName("setSellerId1")
     fun setSellerId(type: String){
         this.sellerId = sellerId
+    }
+
+    @JvmName("getPdTimer1")
+    fun getPdTimer(): Int?{
+        return pdTimer
+    }
+
+    @JvmName("setPdTimer1")
+    fun setPdTimer(type: Int){
+        this.pdTimer = pdTimer
+    }
+
+    @JvmName("getExpire1")
+    fun getExpire(): String?{
+        return expire
+    }
+
+    @JvmName("setExpire1")
+    fun setExpire(type: String){
+        this.expire = expire
     }
 }
