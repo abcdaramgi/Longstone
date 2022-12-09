@@ -1,4 +1,5 @@
 package com.example.applicationtest.Transport;
+
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -10,14 +11,13 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class StoreFoodListTask extends AsyncTask<String, Void, String>{
+public class deleteFoodTask extends AsyncTask<String, Void, String>{
     String sendMsg, receiveMsg;
     @Override
     protected String doInBackground(String... strings) {
         try{
             String str;
-            URL url = new URL("http://ec2-3-35-255-89.ap-northeast-2.compute.amazonaws.com/post/storeFood");
-            //URL url = new URL("http://10.0.2.2:8080/post/storeFood");
+            URL url = new URL("http://10.0.2.2:8080/post/deleteStoreFood");
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type", "application/json");
@@ -31,8 +31,9 @@ public class StoreFoodListTask extends AsyncTask<String, Void, String>{
             String sendData = strings[0];
 
             osw.write(sendData);
-            Log.d("status value :", sendData);
+            Log.d("pdName :", sendData);
             osw.flush();
+
 
             //통신도 잘되고 서버에서 보낸값 받음
             if(conn.getResponseCode() == conn.HTTP_OK){
@@ -43,9 +44,6 @@ public class StoreFoodListTask extends AsyncTask<String, Void, String>{
                     buffer.append(str);
                 }
                 receiveMsg = buffer.toString();
-                receiveMsg = receiveMsg.toString();
-                Log.d("receiveMsg", receiveMsg);
-
             }else{
                 Log.i("통신결과 : ", conn.getResponseCode()+"에러");
             }

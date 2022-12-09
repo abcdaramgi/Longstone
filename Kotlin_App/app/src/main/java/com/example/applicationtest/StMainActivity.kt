@@ -118,7 +118,7 @@ class StMainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationIte
                     var row = array.getJSONObject(i)
                     var storeFoodDTO = StoreFoodDTO()
 
-
+                    storeFoodDTO.setPdId(row.getString("pdId"))
                     storeFoodDTO.setSellerId(row.getString("sellerId"))
                     storeFoodDTO.setPdName(row.getString("pdName"))
                     storeFoodDTO.setStoreAddr(row.getString("storeAddr"))
@@ -140,8 +140,10 @@ class StMainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationIte
                         null,
                         storeFoodDTO.getStatus(),
                         null,
+                        //Integer.parseInt(storeFoodDTO.getPdId()),
                         null,
                         storeFoodDTO.getSellerId()
+
                     ));
 
                 }

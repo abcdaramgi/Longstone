@@ -187,4 +187,17 @@ public class PostsController {
         data.put("post", resultList);
         return data;
     }
+
+    //등록 삭제
+    @RequestMapping (value = "/deleteStoreFood", method = {RequestMethod.POST})
+    public String deleteSellerFood(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        String success = "false";
+        ServletInputStream inputStream = request.getInputStream();
+        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+
+        System.out.println("pdName : " + messageBody);
+        success = sellerFoodRepository.deleteStoreFoodData(messageBody);
+
+        return success;
+    }
 }
