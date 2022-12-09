@@ -1,4 +1,5 @@
 package com.example.applicationtest
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
@@ -13,11 +14,10 @@ import com.example.applicationtest.DTO.FoodData
 import com.example.applicationtest.DTO.OnSalePostDTO
 import com.example.applicationtest.DTO.StoreDTO
 import com.example.applicationtest.FireBase.MyFirebaseMessagingService
+import com.example.applicationtest.Singleton.SellerSingleton
 import com.example.applicationtest.Singleton.UserSingleton
-import com.example.applicationtest.Transport.FavoritesListTask
-import com.example.applicationtest.Transport.OnsaleListTask
-import com.example.applicationtest.Transport.SearchStoreTask
-import com.example.applicationtest.Transport.StoreGetInfoTask
+import com.example.applicationtest.Transport.*
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.messaging.FirebaseMessaging
 //import com.google.firebase.messaging.FirebaseMessaging
@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         MyFirebaseMessagingService().getFirebaseToken()
         initDynamicLink()
         getNotificationList()
+        updateToken()
 
 
         nav_view.setOnNavigationItemSelectedListener(this)
@@ -236,6 +237,32 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         }catch(e : Exception){
             e.printStackTrace()
         }
+    }
+
+
+    private fun updateToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            val token = task.result
+
+            val testid = MyApplication.prefs.getString("id", "0")
+            Log.i("plz", testid)
+            Log.i("plz", UserSingleton.getInstance().userId)
+            if(testid == UserSingleton.getInstance().userId){
+                val task = SaveTokenTask()
+                val result = task.execute( UserSingleton.getInstance().userId, token, "user").get()
+                if(result == "true"){
+                    Log.i("saveToken", "성공적으로 소비자 토큰을 저장함")
+                }
+            }else{
+                Log.i("saveToken", "토큰저장 실패")
+            }
+        })
+
     }
 
     fun getStoreData(){
