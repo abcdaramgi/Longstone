@@ -9,6 +9,7 @@ public class Product {
     public String topicName;
     public String pdCount;
     public String pdContents;
+
     public String pdName;
 
     public String getstrId(){ return strId;}

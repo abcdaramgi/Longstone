@@ -135,7 +135,7 @@ public class FcmService {
         System.out.printf("ddasertasdfG??S?EDF???");
         return this.instance.send(message);
     }
-    
+
 //    @PostConstruct
 //    public void firebaseSetting() throws IOException {
 //        GoogleCredentials googleCredentials = GoogleCredentials.fromStream(new ClassPathResource("firebase_service_key.json").getInputStream())

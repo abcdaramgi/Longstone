@@ -9,12 +9,11 @@ public class Store {
     public String name;
     public String number;
     public String pdname;
-
     public String openHour;
-
     public String storeAddr;
 
     public String imgUrl;
+
     public String sellerId;
 
     public String getName() {

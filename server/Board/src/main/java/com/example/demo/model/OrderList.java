@@ -5,6 +5,7 @@ public class OrderList {
     private String storeName;
     private String orderCount;
     private String imgUrl;
+    private String updateAt;
 
     public String getpdName(){
         return pdName;
@@ -26,5 +27,12 @@ public class OrderList {
     }
     public void setimgUrl(String imgUrl){
         this.imgUrl = imgUrl;
+    }
+
+    public String getUpdateAt(){
+        return updateAt;
+    }
+    public void setUpdateAt(String updateAt){
+        this.updateAt = updateAt;
     }
 }

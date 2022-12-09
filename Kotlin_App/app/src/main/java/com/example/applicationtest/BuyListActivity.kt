@@ -12,8 +12,6 @@ import com.example.applicationtest.DTO.OrderListDTO
 import com.example.applicationtest.Singleton.UserSingleton
 import com.example.applicationtest.Transport.OrderListTask
 import kotlinx.android.synthetic.main.activity_buy_list.*
-import kotlinx.android.synthetic.main.fragment_bell_screen.*
-import kotlinx.android.synthetic.main.item_buy_list_view.*
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -74,14 +72,16 @@ class BuyListActivity : AppCompatActivity() {
                     orderListDTO.setstoreName(row.getString("storeName"))
                     orderListDTO.setorderCount(row.getString("orderCount"))
                     orderListDTO.setimgUrl(row.getString("imgUrl"))
+                    orderListDTO.setupdateAt(row.getString("updateAt"))
 
                     Log.d("pdName : ", orderListDTO.getpdName())
                     Log.d("storeName : ", orderListDTO.getstoreName())
                     Log.d("orderCount : ", orderListDTO.getorderCount())
                     Log.d("imgUrl : ", orderListDTO.getimgUrl())
+                    Log.d("date : ", orderListDTO.getupdateAt())
 
                     data!!.add(BuyListItem(orderListDTO.getpdName(), orderListDTO.getstoreName(),
-                                        orderListDTO.getorderCount(), orderListDTO.getimgUrl()))
+                                        orderListDTO.getorderCount(), orderListDTO.getimgUrl(),orderListDTO.getupdateAt()))
                 }
             }
             else{

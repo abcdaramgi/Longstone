@@ -17,6 +17,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_cart_screen.*
 import kotlinx.android.synthetic.main.item_cart_view.view.*
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 class CartAdapter (private val context: Context) : RecyclerView.Adapter<CartAdapter.ViewHolder>(){
@@ -88,6 +92,7 @@ class BuyListAdapter(private val context: Context) : RecyclerView.Adapter<BuyLis
         private val txtstName: TextView = itemView.findViewById(R.id.buy_list_st_name)
         private val txtfdCount: TextView = itemView.findViewById(R.id.buy_list_fd_count)
         private val txtImg: ImageView = itemView.findViewById(R.id.buy_list_fd_img)
+        private val txtdate : TextView = itemView.findViewById(R.id.textView8)
         //val button : Button = itemView.findViewById(R.id.buy_list_bt)
 
         fun bind(item: BuyListItem) {
@@ -95,6 +100,7 @@ class BuyListAdapter(private val context: Context) : RecyclerView.Adapter<BuyLis
             txtfdName.text = item.buyliste_fd_name
             txtfdCount.text = item.buyliste_fd_count + "개"
             Glide.with(itemView).load(item.buylist_img).into(txtImg)
+            txtdate.text = item.buylist_day
         }
 
     }

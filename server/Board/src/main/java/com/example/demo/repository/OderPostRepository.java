@@ -21,7 +21,7 @@ public class OderPostRepository {
     JdbcTemplate jdbcTemplate;
 
     public List<OrderList> getOrderListData(String userId){
-        String sql = "SELECT ProductTB.pdName, StoreTB.storeName, OrderTB.orderCount, PdimageTB.imgUrl \n" +
+        String sql = "SELECT ProductTB.pdName, StoreTB.storeName, OrderTB.orderCount, PdimageTB.imgUrl, OrderTB.updateAt \n" +
                 "FROM ProductTB, OrderTB, PdimageTB, StoreTB\n" +
                 "WHERE OrderTB.userId = ? AND (ProductTB.pdId = OrderTB.pdId AND OrderTB.sellerId = StoreTB.sellerId AND OrderTB.pdId = PdimageTB.pdId)";
         List<OrderList> result = jdbcTemplate.query(sql, new RowMapper<OrderList>() {
@@ -32,6 +32,7 @@ public class OderPostRepository {
                 orderList.setstoreName(rs.getString("storeName"));
                 orderList.setorderCount(rs.getString("orderCount"));
                 orderList.setimgUrl(rs.getString("imgUrl"));
+                orderList.setUpdateAt(rs.getString("updateAt"));
                 return orderList;
             }
         }, userId);

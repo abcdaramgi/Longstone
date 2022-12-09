@@ -4,14 +4,11 @@ import java.util.stream.Stream;
 
 public class StoreDTO {
     public String name;
-    public String number;
     public String pdname;
-
-    public String openHour;
-
-    public String storeAddr;
-
     public String imgUrl;
+    public String number;
+    public String openHour;
+    public String storeAddr;
 
     public String getName() {
         return name;

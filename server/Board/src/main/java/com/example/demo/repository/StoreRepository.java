@@ -43,5 +43,20 @@ public class StoreRepository {
         return result;
     }
 
+    // 가게정보 모두 들고오기
+    public List<Store> SearchStoreData(String status){
+        String sql = "SELECT storeName, pdName, imgUrl FROM StoreTB";
+        List<Store> result = jdbcTemplate.query(sql, new RowMapper<Store>() {
+            @Override
+            public Store mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Store store = new Store();
+                store.setName(rs.getString("storeName"));
+                store.setPdname(rs.getString("pdName"));
+                store.setImgUrl(rs.getString("imgUrl"));
+                return store;
+            }
+        });
+        return result;
+    }
 
 }

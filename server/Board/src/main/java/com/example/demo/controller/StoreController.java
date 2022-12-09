@@ -58,4 +58,16 @@ public class StoreController {
         System.out.println(imgUrl);
         return imgUrl;
     }
+
+    @RequestMapping(value = "/storedata", method = {RequestMethod.POST})
+    public JSONObject getSearchStoreData(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        ServletInputStream inputStream = request.getInputStream();
+        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+
+        System.out.println("postStatus : " + messageBody);
+        List<Store> store = storeRepository.SearchStoreData(messageBody);
+        JSONObject data = new JSONObject();
+        data.put("store", store);
+        return data;
+    }
 }

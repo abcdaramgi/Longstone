@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.applicationtest.DTO.StoreDTO
 import com.google.android.material.internal.ContextUtils.getActivity
 import kotlinx.android.synthetic.main.fragment_prefer_screen.*
 import java.io.Serializable

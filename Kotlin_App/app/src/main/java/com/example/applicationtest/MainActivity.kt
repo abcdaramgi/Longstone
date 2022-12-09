@@ -16,6 +16,8 @@ import com.example.applicationtest.FireBase.MyFirebaseMessagingService
 import com.example.applicationtest.Singleton.UserSingleton
 import com.example.applicationtest.Transport.FavoritesListTask
 import com.example.applicationtest.Transport.OnsaleListTask
+import com.example.applicationtest.Transport.SearchStoreTask
+import com.example.applicationtest.Transport.StoreGetInfoTask
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.messaging.FirebaseMessaging
 //import com.google.firebase.messaging.FirebaseMessaging
@@ -44,6 +46,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 //        StoreData("유가네 닭갈비","닭갈비, 볶음밥, 막국수, ",R.drawable.image_bread1),
 //        StoreData("봉대박찜닭","찜닭, 샐러드",R.drawable.image_bread1),
 //    )
+
+    var storeList1: MutableList<StoreData>? = mutableListOf();
 
         override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -111,6 +115,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 supportFragmentManager.beginTransaction().replace(R.id.fl_container, homeScreen).commit()*/
             }
             R.id.second -> {
+                getFavoritesData()
                 transaction.replace(
                     R.id.fl_container,
                     SearchScreen()
@@ -231,8 +236,44 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         }catch(e : Exception){
             e.printStackTrace()
         }
+    }
 
+    fun getStoreData(){
+        storeList1!!.clear();
+        var result = ""
+        try{
+            Log.d("Store List", "Store List start...")
 
+            val task = SearchStoreTask()
+            result = task.execute("Y").get()
+            Log.d("받은값", result)
+
+            if(result != null){
+                val `object` = JSONObject(result)
+                val array = `object`.get("post") as JSONArray
+
+                for(i: Int in 0..array.length()-1){
+                    var row = array.getJSONObject(i)
+                    var storeDTO = StoreDTO()
+
+                    storeDTO.setName(row.getString("name"))
+                    storeDTO.setPdname(row.getString("pdname"))
+                    storeDTO.setImgUrl(row.getString("imgUrl"))
+
+                    Log.d("storeName : ", storeDTO.getName())
+                    Log.d("storePdName : ", storeDTO.getPdname())
+                    Log.d("storeUrl : ", storeDTO.getImgUrl())
+
+                    storeList1!!.add(StoreData(storeDTO.getName(), storeDTO.getPdname(), storeDTO.getImgUrl()));
+                }
+            }
+            else{
+                Log.d("Search", "Search fail...")
+            }
+            Log.d("Search List", "Search List end...")
+        }catch(e : Exception){
+            e.printStackTrace()
+        }
     }
 
     fun getFavoritesData(){

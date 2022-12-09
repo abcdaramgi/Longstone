@@ -5,6 +5,7 @@ public class OrderListDTO {
     private String storeName;
     private String orderCount;
     private String imgUrl;
+    private String updateAt;
 
     public String getpdName(){
         return pdName;
@@ -26,5 +27,12 @@ public class OrderListDTO {
     }
     public void setimgUrl(String imgUrl){
         this.imgUrl = imgUrl;
+    }
+
+    public String getupdateAt(){
+        return updateAt;
+    }
+    public void setupdateAt(String updateAt){
+        this.updateAt = updateAt;
     }
 }

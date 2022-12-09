@@ -23,4 +23,5 @@ data class BuyListItem (
     var buyliste_st_name : String? =null,
     var buyliste_fd_count : String? =null,
     var buylist_img : String? =null,
+    var buylist_day : String? =null,
         )
