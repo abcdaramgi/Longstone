@@ -169,7 +169,7 @@ class StMainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationIte
             Log.i("plz", SellerSingleton.getInstance().sellerId)
             if(testid == SellerSingleton.getInstance().sellerId){
                 val task = SaveTokenTask()
-                val result = task.execute( SellerSingleton.getInstance().sellerId, token, "user").get()
+                val result = task.execute( SellerSingleton.getInstance().sellerId, token, "seller").get()
                 if(result == "true"){
                     Log.i("saveToken", "성공적으로 소비자 토큰을 저장함")
                 }

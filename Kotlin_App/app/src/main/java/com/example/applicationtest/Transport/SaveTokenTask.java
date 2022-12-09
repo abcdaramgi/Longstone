@@ -20,7 +20,7 @@ public class SaveTokenTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... strings) {
         try{
             String str;
-            URL url = new URL("http://ec2-3-35-255-89.ap-northeast-2.compute.amazonaws.com/savetoken");
+            URL url = new URL("http://ec2-3-35-255-89.ap-northeast-2.compute.amazonaws.com/user/savetoken");
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type", "application/json");
@@ -33,7 +33,7 @@ public class SaveTokenTask extends AsyncTask<String, Void, String> {
 
             JSONObject sendJson = new JSONObject();
             sendJson.put("id", strings[0]);
-            sendJson.put("token", strings[1]);
+            sendJson.put("targetToken", strings[1]);
             sendJson.put("type", strings[2]);
 
             osw.write(sendJson.toString());

@@ -35,15 +35,15 @@ public class FcmService {
     private FirebaseMessaging instance;
 
     public void sendMessageTo(String targetToken, String title, String body) throws IOException {
-        String message = makeMessage(targetToken, title, body);
-
+        String message = makeTopicMessage(targetToken, title, body);
+        System.out.println(message);
         OkHttpClient client = new OkHttpClient();
         okhttp3.RequestBody requestBody = okhttp3.RequestBody.create(message,
                 okhttp3.MediaType.get("application/json; charset=utf-8"));
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url(API_URL)
+                .url(URL)
                 .post(requestBody)
-                .addHeader(HttpHeaders.AUTHORIZATION, "Bearer " + getAccessToken())
+                .addHeader(HttpHeaders.AUTHORIZATION, "key=AAAA5LcZ2NA:APA91bH78hrbpmXnLggqftgkJAo3II0DyNIlgABja9S7nVWiYHI_k9nmBqj515mWmVIcdNzruXNW8FdRLUqqD4VqP3UW-nuJOI0xkCPGiomCz6QrJTliicMAHIfLwGdU9TqYNIszm6W7")
                 .addHeader(HttpHeaders.CONTENT_TYPE, "application/json; UTF-8")
                 .build();
 
