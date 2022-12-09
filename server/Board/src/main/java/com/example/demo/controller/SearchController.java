@@ -43,18 +43,16 @@ public class SearchController {
 //    }
 
     @RequestMapping(value = "/topic", method = {RequestMethod.POST})
-    public String searchTopicData(HttpServletRequest request, HttpServletResponse response) throws IOException{
-        String success;
+    public JSONObject searchTopicData(HttpServletRequest request, HttpServletResponse response) throws IOException{
+
         ServletInputStream inputStream = request.getInputStream();
         String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
 
         SearchData searchData = objectMapper.readValue(messageBody, SearchData.class);
-        List<Store> resultList = searchRepository.searchStoreIncludeContent(searchData);
-        String jsonList = new Gson().toJson(resultList);
-        success = "True";
-        System.out.println("jsonList : " + jsonList);
-        System.out.println("searchDara.content : " + searchData.content);
+        List<Store> store = searchRepository.searchStoreIncludeContent(searchData);
+        JSONObject data = new JSONObject();
+        data.put("store", store);
 
-        return jsonList;
+        return data;
     }
 }

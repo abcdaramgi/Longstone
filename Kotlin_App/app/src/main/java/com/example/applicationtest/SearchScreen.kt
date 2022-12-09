@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.applicationtest.DTO.FoodData
+import com.example.applicationtest.DTO.OnSalePostDTO
 import com.example.applicationtest.DTO.StoreDTO
 import com.example.applicationtest.Transport.SearchTask
 import com.google.gson.Gson
@@ -19,6 +21,8 @@ import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.fragment_prefer_screen.*
 import kotlinx.android.synthetic.main.fragment_search_screen.*
 import okhttp3.internal.platform.android.AndroidLogHandler.getFilter
+import org.json.JSONArray
+import org.json.JSONObject
 import java.lang.reflect.Type
 
 class SearchScreen : Fragment() {
@@ -72,13 +76,31 @@ class SearchScreen : Fragment() {
                         val task = SearchTask()
                         val result = task.execute(content).get()
 
-                        val gson = Gson()
-                        val listType: Type = object : TypeToken<ArrayList<StoreData2?>?>() {}.type
-                        val yourClassList: List<StoreData2> = Gson().fromJson(result, listType)
-
                         Log.d("받은값", result)
-                        Log.d("Register", "register end...")
-                        Log.d("리스트변환했냐", yourClassList.get(1).name.toString())
+
+
+                        if(result != null){
+                            val `object` = JSONObject(result)
+                            val array = `object`.get("store") as JSONArray
+
+                            for(i: Int in 0..array.length()-1){
+                                var row = array.getJSONObject(i)
+
+                                list!!.add(
+                                    StoreData(
+                                    row.getString("storeName"),
+                                    row.getString("pdName"),
+                                    row.getString("imgUrl")
+                                )
+                                );
+                            }
+                        }
+                        else{
+                            Log.d("Onsale", "Onsale fail...")
+                        }
+
+
+
                     } catch (e: Exception) {
                     }
                     return false

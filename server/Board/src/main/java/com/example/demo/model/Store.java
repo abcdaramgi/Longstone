@@ -82,4 +82,13 @@ public class Store {
         this.openHour = openHour;
         this.storeAddr = storeAddr;
     }
+
+    public Store(String name, String number, String pdname, String imgUrl, String storeAddr){
+        this.name = name;
+        this.number = number;
+        this.pdname = pdname;
+        this.imgUrl = imgUrl;
+        this.storeAddr = storeAddr;
+    }
+
 }
