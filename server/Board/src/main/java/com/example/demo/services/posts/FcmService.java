@@ -35,7 +35,7 @@ public class FcmService {
     private FirebaseMessaging instance;
 
     public void sendMessageTo(String targetToken, String title, String body) throws IOException {
-        String message = makeTopicMessage(targetToken, title, body);
+        String message = makeMessage(targetToken, title, body);
         System.out.println(message);
         OkHttpClient client = new OkHttpClient();
         okhttp3.RequestBody requestBody = okhttp3.RequestBody.create(message,
