@@ -20,7 +20,7 @@ public class NotificationController {
     SellerRepository sellerRepository;
 
     //토픽
-    @PostMapping(value = "/notification/topics/{topic}")
+    @PostMapping(value = "/notification/topic/{topic}")
     public ResponseEntity notificationTopics(@PathVariable("topic") String topic, @RequestBody RequestDTO requestDTO) throws IOException {
         fcmService.sendTopicMessageTo(
                 topic,
