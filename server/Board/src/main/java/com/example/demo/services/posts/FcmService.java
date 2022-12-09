@@ -1,4 +1,4 @@
-/*package com.example.demo.services.posts;
+package com.example.demo.services.posts;
 
 import com.example.demo.model.FcmMessage;
 import com.example.demo.model.testMessage;
@@ -151,4 +151,4 @@ public class FcmService {
 //    public BatchResponse sendMessage(MulticastMessage message) throws FirebaseMessagingException {
 //        return this.instance.sendMulticast(message);
 //    }
-}*/
+}
