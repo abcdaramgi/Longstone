@@ -10,9 +10,17 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
 import com.example.applicationtest.DTO.FoodData
+import com.example.applicationtest.DTO.StoreDTO
+import com.example.applicationtest.Singleton.SellerSingleton
+import com.example.applicationtest.Singleton.UserSingleton
+import com.example.applicationtest.Transport.BuyNotificationTask
+import com.example.applicationtest.Transport.NotificationTask
 import com.example.applicationtest.Transport.OrderPostTask
+import com.example.applicationtest.Transport.StoreGetInfoTask
 import kotlinx.android.synthetic.main.activity_buy.*
 import kotlinx.android.synthetic.main.item_today_food_detail.*
+import org.json.JSONArray
+import org.json.JSONObject
 
 class BuyActivity : AppCompatActivity() {
     lateinit var datas : FoodData
@@ -50,10 +58,11 @@ class BuyActivity : AppCompatActivity() {
                     intent.putExtra("data", datas)
 
                     val task = OrderPostTask()
-                    val result = task.execute("1", datas.name, (datas.updatecost?.times(num)).toString(), num.toString()).get()
+                    val result = task.execute(datas.pdId.toString(), datas.name, (datas.updatecost?.times(num)).toString(), num.toString()).get()
+                    Log.d("받은값", result)
 
-
-                    //Log.d("받은값", result)
+                    //판매자에게 알람
+                    sendNotification(datas)
 
                     startActivity(intent)
                 }
@@ -68,6 +77,19 @@ class BuyActivity : AppCompatActivity() {
                     builder.show()
                 }
             }
+        }
+    }
+
+    private fun sendNotification(data:FoodData) {
+        try {
+            Log.d("Notification", "Notification start...")
+            val task = BuyNotificationTask()
+            val result = task.execute(UserSingleton.getInstance().userId, data.getPdId().toString(), data.getCount().toString()).get()
+            Log.d("받은값", result)
+
+
+            Log.d("post", "posting end...")
+        } catch (e: Exception) {
         }
     }
 }

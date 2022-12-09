@@ -19,6 +19,12 @@ public class SellerRepository {
         return success;
     }
 
+    public String selectSellerToken(String pdid){
+        String sql = "SELECT nToken FROM SellTB WHERE sellerId = (SELECT sellerId FROM ProductTB WHERE pdId = ?)";
+        String result = jdbcTemplate.queryForObject(sql, String.class, pdid);
+        return result;
+    }
+
     public String saveToken(String id, String token){
         String success = "False";
         String sql = "UPDATE SellTB SET nToken = ? WHERE sellerId = ?";

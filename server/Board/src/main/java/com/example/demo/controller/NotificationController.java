@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.RequestDTO;
+import com.example.demo.repository.SellerRepository;
 import com.example.demo.services.posts.FcmService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +15,9 @@ import java.io.IOException;
 public class NotificationController {
 
     private final FcmService fcmService;
+
+    @Autowired
+    SellerRepository sellerRepository;
 
     //토픽
     @PostMapping(value = "/notification/topics/{topic}")
@@ -25,17 +30,21 @@ public class NotificationController {
     }
 
     //유저
-    @PostMapping("/notification/user/{user}")
+    @PostMapping("/notification/user")
     public ResponseEntity pushMessage(@RequestBody RequestDTO requestDTO) throws IOException {
-        System.out.println(requestDTO.getTargetToken() + " "
-                +requestDTO.getTitle() + " " + requestDTO.getBody());
+        String uid = requestDTO.getId() + "님이";
+        String pdid = requestDTO.getTitle();
+        String count = requestDTO.getBody() + "개를 구매하셨습니다";
+        String success = sellerRepository.selectSellerToken(pdid);
 
-        fcmService.sendMessageTo(
-                requestDTO.getTargetToken(),
-                requestDTO.getTitle(),
-                requestDTO.getBody());
+        fcmService.sendTopicMessageTo(
+                success,
+                uid,
+                count);
+
         return ResponseEntity.ok().build();
     }
+
 
     //특정고객
 //    @PostMapping(value = "/notification/buy/{user}")

@@ -16,13 +16,13 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class NotificationTask extends AsyncTask<String, Void, String> {
+public class BuyNotificationTask extends AsyncTask<String, Void, String> {
     String sendMsg, receiveMsg;
     @Override
     protected String doInBackground(String... strings) {
         try{
             String str;
-            URL url = new URL("http://10.0.2.2:8080/notification/topic/" + strings[0]);
+            URL url = new URL("http://10.0.2.2:8080/notification/user");
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type", "application/json");
@@ -34,6 +34,7 @@ public class NotificationTask extends AsyncTask<String, Void, String> {
             OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
 
             JSONObject sendJson = new JSONObject();
+            sendJson.put("id", strings[0]);
             sendJson.put("title", strings[1]);
             sendJson.put("body", strings[2]);
 
