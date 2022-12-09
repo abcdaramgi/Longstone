@@ -53,15 +53,12 @@ public class FcmService {
     }
 
     private String makeMessage(String targetToken, String title, String body) throws JsonParseException, JsonProcessingException {
-        FcmMessage fcmMessage = FcmMessage.builder()
-                .message(FcmMessage.Message.builder()
-                        .token(targetToken)
-                        .notification(FcmMessage.Notification.builder()
-                                .title(title)
-                                .body(body)
-                                .image(null)
-                                .build()
-                        ).build()).validateOnly(false).build();
+        testMessage fcmMessage = testMessage.builder()
+                .data(testMessage.Message.builder()
+                        .body(body)
+                        .title(title)
+                        .build())
+                .priority("high").to(targetToken).build();
         System.out.println("makemessage");
         return objectMapper.writeValueAsString(fcmMessage);
     }
