@@ -40,8 +40,8 @@ public class OderPostRepository {
 
     public void getPostMatchOrderPost(OrderPost orderPost){
         //String sellerId = getSellorId(orderPost);
-        String insertSQL = "INSERT INTO OrderTB(id, userId, pdId, sellerId, orderCount) VALUES (?, ?, ?, ?, ?)";
-        jdbcTemplate.update(insertSQL, 1, orderPost.getUid(), orderPost.getPid(), "seller1123", orderPost.getPcount());
+        String insertSQL = "INSERT INTO OrderTB(userId, pdId, sellerId, orderCount) VALUES (?, ?, (SELECT sellerId FROM ProductTB WHERE pdId = ?), ?)";
+        jdbcTemplate.update(insertSQL, orderPost.getUid(), orderPost.getPid(), orderPost.getPid(), orderPost.getPcount());
 
         // 여기서 seller한테 알림 팅궈줘야해요
         System.out.println("제발요~");

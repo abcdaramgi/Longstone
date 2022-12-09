@@ -17,10 +17,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.applicationtest.DTO.FoodData
 import com.example.applicationtest.MapScreen.Companion.newInstance
+import com.example.applicationtest.Singleton.UserSingleton
+import com.example.applicationtest.Transport.CartTask
 import kotlinx.android.synthetic.main.activity_buy.*
 import kotlinx.android.synthetic.main.fragment_cart_screen.*
 import kotlinx.android.synthetic.main.fragment_cart_screen.view.*
 import kotlinx.android.synthetic.main.fragment_prefer_screen.*
+import kotlinx.android.synthetic.main.item_alertdialog.*
 import kotlinx.android.synthetic.main.item_alertdialog.view.*
 import kotlinx.android.synthetic.main.item_today_food_detail.*
 import kotlinx.android.synthetic.main.item_today_food_detail.store_box
@@ -113,7 +116,7 @@ class FoodDetailActivity : AppCompatActivity() {
             layout.back.setOnClickListener{
                 dialog.dismiss()
             }
-
+            //구매하기
             layout.btn_no.setOnClickListener {
                 selectNum = layout.number_picker.value
 
@@ -122,8 +125,14 @@ class FoodDetailActivity : AppCompatActivity() {
                 intent.putExtra("data", datas)
                 startActivity(intent)
             }
-
+            //장바구니
             layout.btn_ok.setOnClickListener {
+                //=====================================================//
+                selectNum = layout.number_picker.value
+
+                sendCartData(selectNum)
+
+                //=====================================================//
                 var view : View = View.inflate(this,R.layout.fragment_cart_screen, null)
                 selectNum = layout.number_picker.value
                 //StoreData(data.storename, data.storeinfo, data.img)
@@ -187,4 +196,30 @@ class FoodDetailActivity : AppCompatActivity() {
         return "$hour : $nmin : $sec"
     }
 
+    //장바구니 추가
+    fun sendCartData(selectedNum : Int){
+        val layout = layoutInflater.inflate(R.layout.item_alertdialog, null)
+        Log.d("Cart insert", "Cart start...")
+        var result = ""
+        try{
+            val userId = UserSingleton.getInstance().userId.toString()
+            val pdName = detail_food_name.text!!.toString()
+            val storeName = store_de_name.text!!.toString()
+            val pdCount = selectedNum
+
+            Log.d("앱에서 보낸값", "$userId, $pdName, $storeName, $pdCount")
+
+            var task = CartTask()
+            val result = task.execute(userId, pdName, storeName, pdCount.toString()).get();
+            Log.d("받은값", result)
+            Log.d("Cart insert", "Cart end...")
+        }catch (e :Exception){
+            e.printStackTrace()
+        }
+        if(result == "true"){
+
+        }else{
+            Log.d("Cart insert", "Cart fail...")
+        }
+    }
 }

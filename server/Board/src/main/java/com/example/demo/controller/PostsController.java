@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.domain.posts.PostsRepository;
 import com.example.demo.model.*;
+import com.example.demo.repository.CartRepository;
 import com.example.demo.repository.OderPostRepository;
 import com.example.demo.repository.PostRepository;
 import com.example.demo.repository.SellerFoodRepository;
@@ -31,6 +32,8 @@ public class PostsController {
     PostRepository postRepository;
     @Autowired
     OderPostRepository oderPostRepository;
+    @Autowired
+    CartRepository cartRepository;
 
     @Autowired
     SellerFoodRepository sellerFoodRepository;
@@ -49,6 +52,32 @@ public class PostsController {
 //        return "hello world";
 //    }
 
+    @RequestMapping(value = "/cart", method = {RequestMethod.POST})
+    public String cartPost(HttpServletRequest request, HttpServletResponse response) throws  IOException{
+        String success = "false";
+        ServletInputStream inputStream = request.getInputStream();
+        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+
+        Cart cart = objectMapper.readValue(messageBody, Cart.class);
+        System.out.println("userId : " + cart.getuserId() + "\n" +
+                "pdName : " + cart.getpdName() + "\n" +
+                "storeName : " + cart.getstoreName() + "\n" +
+                "pdCount : " + cart.getpdCount());
+        success = cartRepository.insertCartData(cart);
+        return success;
+    }
+
+    @RequestMapping(value = "/cartlist", method = {RequestMethod.POST})
+    public JSONObject cartListPost(HttpServletRequest request, HttpServletResponse response) throws  IOException{
+        ServletInputStream inputStream = request.getInputStream();
+        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+
+        System.out.println("userId : " + messageBody);
+        List<Cart> cartList = cartRepository.getCartListData(messageBody);
+        JSONObject data = new JSONObject();
+        data.put("cartList", cartList);
+        return data;
+    }
 
     @RequestMapping(value = "/order", method = {RequestMethod.POST})
     public String orderProductPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
