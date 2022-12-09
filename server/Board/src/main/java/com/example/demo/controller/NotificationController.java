@@ -1,4 +1,4 @@
-/*package com.example.demo.controller;
+package com.example.demo.controller;
 
 import com.example.demo.model.RequestDTO;
 import com.example.demo.repository.SellerRepository;
@@ -20,7 +20,7 @@ public class NotificationController {
     SellerRepository sellerRepository;
 
     //토픽
-    @PostMapping(value = "/notification/topics/{topic}")
+    @PostMapping(value = "/notification/topic/{topic}")
     public ResponseEntity notificationTopics(@PathVariable("topic") String topic, @RequestBody RequestDTO requestDTO) throws IOException {
         fcmService.sendTopicMessageTo(
                 topic,
@@ -72,4 +72,4 @@ public class NotificationController {
 //    }
 
 
-}*/
+}

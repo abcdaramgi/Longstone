@@ -1,4 +1,4 @@
-/*package com.example.demo.services.posts;
+package com.example.demo.services.posts;
 
 import com.example.demo.model.FcmMessage;
 import com.example.demo.model.testMessage;
@@ -49,7 +49,7 @@ public class FcmService {
 
         okhttp3.Response response = client.newCall(request).execute();
 
-        System.out.println(response.body().string());
+        System.out.println("sendmessage");
     }
 
     private String makeMessage(String targetToken, String title, String body) throws JsonParseException, JsonProcessingException {
@@ -62,7 +62,7 @@ public class FcmService {
                                 .image(null)
                                 .build()
                         ).build()).validateOnly(false).build();
-
+        System.out.println("makemessage");
         return objectMapper.writeValueAsString(fcmMessage);
     }
 
@@ -81,7 +81,7 @@ public class FcmService {
 
         okhttp3.Response response = client.newCall(request).execute();
 
-        System.out.println(response.body().string());
+        System.out.println("sendtopic");
     }
 
     public String makeTopicMessage(String topic, String title, String body) throws JsonProcessingException {
@@ -108,7 +108,7 @@ public class FcmService {
         System.out.println(fcmMessage.getData());
         System.out.println(fcmMessage.getData().getBody());
         System.out.println(fcmMessage.getData().getTitle());
-        System.out.println("zzd");
+        System.out.println("maketopic");
 
 
         return objectMapper.writeValueAsString(fcmMessage);
@@ -151,4 +151,4 @@ public class FcmService {
 //    public BatchResponse sendMessage(MulticastMessage message) throws FirebaseMessagingException {
 //        return this.instance.sendMulticast(message);
 //    }
-}*/
+}
