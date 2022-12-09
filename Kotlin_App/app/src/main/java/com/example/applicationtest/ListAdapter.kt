@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Switch
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.applicationtest.DTO.FoodData
@@ -19,6 +20,7 @@ class ListAdapter(private var list: ArrayList<FoodData>): RecyclerView.Adapter<L
         var data2Text: TextView = itemView!!.findViewById(R.id.food_place)
         var data3Text: TextView = itemView!!.findViewById(R.id.food_cost)
         var imgFood: ImageView = itemView!!.findViewById(R.id.img_store_food_photo)
+        var switch: Switch = itemView!!.findViewById(R.id.switch1)
 
 
         // onBindViewHolder의 역할을 대신한다.
@@ -28,6 +30,9 @@ class ListAdapter(private var list: ArrayList<FoodData>): RecyclerView.Adapter<L
             data1Text.text = data.getName()
             data2Text.text = data.getPlace()
             data3Text.text = data.getUpdatecost().toString() + "원"
+            if (data.getStatus() == "Y") {
+                switch.isChecked = true
+            }
         }
     }
 

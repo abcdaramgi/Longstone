@@ -13,6 +13,7 @@ class FoodData(
     var storeimg: Int? =null,
     var refood: Int? =null,
     var pdContents: String? =null,
+    var status: String? =null,
 
     var pdTimer: Int? =null,
     var pdId: Int? =null,
@@ -123,5 +124,14 @@ class FoodData(
 
     fun setPdId(type: Int){
         this.pdId = pdId
+    }
+    @JvmName("getStaus")
+    fun getStatus(): String? {
+        return status
+    }
+
+    @JvmName("setStaus")
+    fun setStatus(status: String) {
+        this.status = status
     }
 }

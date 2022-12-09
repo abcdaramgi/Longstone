@@ -326,6 +326,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                         null,
                         null,
                         onSalePostDTO.getPdContents(),
+                        null,
                         onSalePostDTO.getPdTimer(),
                         onSalePostDTO.getPdid(),
                         onSalePostDTO.getSellerid(),

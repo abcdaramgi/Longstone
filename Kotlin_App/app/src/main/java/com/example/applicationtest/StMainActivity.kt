@@ -132,6 +132,8 @@ class StMainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationIte
                         null,
                         null,
                         null,
+                        storeFoodDTO.getStatus(),
+                        null,
                         null,
                         storeFoodDTO.getSellerId()
                     ));
