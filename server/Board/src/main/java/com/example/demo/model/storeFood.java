@@ -8,6 +8,10 @@ public class storeFood {
     private Integer pdSale;
     private String status;
     private String imgUrl;
+    private Integer saleprice;
+
+    public Integer getSaleprice() {return saleprice;}
+    public void setSaleprice(Integer slalePrice) {this.saleprice = slalePrice;}
 
     public String getSellerId() {return sellerId;}
     public void setSellerId(String sellerId) {this.sellerId = sellerId;}

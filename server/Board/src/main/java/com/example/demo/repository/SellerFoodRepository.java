@@ -17,9 +17,10 @@ public class SellerFoodRepository {
 
     public List<storeFood> selectStoreFoodData(String sellerId){
 
-            String sql = "SELECT ProductTB.sellerId, ProductTB.pdName, ProductTB. pdPrice, ProductTB.pdSale, ProductTB.status, PdimageTB.imgUrl \n" +
-                    "FROM ProductTB, PdimageTB\n" +
-                    "WHERE ProductTB.sellerId = ? AND ProductTB.pdId = PdimageTB.pdId";
+            String sql = "SELECT ProductTB.sellerId, ProductTB.pdName, ProductTB. pdPrice, ProductTB.pdSale, ProductTB.status, PdimageTB.imgUrl\n" +
+                    "FROM ProductTB LEFT OUTER JOIN PdimageTB\n" +
+                    "ON ProductTB.pdId = PdimageTB.pdId\n" +
+                    "WHERE ProductTB.sellerId = ?";
 
         List<storeFood> result = jdbcTemplate.query(sql, new RowMapper<storeFood>() {
             @Override
@@ -30,7 +31,7 @@ public class SellerFoodRepository {
                 sf.setPdPrice(price);
                 Float discount = rs.getFloat("pdSale");
                 price = price * ((100 - discount) / 100);
-                sf.setPdSale(Math.round(price));
+                sf.setSaleprice(Math.round(price));
                 sf.setStatus(rs.getString("status"));
                 sf.setImgUrl(rs.getString("imgUrl"));
 

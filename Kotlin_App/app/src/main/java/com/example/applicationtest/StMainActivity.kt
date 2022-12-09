@@ -123,7 +123,7 @@ class StMainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationIte
                     storeFoodDTO.setPdName(row.getString("pdName"))
                     storeFoodDTO.setStoreAddr(row.getString("storeAddr"))
                     storeFoodDTO.setPdPrice(row.getInt("pdPrice"))
-                    storeFoodDTO.setPdSale(row.getInt("pdSale"))
+                    storeFoodDTO.setSaleprice(row.getInt("saleprice"))
                     storeFoodDTO.setStatus(row.getString("status"))
                     storeFoodDTO.setImgUrl(row.getString("imgUrl"))
 
@@ -131,7 +131,7 @@ class StMainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationIte
                         storeFoodDTO.getPdName(),
                         storeFoodDTO.getStoreAddr(),
                         storeFoodDTO.getPdPrice(),
-                        storeFoodDTO.getPdSale(),
+                        storeFoodDTO.getSaleprice(),
                         storeFoodDTO.getImgUrl(),
                         null,
                         null,
