@@ -8,6 +8,8 @@ import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.applicationtest.DTO.FoodData
+import com.example.applicationtest.Singleton.SellerSingleton
+import com.example.applicationtest.Transport.deleteFoodTask
 import com.example.applicationtest.Transport.UpdatePostStatusTask
 
 //ST_HOME_LIST, ITEM 연결
@@ -84,12 +86,15 @@ class ListAdapter(private var list: ArrayList<FoodData>): RecyclerView.Adapter<L
         holder.button3.setOnClickListener(View.OnClickListener { //Position for remove
             val position = holder.layoutPosition
             notifyItemRemoved(position)
+            list.removeAt(position);
 
-//            var params :String = holder.data1Text.text.toString()
-//            var result = ""
-//            val task = deleteFoodTask()
-//            result = task.execute(params).get()
-//            Log.d("받은값", result)
+
+            var pdName = holder.data1Text.text.toString()
+            val sellerId = SellerSingleton.getInstance().sellerId.toString()
+            var result = ""
+            val task = deleteFoodTask()
+            result = task.execute(sellerId, pdName).get()
+            Log.d("받은값", result)
         })
     }
 

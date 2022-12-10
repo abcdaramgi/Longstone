@@ -1,5 +1,5 @@
 package com.example.demo.repository;
-
+import com.example.demo.model.Store;
 import com.example.demo.model.Post;
 import com.example.demo.model.storeFood;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,14 +58,22 @@ public class SellerFoodRepository {
 
     }
 
-    public String deleteStoreFoodData(String pdName){
-        String success = "False";
-        String sql = "DELETE FROM ProductTB\n" +
-                "WHERE pdName = ?";
+    public String deleteStoreFoodData(Store store){
+        String success = "왔다감";
 
-        int result = jdbcTemplate.update(sql, pdName);
-        if(result != 0)
-            success = "true";
+        String openSql = "SET foreign_key_checks = 0;";
+        String deleteProduct = "DELETE FROM ProductTB WHERE sellerId = ? AND pdName = ?;";
+        String deletePdimage = "DELETE FROM PdimageTB WHERE pdId = (SELECT pdId FROM ProductTB WHERE sellerId = ? AND pdName = ?);";
+        String deleteOrder = "DELETE FROM OrderTB WHERE pdId = (SELECT pdId FROM ProductTB WHERE sellerId = ? AND pdName = ?);";
+        String deleteCart = "DELETE FROM CartTB WHERE pdId = (SELECT pdId FROM ProductTB WHERE sellerId = ? AND pdName = ?);";
+        String closeSql = "SET foreign_key_checks = 1;";
+
+        jdbcTemplate.update(openSql);
+        jdbcTemplate.update(deleteProduct, store.getSellerId(), store.getPdname());
+        jdbcTemplate.update(deletePdimage, store.getSellerId(), store.getPdname());
+        jdbcTemplate.update(deleteOrder, store.getSellerId(), store.getPdname());
+        jdbcTemplate.update(deleteCart, store.getSellerId(), store.getPdname());
+        jdbcTemplate.update(closeSql);
 
         return success;
 

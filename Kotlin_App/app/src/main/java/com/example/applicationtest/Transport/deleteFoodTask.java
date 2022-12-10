@@ -3,6 +3,9 @@ package com.example.applicationtest.Transport;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -28,10 +31,12 @@ public class deleteFoodTask extends AsyncTask<String, Void, String>{
             //서버에 보낼값포함해 요청함
             OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
 
-            String sendData = strings[0];
+            JSONObject sendJson = new JSONObject();
+            sendJson.put("sellerId", strings[0]);
+            sendJson.put("pdname", strings[1]);
 
-            osw.write(sendData);
-            Log.d("pdName :", sendData);
+            osw.write(sendJson.toString());
+            Log.d("pdName :", sendJson.toString());
             osw.flush();
 
 
@@ -50,6 +55,8 @@ public class deleteFoodTask extends AsyncTask<String, Void, String>{
         }catch (MalformedURLException e){
             e.printStackTrace();
         }catch (IOException e){
+            e.printStackTrace();
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         return receiveMsg;
