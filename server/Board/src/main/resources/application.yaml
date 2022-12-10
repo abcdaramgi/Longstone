@@ -6,7 +6,7 @@ logging-module:
 spring:
   web:
     resources:
-      static-locations[0]: "file:src/main/resources/static/"
+      static-locations[0]: "file:home/ec2-user/Board/src/main/resources/static/images"
       static-locations[1]: "classpath:/static/"
   devtools:
     remote:
