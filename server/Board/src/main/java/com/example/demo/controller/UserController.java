@@ -38,7 +38,7 @@ public class UserController {
 
     @GetMapping
     public String check(){
-        return "어서온나 이게 스프링부트다";
+        return "어서온나 요게 부트스프링이다";
     }
 
     //tset

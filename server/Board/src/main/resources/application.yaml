@@ -4,6 +4,10 @@ logging-module:
   version: 0.0.4
 
 spring:
+  web:
+    resources:
+      static-locations[0]: "file:src/main/resources/static/"
+      static-locations[1]: "classpath:/static/"
   devtools:
     remote:
       restart:
