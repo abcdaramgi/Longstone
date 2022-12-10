@@ -82,8 +82,8 @@ class OrderHistoryScreen : AppCompatActivity() {
 //                            "2022-11-24","10000"),
 //                        )
                         add(ItemOrder(orderHistoryDTO.getUserId(), orderHistoryDTO.getPdName(),
-                        orderHistoryDTO.getOrderCount(), orderHistoryDTO.getUpdateAt(),
-                        orderHistoryDTO.getSalePrice().toString()))
+                        orderHistoryDTO.getOrderCount() + "개", orderHistoryDTO.getUpdateAt(),
+                        orderHistoryDTO.getSalePrice().toString() + "원"))
                         orderAdapter.datas = datas
                         orderAdapter.notifyDataSetChanged()
                     }
