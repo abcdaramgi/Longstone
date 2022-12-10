@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.applicationtest.DTO.FoodData
 import com.example.applicationtest.Transport.UpdatePostStatusTask
 
@@ -48,8 +49,8 @@ class ListAdapter(private var list: ArrayList<FoodData>): RecyclerView.Adapter<L
                     val result = task.execute(data.getPdId().toString(), "N").get()
                 }
             }
-
-
+            
+            Glide.with(itemView).load(data.getImg()).into(imgFood)
         }
     }
 
