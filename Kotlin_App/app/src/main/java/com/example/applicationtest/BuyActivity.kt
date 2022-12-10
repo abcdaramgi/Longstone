@@ -18,6 +18,14 @@ import com.example.applicationtest.Transport.NotificationTask
 import com.example.applicationtest.Transport.OrderPostTask
 import com.example.applicationtest.Transport.StoreGetInfoTask
 import kotlinx.android.synthetic.main.activity_buy.*
+import kotlinx.android.synthetic.main.activity_buy.buy_check
+import kotlinx.android.synthetic.main.activity_buy.buy_food_cost
+import kotlinx.android.synthetic.main.activity_buy.buy_food_img
+import kotlinx.android.synthetic.main.activity_buy.buy_food_name
+import kotlinx.android.synthetic.main.activity_buy.buy_store_name
+import kotlinx.android.synthetic.main.activity_buy.img_store
+import kotlinx.android.synthetic.main.activity_buy.user_de_place
+import kotlinx.android.synthetic.main.activity_cart_buy.*
 import kotlinx.android.synthetic.main.item_today_food_detail.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -39,8 +47,9 @@ class BuyActivity : AppCompatActivity() {
         buy_store_name.text = datas.storename
         buy_store_place.text = datas.place
         buy_count.text = num.toString() + "개"
-        buy_food_cost.text = (datas.cost?.times(num)).toString() + "원->" + (datas.updatecost?.times(num)).toString() + "원"
+        buy_food_cost.text = datas.cost.toString() + "원->" + (datas.updatecost).toString() + "원"
         food_buy_cost.text = (datas.updatecost?.times(num)).toString() + "원"
+        user_de_place.text = datas.phoneNum.toString()
 
         button4.setOnClickListener {
             val builder = AlertDialog.Builder(this)

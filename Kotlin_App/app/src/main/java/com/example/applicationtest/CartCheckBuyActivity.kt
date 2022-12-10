@@ -25,7 +25,7 @@ class CartCheckBuyActivity : AppCompatActivity() {
         check_food_name.text = datas.FoodName
         buy_count.text = datas.food_count.toString() + "개"
         textView15.text = datetime.toString()
-        sum_cost.text = (datas.cost?.times(datas.food_count!!)).toString() + "원"
+        sum_cost.text = ((datas.cost!! - datas.cost!! * (datas.pdSale!!/ 100))?.times(datas.food_count!!)).toString() + "원"
 
         setSupportActionBar(toolbar) //커스텀한 toolbar 액션바로 사용
         supportActionBar?.setDisplayShowTitleEnabled(false)
