@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.applicationtest.DTO.FoodData
 
 //ST_HOME_LIST, ITEM 연결
@@ -32,6 +33,7 @@ class ListAdapter(private var list: ArrayList<FoodData>): RecyclerView.Adapter<L
             if (data.getStatus() == "Y") {
                 switch.isChecked = true
             }
+            Glide.with(itemView).load(data.getImg()).into(imgFood)
         }
     }
 
