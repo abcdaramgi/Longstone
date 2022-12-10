@@ -23,7 +23,7 @@ public class UpdatePostStatusTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... strings) {
         try{
             String str;
-            URL url = new URL("http://ec2-3-35-255-89.ap-northeast-2.compute.amazonaws.com/post/product");
+            URL url = new URL("http://ec2-3-35-255-89.ap-northeast-2.compute.amazonaws.com/post/updatestatus");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection(); //url 연결
             //content type json
             conn.setRequestProperty("Content-Type", "application/json");
@@ -35,10 +35,8 @@ public class UpdatePostStatusTask extends AsyncTask<String, Void, String> {
             OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
 
             JSONObject sendJson = new JSONObject();
-            String pdSale = getSaleRate(strings[0], strings[1]);
-            String strId = SellerSingleton.getInstance().sellerId.toString();
 
-            sendJson.put("sellerId", strings[0]);
+            sendJson.put("sellerid", strings[0]);
             sendJson.put("pdName", strings[1]);
             sendJson.put("status", strings[2]);
 

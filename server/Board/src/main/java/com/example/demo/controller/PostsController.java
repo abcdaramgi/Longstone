@@ -168,8 +168,8 @@ public class PostsController {
         ServletInputStream inputStream = request.getInputStream();
         String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
 
-        Post userData = objectMapper.readValue(messageBody, Post.class);
-        success = sellerFoodRepository.updateFoodStatus(userData);
+        Post postData = objectMapper.readValue(messageBody, Post.class);
+        success = sellerFoodRepository.updateFoodStatus(postData);
 
         return success;
     }
