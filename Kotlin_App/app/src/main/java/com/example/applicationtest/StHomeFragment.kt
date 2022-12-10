@@ -38,7 +38,5 @@ class StHomeFragment : Fragment()
         listView.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         // RecyclerView.adapter에 지정
         listView.adapter = listAdapter
-
-        switch1.setOnClickListener()
     }
 }
