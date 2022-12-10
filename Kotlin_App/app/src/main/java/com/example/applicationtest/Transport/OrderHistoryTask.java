@@ -18,7 +18,7 @@ public class OrderHistoryTask extends AsyncTask<String, Void, String> {
         try{
             String str;
             //URL url = new URL("http://ec2-3-35-255-89.ap-northeast-2.compute.amazonaws.com/post/storeFood");
-            URL url = new URL("http://10.0.2.2:8080/post/orderHistory");
+            URL url = new URL("http://222.103.14.187:8080/post/orderHistory");
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type", "application/json");

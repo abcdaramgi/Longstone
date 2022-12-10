@@ -120,15 +120,22 @@ class CartScreen : AppCompatActivity() {
                     cartListDTO.setimgUrl(row.getString("imgUrl"))
                     cartListDTO.setpdPrice(row.getInt("pdPrice"))
                     cartListDTO.setpdCount(row.getInt("pdCount"))
+                    cartListDTO.setpdSale(row.getDouble("pdSale"))
+                    cartListDTO.setphoneNum(row.getString("phoneNum"))
+                    cartListDTO.setstoreName(row.getString("storeAddr"))
 
                     Log.d("storeName : ", cartListDTO.getstoreName())
                     Log.d("pdName : ", cartListDTO.getpdName())
                     Log.d("imgUrl : ", cartListDTO.getimgUrl())
                     Log.d("pdPrice : ", cartListDTO.getpdPrice().toString())
                     Log.d("pdCount : ", cartListDTO.getpdCount().toString())
+                    Log.d("pdSale : ", cartListDTO.getpdSale().toString())
+                    Log.d("phoneNum : ", cartListDTO.getphoneNum().toString())
+                    Log.d("storeAddr : ", cartListDTO.getstoreName().toString())
 
                     datas!!.add(ItemCart(false, cartListDTO.getstoreName(), cartListDTO.getpdName(),
-                                cartListDTO.getimgUrl(), cartListDTO.getpdPrice(), cartListDTO.getpdCount()))
+                                cartListDTO.getimgUrl(), cartListDTO.getpdPrice(), cartListDTO.getpdCount(), cartListDTO.getpdSale(),
+                                cartListDTO.getphoneNum(), cartListDTO.getstoreAddr()))
                 }
             }
             else{

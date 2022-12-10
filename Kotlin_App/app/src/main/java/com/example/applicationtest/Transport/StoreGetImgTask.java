@@ -26,7 +26,7 @@ public class StoreGetImgTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... Strings) {
         try{
             String str;
-            URL url = new URL("http://ec2-3-35-255-89.ap-northeast-2.compute.amazonaws.com/store/imginfo");
+            URL url = new URL("http://222.103.14.187:8080/store/imginfo");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type", "application/json");
 

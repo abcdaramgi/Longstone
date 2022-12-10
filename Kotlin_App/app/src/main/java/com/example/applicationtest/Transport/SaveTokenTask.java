@@ -20,7 +20,7 @@ public class SaveTokenTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... strings) {
         try{
             String str;
-            URL url = new URL("http://ec2-3-35-255-89.ap-northeast-2.compute.amazonaws.com/user/savetoken");
+            URL url = new URL("http://222.103.14.187:8080/user/savetoken");
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type", "application/json");

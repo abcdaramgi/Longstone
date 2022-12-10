@@ -23,7 +23,7 @@ public class FileUploadUtils {
                 .addFormDataPart(sellerId, file.getName(), RequestBody.create(MultipartBody.FORM, file))
                 .build();
         Request request = new Request.Builder()
-                .url("http://ec2-3-35-255-89.ap-northeast-2.compute.amazonaws.com/post/image") // Server URL 은 본인 IP를 입력
+                .url("http://222.103.14.187:8080/post/image") // Server URL 은 본인 IP를 입력
                 .post(requestBody)
                 .build();
         OkHttpClient client = new OkHttpClient();

@@ -146,6 +146,7 @@ public class PostsController {
 //                String savePath = "\\home\\ec2-user\\Board\\src\\main\\resources\\static\\images\\" + file.getOriginalFilename();
                 String savePath = "/home/ec2-user/Board/src/main/resources/static/images/" + file.getOriginalFilename();
                 String dbSavePath = "http://ec2-3-35-255-89.ap-northeast-2.compute.amazonaws.com/images/" + file.getOriginalFilename();
+//                String dbSavePath = "http://222.103.14.187:8080/images/" + file.getOriginalFilename();
 
                 System.out.println("seller name : " + sellerId);
                 System.out.println("save file path : " + savePath);
