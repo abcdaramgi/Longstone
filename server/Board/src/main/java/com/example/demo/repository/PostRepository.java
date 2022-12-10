@@ -46,7 +46,7 @@ public class PostRepository {
 
     public List<Post> getOnsalePost(String status){
         String sql = "SELECT ProductTB.pdId, ProductTB.sellerId, pdContents, pdPrice, pdTimer, pdSale, expire, pdName, pdCount, PdimageTB.imgUrl FROM ProductTB, PdimageTB WHERE (expire > ? AND status = ?) \n" +
-                "AND (ProductTB.pdId = PdimageTB.pdId);";
+                "AND (ProductTB.pdId = PdimageTB.pdId) AND pdCount > 0;";
 //        String sql = "SELECT ProductTB.pdId, ProductTB.sellerId, pdContents, pdPrice, pdTimer, pdSale, pdName, pdCount, PdimageTB.imgUrl FROM ProductTB, PdimageTB WHERE (expire > ? AND status = ?) \n" +
 //                "AND (ProductTB.pdId = PdimageTB.pdId);";
 
