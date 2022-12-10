@@ -57,5 +57,18 @@ public class SellerFoodRepository {
 
     }
 
+    public String deleteStoreFoodData(String pdName){
+        String success = "False";
+        String sql = "DELETE FROM ProductTB\n" +
+                "WHERE pdName = ?";
+
+        int result = jdbcTemplate.update(sql, pdName);
+        if(result != 0)
+            success = "true";
+
+        return success;
+
+    }
+
 
 }

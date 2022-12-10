@@ -4,9 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.Switch
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.applicationtest.DTO.FoodData
 
@@ -21,6 +19,7 @@ class ListAdapter(private var list: ArrayList<FoodData>): RecyclerView.Adapter<L
         var data3Text: TextView = itemView!!.findViewById(R.id.food_cost)
         var imgFood: ImageView = itemView!!.findViewById(R.id.img_store_food_photo)
         var switch: Switch = itemView!!.findViewById(R.id.switch1)
+        var button3: Button = itemView!!.findViewById(R.id.button3)
 
 
         // onBindViewHolder의 역할을 대신한다.
@@ -50,6 +49,27 @@ class ListAdapter(private var list: ArrayList<FoodData>): RecyclerView.Adapter<L
     override fun onBindViewHolder(holder: ListAdapter.ListItemViewHolder, position: Int) {
         Log.d("ListAdapter", "===== ===== ===== ===== onBindViewHolder ===== ===== ===== =====")
         holder.bind(list[position], position)
+
+        holder.switch.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener{
+                buttonView, isChecked ->
+            if (holder.switch.isChecked) {
+                Log.d("스위치", "켜짐")
+            }
+            else{
+                Log.d("스위치", "꺼짐")
+            }
+        })
+
+        holder.button3.setOnClickListener(View.OnClickListener { //Position for remove
+            val position = holder.layoutPosition
+            notifyItemRemoved(position)
+
+//            var params :String = holder.data1Text.text.toString()
+//            var result = ""
+//            val task = deleteFoodTask()
+//            result = task.execute(params).get()
+//            Log.d("받은값", result)
+        })
     }
 
 }
