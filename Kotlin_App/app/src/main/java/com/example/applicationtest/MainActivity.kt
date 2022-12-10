@@ -377,7 +377,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                     onSalePostDTO.setSellerid(row.getString("sellerid"))
                     onSalePostDTO.setStoreName(row.getString("storeName"))
                     onSalePostDTO.setExpire(row.getString("expire"))
-
+                    onSalePostDTO.setNumber(row.getString("number"))
 
                     dataList!!.add(FoodData(
                         onSalePostDTO.getPdName(),
@@ -395,6 +395,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                         onSalePostDTO.getPdid(),
                         onSalePostDTO.getSellerid(),
                         onSalePostDTO.getExpire(),
+                        onSalePostDTO.getNumber()
                     ));
                 }
             }

@@ -68,13 +68,14 @@ public class PostRepository {
                 post.setPdContents(rs.getString("pdContents"));
                 post.setCount(rs.getInt("pdCount"));
 
-                String strSql = "SELECT storeName,storeAddr FROM StoreTB WHERE sellerId = ?";
+                String strSql = "SELECT storeName,storeAddr,storeNum FROM StoreTB WHERE sellerId = ?";
                 List<Store> strResult = jdbcTemplate.query(strSql, new RowMapper<Store>() {
                     @Override
                     public Store mapRow(ResultSet rs, int rowNum) throws SQLException {
                         Store store = new Store();
                         store.setName(rs.getString("storeName"));
                         store.setStoreAddr(rs.getString("storeAddr"));
+                        store.setNumber(rs.getString("storeNum"));
                         return store;
                     }
                 }, rs.getString("sellerId"));
@@ -86,6 +87,7 @@ public class PostRepository {
                 post.setSellerid(rs.getString("sellerId"));
                 post.setPdTimer(rs.getInt("pdTimer"));
                 post.setExpire(rs.getString("expire"));
+                post.setNumber(store.getNumber());
                 return post;
             }
         }, timeStamp, status);

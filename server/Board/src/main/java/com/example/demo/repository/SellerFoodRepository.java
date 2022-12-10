@@ -80,13 +80,14 @@ public class SellerFoodRepository {
     }
 
     public String updateFoodStatus(Post post){
-        String success = "False";
+        String success = "지나가요~";
 
+        String sql = "UPDATE ProductTB SET STATUS = ? WHERE pdId = ?";
+        String idsql = "SELECT pdId FROM ProductTB WHERE sellerId = ? AND pdName = ?";
+        String pdId = jdbcTemplate.queryForObject(idsql, String.class, post.getSellerid(), post.getPdName());
 
-        String sql = "UPDATE ProductTB SET STATUS = ? WHERE pdId = (SELECT pdId FROM ProductTB WHERE sellerId = ? AND pdName = ?)";
-        int result = jdbcTemplate.update(sql, post.getStatus(), post.getSellerid(), post.getPdName());
-        if(result != 0)
-            success = "true";
+        jdbcTemplate.update(sql, post.getStatus(), pdId);
+
         return success;
     }
 }
