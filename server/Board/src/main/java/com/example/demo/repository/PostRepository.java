@@ -50,6 +50,8 @@ public class PostRepository {
 //        String sql = "SELECT ProductTB.pdId, ProductTB.sellerId, pdContents, pdPrice, pdTimer, pdSale, pdName, pdCount, PdimageTB.imgUrl FROM ProductTB, PdimageTB WHERE (expire > ? AND status = ?) \n" +
 //                "AND (ProductTB.pdId = PdimageTB.pdId);";
 
+
+
         SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String timeStamp = date.format(new Date());
         System.out.println(timeStamp);
@@ -76,6 +78,7 @@ public class PostRepository {
                         store.setName(rs.getString("storeName"));
                         store.setStoreAddr(rs.getString("storeAddr"));
                         store.setNumber(rs.getString("storeNum"));
+
                         return store;
                     }
                 }, rs.getString("sellerId"));

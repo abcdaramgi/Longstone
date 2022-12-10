@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -21,7 +23,9 @@ public class SellerFoodRepository {
             String sql = "SELECT ProductTB.sellerId, ProductTB.pdName, ProductTB. pdPrice, ProductTB.pdSale, ProductTB.status, PdimageTB.imgUrl\n" +
                     "FROM ProductTB LEFT OUTER JOIN PdimageTB\n" +
                     "ON ProductTB.pdId = PdimageTB.pdId\n" +
-                    "WHERE ProductTB.sellerId = ?";
+                    "WHERE ProductTB.sellerId = ? AND expire > ?";
+            SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String timeStamp = date.format(new Date());
 
         List<storeFood> result = jdbcTemplate.query(sql, new RowMapper<storeFood>() {
             @Override
@@ -51,7 +55,7 @@ public class SellerFoodRepository {
 
                 return sf;
             }
-        }, sellerId);
+        }, sellerId, timeStamp);
 
         System.out.println(result);
         return result;

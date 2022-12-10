@@ -15,6 +15,7 @@ public class Store {
     public String imgUrl;
 
     public String sellerId;
+    public Integer reviewCount;
 
     public String getName() {
         return name;
@@ -74,6 +75,14 @@ public class Store {
         this.name = name;
         this.number = number;
         this.pdname = pdname;
+    }
+
+    public Integer getReviewCount() {
+        return reviewCount;
+    }
+
+    public void setReviewCount(Integer reviewCount) {
+        this.reviewCount = reviewCount;
     }
 
     public Store(String name, String number, String storeAddr, String openHour){

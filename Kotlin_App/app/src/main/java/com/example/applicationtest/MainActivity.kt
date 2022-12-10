@@ -378,6 +378,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                     onSalePostDTO.setStoreName(row.getString("storeName"))
                     onSalePostDTO.setExpire(row.getString("expire"))
                     onSalePostDTO.setNumber(row.getString("number"))
+                    onSalePostDTO.setReviewCount(row.getInt("count"))
 
                     dataList!!.add(FoodData(
                         onSalePostDTO.getPdName(),
@@ -388,7 +389,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                         onSalePostDTO.getCount(),
                         onSalePostDTO.getStoreName(),
                         null,
-                        null,
+                        0,
                         onSalePostDTO.getPdContents(),
                         null,
                         onSalePostDTO.getPdTimer(),

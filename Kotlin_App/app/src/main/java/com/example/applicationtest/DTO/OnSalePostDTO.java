@@ -17,6 +17,7 @@ public class OnSalePostDTO {
     private Float pdSale;
     private String expire;
     private String number;
+    private Integer reviewCount;
 
     public Float getPdSale() {
         return pdSale;
@@ -128,5 +129,13 @@ public class OnSalePostDTO {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public Integer getReviewCount() {
+        return reviewCount;
+    }
+
+    public void setReviewCount(Integer reviewCount) {
+        this.reviewCount = reviewCount;
     }
 }
