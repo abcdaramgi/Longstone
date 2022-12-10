@@ -78,11 +78,13 @@ public class PostTask extends AsyncTask<String, Void, String>{
     //할인율 계산
     private String getSaleRate(String originalPrice, String discountPrice){
         String rate = "";
+        Long ss;
         double original = Integer.parseInt(originalPrice);
         double sale = Integer.parseInt(discountPrice);
-        rate = Double.toString((original - sale)/original);
+        ss = Math.round(((original - sale)/original) * 100);
+        ss.toString();
         Log.d("제발", String.valueOf((original - sale)/original));
         Log.d("변환값", rate);
-        return rate;
+        return ss.toString();
     }
 }

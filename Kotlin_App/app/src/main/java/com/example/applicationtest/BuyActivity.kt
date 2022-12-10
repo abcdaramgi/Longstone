@@ -68,7 +68,7 @@ class BuyActivity : AppCompatActivity() {
                     intent.putExtra("data", datas)
 
                     val task = OrderPostTask()
-                    val result = task.execute(datas.pdId.toString(), datas.name, (datas.updatecost?.times(num)).toString(), num.toString()).get()
+                    val result = task.execute(datas.pdId.toString(), datas.name, datas.updatecost.toString(), num.toString()).get()
                     Log.d("받은값", result)
 
                     //판매자에게 알람
