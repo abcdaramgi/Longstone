@@ -9,11 +9,13 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.applicationtest.DTO.FoodData
+import com.example.applicationtest.DTO.StoreDTO
 import com.example.applicationtest.FireBase.MyFirebaseMessagingService
 import com.example.applicationtest.Singleton.SellerSingleton
 import com.example.applicationtest.Singleton.UserSingleton
 import com.example.applicationtest.Transport.FavoritesTask
 import com.example.applicationtest.Transport.SellerLoginTask
+import com.example.applicationtest.Transport.StoreDetailListTask
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_food_store_detail.*
 import kotlinx.android.synthetic.main.activity_store_detile.*
@@ -22,6 +24,8 @@ import kotlinx.android.synthetic.main.activity_store_detile.st_de_info
 import kotlinx.android.synthetic.main.activity_store_detile.st_de_name
 import kotlinx.android.synthetic.main.activity_store_detile.store_img
 import kotlinx.android.synthetic.main.fragment_cart_screen.*
+import org.json.JSONArray
+import org.json.JSONObject
 
 class FoodStoreDetailActivity : AppCompatActivity() {
     lateinit var data : FoodData
@@ -74,10 +78,64 @@ class FoodStoreDetailActivity : AppCompatActivity() {
         storeFoodListAdapter = StoreFoodListAdapter(this)
         store_re.adapter = storeFoodListAdapter
 
+        //===================================================//
+        datas!!.clear()
+        var salepercent = 0.0;
+        var orgPrice = 0.0;
+        var salePrice = 0;
+        var result = ""
+        try{
+            Log.d("Store Detail List", "Store List start...")
+            val storeName = data.storename.toString()
+            Log.d("앱에서 보낸값", "$storeName")
+
+            val task = StoreDetailListTask();
+            result = task.execute(storeName).get()
+            Log.d("받은값", result)
+
+            if(result != null) {
+                val `object` = JSONObject(result)
+                val array = `object`.get("StoreDetailList") as JSONArray
+
+                for (i: Int in 0..array.length() - 1) {
+                    var row = array.getJSONObject(i)
+                    var storeDTO = StoreDTO()
+
+                    storeDTO.setPdname(row.getString("pdname"))
+                    storeDTO.setImgUrl(row.getString("imgUrl"))
+                    storeDTO.setpdPrice(row.getInt("pdPrice"))
+                    storeDTO.setpdSale(row.getInt("pdSale"))
+
+                    Log.d("pdName : ", storeDTO.getPdname())
+                    Log.d("imgUrl : ", storeDTO.getImgUrl())
+                    Log.d("pdPrice : ", storeDTO.getpdPrice().toString())
+                    Log.d("pdSale : ", storeDTO.getpdSale().toString())
+                    salepercent = storeDTO.getpdSale().toDouble();
+                    orgPrice = storeDTO.getpdPrice().toDouble();
+                    Log.d("salepercent", salepercent.toString())
+                    Log.d("orgPrice", orgPrice.toString())
+                    salePrice = (orgPrice - (orgPrice * (salepercent / 100))).toInt()
+                    Log.d("salePrice", salePrice.toString())
+                    Log.d("sibal", (orgPrice * (salepercent / 100)).toString())
+                    Log.d("sib2", (orgPrice - (orgPrice * (salepercent / 100))).toString())
+                    datas.add(
+                        ItemStoreFood(
+                            storeDTO.getPdname(), storeDTO.getImgUrl(), storeDTO.getpdPrice(), salePrice))
+                }
+            }
+            else{
+                Log.d("Store Detail List", "Store List fail...")
+            }
+            Log.d("Store Detail List", "Store List end...")
+        }catch (e :Exception) {
+            e.printStackTrace()
+        }
+        //===================================================//
+
         datas.apply {
-            add(ItemStoreFood("생크림 소금빵",R.drawable.image_bread1,3000,1500))
-            add(ItemStoreFood("양념불고기(간장)",R.drawable.image_bread1,8000,4500))
-            add(ItemStoreFood("김혜르무르트 2세 쿠키",R.drawable.image_bread1,1200, 800))
+//            add(ItemStoreFood("생크림 소금빵",R.drawable.image_bread1,3000,1500))
+//            add(ItemStoreFood("양념불고기(간장)",R.drawable.image_bread1,8000,4500))
+//            add(ItemStoreFood("김혜르무르트 2세 쿠키",R.drawable.image_bread1,1200, 800))
         }
         storeFoodListAdapter.datas = datas
         storeFoodListAdapter.notifyDataSetChanged()

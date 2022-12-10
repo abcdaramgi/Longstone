@@ -9,6 +9,8 @@ public class StoreDTO {
     public String number;
     public String openHour;
     public String storeAddr;
+    public Integer pdPrice;
+    public Integer pdSale;
 
     public String getName() {
         return name;
@@ -33,11 +35,22 @@ public class StoreDTO {
     public String getImgUrl() {
         return imgUrl;
     }
+    public Integer getpdPrice() {
+        return pdPrice;
+    }
+    public Integer getpdSale() {
+        return pdSale;
+    }
 
     public void setName(String name) {
         this.name = name;
     }
-
+    public void setpdPrice(Integer pdPrice) {
+        this.pdPrice = pdPrice;
+    }
+    public void setpdSale(Integer pdSale) {
+        this.pdSale = pdSale;
+    }
     public void setNumber(String number) {
         this.number = number;
     }

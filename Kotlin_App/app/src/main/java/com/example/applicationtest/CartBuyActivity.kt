@@ -27,7 +27,7 @@ class CartBuyActivity : AppCompatActivity() {
         buy_food_name.text = datas.FoodName
         buy_store_name.text = datas.StoreName
         buy_store_place2.text = datas.storeAddr
-        buy_food_cost.text = datas.cost.toString() + "->" + (datas.cost!! - (datas.cost!! * (datas.pdSale!!/ 100)).toInt()).toString() + "원"
+        buy_food_cost.text = datas.cost.toString() + "원"+ " -> " + (datas.cost!! - (datas.cost!! * (datas.pdSale!!/ 100)).toInt()).toString() + "원"
 
         buy_num.text = datas.food_count.toString() + "개"
         textView28.text = ((datas.cost!! - datas.cost!! * (datas.pdSale!!/ 100))?.times(datas.food_count!!)).toString() + "원"

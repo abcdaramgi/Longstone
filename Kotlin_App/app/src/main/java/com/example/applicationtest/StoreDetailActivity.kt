@@ -2,11 +2,14 @@ package com.example.applicationtest
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.applicationtest.DTO.StoreDTO
+import com.example.applicationtest.Transport.StoreDetailListTask
 import kotlinx.android.synthetic.main.activity_check_buy.*
 import kotlinx.android.synthetic.main.activity_food_store_detail.*
 import kotlinx.android.synthetic.main.activity_store_detile.*
@@ -15,6 +18,8 @@ import kotlinx.android.synthetic.main.activity_store_detile.st_de_name
 import kotlinx.android.synthetic.main.activity_store_detile.store_img
 import kotlinx.android.synthetic.main.fragment_prefer_screen.*
 import kotlinx.android.synthetic.main.fragment_prefer_screen.view.*
+import org.json.JSONArray
+import org.json.JSONObject
 
 class StoreDetailActivity: AppCompatActivity() {
     lateinit var data : StoreData
@@ -51,11 +56,13 @@ class StoreDetailActivity: AppCompatActivity() {
         storeFoodListAdapter = StoreFoodListAdapter(this)
         store_re_de.adapter = storeFoodListAdapter
 
-        datas.apply {
-            add(ItemStoreFood("생크림 소금빵",R.drawable.image_bread1,3000,1500))
-            add(ItemStoreFood("양념불고기(간장)",R.drawable.image_bread1,8000,4500))
-            add(ItemStoreFood("김혜르무르트 2세 쿠키",R.drawable.image_bread1,1200, 800))
-        }
+
+
+//        datas.apply {
+//            add(ItemStoreFood("생크림 소금빵",R.drawable.image_bread1,3000,1500))
+//            add(ItemStoreFood("양념불고기(간장)",R.drawable.image_bread1,8000,4500))
+//            add(ItemStoreFood("김혜르무르트 2세 쿠키",R.drawable.image_bread1,1200, 800))
+//        }
         storeFoodListAdapter.datas = datas
         storeFoodListAdapter.notifyDataSetChanged()
     }

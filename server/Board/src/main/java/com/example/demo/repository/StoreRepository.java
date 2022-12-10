@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import com.example.demo.model.Cart;
 import com.example.demo.model.Store;
 import com.example.demo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,4 +60,21 @@ public class StoreRepository {
         return result;
     }
 
+    public List<Store> getStoreDetailListData(String storeName){
+        String sql = "SELECT ProductTB.pdName, imgUrl, pdPrice, pdSale " +
+                "FROM ProductTB, PdimageTB " +
+                "WHERE ProductTB.sellerId = (SELECT sellerId FROM StoreTB WHERE storeName = ?) AND ProductTB.sellerId = PdimageTB.sellerId;";
+        List<Store> result = jdbcTemplate.query(sql, new RowMapper<Store>() {
+            @Override
+            public Store mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Store storeList = new Store();
+                storeList.setPdname(rs.getString("pdName"));
+                storeList.setImgUrl(rs.getString("imgUrl"));
+                storeList.setpdPrice(rs.getInt("pdPrice"));
+                storeList.setpdSale(rs.getInt("pdSale"));
+                return storeList;
+            }
+        }, storeName);
+        return result;
+    }
 }
