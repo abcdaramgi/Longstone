@@ -1,4 +1,5 @@
 package com.example.applicationtest
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
@@ -13,11 +14,10 @@ import com.example.applicationtest.DTO.FoodData
 import com.example.applicationtest.DTO.OnSalePostDTO
 import com.example.applicationtest.DTO.StoreDTO
 import com.example.applicationtest.FireBase.MyFirebaseMessagingService
+import com.example.applicationtest.Singleton.SellerSingleton
 import com.example.applicationtest.Singleton.UserSingleton
-import com.example.applicationtest.Transport.FavoritesListTask
-import com.example.applicationtest.Transport.OnsaleListTask
-import com.example.applicationtest.Transport.SearchStoreTask
-import com.example.applicationtest.Transport.StoreGetInfoTask
+import com.example.applicationtest.Transport.*
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.messaging.FirebaseMessaging
 //import com.google.firebase.messaging.FirebaseMessaging
@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         MyFirebaseMessagingService().getFirebaseToken()
         initDynamicLink()
         getNotificationList()
+        updateToken()
 
 
         nav_view.setOnNavigationItemSelectedListener(this)
@@ -115,13 +116,13 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 supportFragmentManager.beginTransaction().replace(R.id.fl_container, homeScreen).commit()*/
             }
             R.id.second -> {
-                getFavoritesData()
+                getStoreData()
                 transaction.replace(
                     R.id.fl_container,
                     SearchScreen()
                 )
                 transaction.commit()
-                intent.putExtra("DataList",storeList as ArrayList)
+                intent.putExtra("DataList",storeList1 as ArrayList)
                 /*searchScreen = SearchScreen.newInstance()
                 supportFragmentManager.beginTransaction().replace(R.id.fl_container, searchScreen).commit()*/
             }
@@ -238,42 +239,64 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         }
     }
 
-    fun getStoreData(){
-        storeList1!!.clear();
-        var result = ""
-        try{
-            Log.d("Store List", "Store List start...")
 
-            val task = SearchStoreTask()
-            result = task.execute("Y").get()
+    private fun updateToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            val token = task.result
+
+            val testid = MyApplication.prefs.getString("id", "0")
+            Log.i("plz", testid)
+            Log.i("plz", UserSingleton.getInstance().userId)
+            if(testid == UserSingleton.getInstance().userId){
+                val task = SaveTokenTask()
+                val result = task.execute( UserSingleton.getInstance().userId, token, "user").get()
+                if(result == "true"){
+                    Log.i("saveToken", "성공적으로 소비자 토큰을 저장함")
+                }
+            }else{
+                Log.i("saveToken", "토큰저장 실패")
+            }
+        })
+
+    }
+
+    fun getStoreData(){
+        try {
+            storeList1!!.clear();
+            val content = ""
+            val task = SearchTask()
+            val result = task.execute(content).get()
+
             Log.d("받은값", result)
+
 
             if(result != null){
                 val `object` = JSONObject(result)
-                val array = `object`.get("post") as JSONArray
+                val array = `object`.get("store") as JSONArray
 
                 for(i: Int in 0..array.length()-1){
                     var row = array.getJSONObject(i)
-                    var storeDTO = StoreDTO()
 
-                    storeDTO.setName(row.getString("name"))
-                    storeDTO.setPdname(row.getString("pdname"))
-                    storeDTO.setImgUrl(row.getString("imgUrl"))
-
-                    Log.d("storeName : ", storeDTO.getName())
-                    Log.d("storePdName : ", storeDTO.getPdname())
-                    Log.d("storeUrl : ", storeDTO.getImgUrl())
-
-                    storeList1!!.add(StoreData(storeDTO.getName(), storeDTO.getPdname(), storeDTO.getImgUrl()));
+                    storeList1!!.add(
+                        StoreData(
+                            row.getString("name"),
+                            row.getString("pdname"),
+                            row.getString("imgUrl")
+                        )
+                    );
                 }
             }
-            else{
-                Log.d("Search", "Search fail...")
+            else {
+                Log.d("search", "search fail...")
             }
-            Log.d("Search List", "Search List end...")
-        }catch(e : Exception){
-            e.printStackTrace()
+        } catch (e: Exception) {
         }
+        Log.d("search", storeList1?.get(0)?.storename.toString())
     }
 
     fun getFavoritesData(){
@@ -354,7 +377,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                     onSalePostDTO.setSellerid(row.getString("sellerid"))
                     onSalePostDTO.setStoreName(row.getString("storeName"))
                     onSalePostDTO.setExpire(row.getString("expire"))
-
+                    onSalePostDTO.setNumber(row.getString("number"))
 
                     dataList!!.add(FoodData(
                         onSalePostDTO.getPdName(),
@@ -372,6 +395,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                         onSalePostDTO.getPdid(),
                         onSalePostDTO.getSellerid(),
                         onSalePostDTO.getExpire(),
+                        onSalePostDTO.getNumber()
                     ));
                 }
             }

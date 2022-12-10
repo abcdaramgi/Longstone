@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.applicationtest.Transport.OrderPostTask
 import kotlinx.android.synthetic.main.activity_cart_buy.*
 import kotlinx.android.synthetic.main.item_menu_view.*
+import kotlinx.android.synthetic.main.item_store_view.*
 
 class CartBuyActivity : AppCompatActivity() {
     lateinit var datas : ItemCart
@@ -25,9 +26,13 @@ class CartBuyActivity : AppCompatActivity() {
         Glide.with(this).load(R.drawable.ic_baseline_home_24).into(img_store)
         buy_food_name.text = datas.FoodName
         buy_store_name.text = datas.StoreName
-        buy_food_cost.text = datas.cost.toString() + "원"
+        buy_store_place2.text = datas.storeAddr
+        buy_food_cost.text = datas.cost.toString() + "->" + (datas.cost!! - (datas.cost!! * (datas.pdSale!!/ 100)).toInt()).toString() + "원"
+
         buy_num.text = datas.food_count.toString() + "개"
-        textView28.text = (datas.cost?.times(datas.food_count!!)).toString() + "원"
+        textView28.text = ((datas.cost!! - datas.cost!! * (datas.pdSale!!/ 100))?.times(datas.food_count!!)).toString() + "원"
+        user_de_place.text = datas.phoneNum.toString()
+
 
         cart_buy.setOnClickListener {
             val builder = AlertDialog.Builder(this)

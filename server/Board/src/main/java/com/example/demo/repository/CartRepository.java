@@ -30,9 +30,9 @@ public class CartRepository {
 
     //장바구니 리스트 가져오기
     public List<Cart> getCartListData(String userId){
-        String sql = "SELECT StoreTB.storeName, ProductTB.pdName, PdimageTB.imgUrl, ProductTB.pdPrice, CartTB.pdCount\n" +
-                "FROM StoreTB, ProductTB, CartTB, PdimageTB\n" +
-                "WHERE CartTB.sellerId = ProductTB.sellerId AND CartTB.sellerId = StoreTB.sellerId AND CartTB.pdId = ProductTB.pdId AND CartTB.pdId = PdimageTB.pdId AND CartTB.userId = ?";
+        String sql = "SELECT StoreTB.storeName, ProductTB.pdName, PdimageTB.imgUrl, ProductTB.pdPrice, CartTB.pdCount, ProductTB.pdSale, UserTB.phoneNum, StoreTB.storeAddr\n" +
+                "FROM StoreTB, ProductTB, CartTB, PdimageTB, UserTB\n" +
+                "WHERE CartTB.sellerId = ProductTB.sellerId AND CartTB.sellerId = StoreTB.sellerId AND CartTB.pdId = ProductTB.pdId AND CartTB.pdId = PdimageTB.pdId AND CartTB.userId = ? AND UserTB.userId = ?";
         List<Cart> result = jdbcTemplate.query(sql, new RowMapper<Cart>() {
             @Override
             public Cart mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -42,9 +42,12 @@ public class CartRepository {
                 cartList.setimgUrl(rs.getString("imgUrl"));
                 cartList.setpdPrice(rs.getInt("pdPrice"));
                 cartList.setpdCount(rs.getInt("pdCount"));
+                cartList.setpdSale(rs.getDouble("pdSale"));
+                cartList.setphoneNum(rs.getString("phoneNum"));
+                cartList.setstoreAddr(rs.getString("storeAddr"));
                 return cartList;
             }
-        }, userId);
+        }, userId, userId);
         return result;
     }
 }

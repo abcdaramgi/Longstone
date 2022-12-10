@@ -19,24 +19,22 @@ public class SearchRepository {
     public List<Store> searchStoreIncludeContent(SearchData searchData){
 
         //String content = searchData.getContent();
-        String sql = "SELECT storeName,storeNum,StoreTB.pdName FROM StoreTB, ProductTB WHERE (topicName LIKE ? OR storeName LIKE ?) AND ProductTB.sellerId = StoreTB.sellerId";
+        String sql = "SELECT DISTINCT storeName,storeNum,StoreTB.pdName, StoreTB.imgUrl, StoreTB.storeAddr FROM StoreTB, ProductTB WHERE (topicName LIKE ? OR storeName LIKE ?) AND ProductTB.sellerId = StoreTB.sellerId";
         String targetData = "%" + searchData.content + "%";
-//        List<Store> result = jdbcTemplate.query("SELECT storeName \n" +
-//                "FROM StoreTB, ProductTB \n" +
-//                "WHERE (topicName LIKE '%" + "?" + "%' OR storeName LIKE '%" + "?" + "%') AND ProductTB.sellerId = StoreTB.sellerId", new RowMapper<Store>() {
-//            @Override
-//            public Store mapRow(ResultSet rs, int rowNum) throws SQLException {
-//                Store store = new Store(rs.getString("storeName")
-//                        ,rs.getString("storeNum")
-//                        ,rs.getString("pdName"));
-//                return store;
-//            }
-//        }, searchData.content, searchData.content);
-        //});
-        RowMapper<Store> rowMapper = (rs, rowNum) -> new Store(rs.getString("storeName")
-                ,rs.getString("storeNum")
-                ,rs.getString("pdName"));
-        List<Store> testlist = jdbcTemplate.query(sql, rowMapper, targetData, targetData);
-        return testlist;
+
+        List<Store> result = jdbcTemplate.query(sql, new RowMapper<Store>() {
+            @Override
+            public Store mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Store store = new Store();
+                store.setName(rs.getString("storeName"));
+                store.setNumber(rs.getString("storeNum"));
+                store.setPdname(rs.getString("pdName"));
+                store.setImgUrl(rs.getString("imgUrl"));
+                store.setStoreAddr(rs.getString("storeAddr"));
+                return store;
+            }
+        }, targetData, targetData);
+
+        return result;
     }
 }

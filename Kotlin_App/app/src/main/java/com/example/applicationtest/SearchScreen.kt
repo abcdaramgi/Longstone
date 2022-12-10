@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.applicationtest.DTO.FoodData
+import com.example.applicationtest.DTO.OnSalePostDTO
 import com.example.applicationtest.DTO.StoreDTO
 import com.example.applicationtest.Transport.SearchTask
 import com.google.gson.Gson
@@ -19,12 +21,14 @@ import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.fragment_prefer_screen.*
 import kotlinx.android.synthetic.main.fragment_search_screen.*
 import okhttp3.internal.platform.android.AndroidLogHandler.getFilter
+import org.json.JSONArray
+import org.json.JSONObject
 import java.lang.reflect.Type
 
 class SearchScreen : Fragment() {
 
     lateinit var storeAdapter1: StoreAdapter1
-    var list: ArrayList<StoreData> = ArrayList()
+    var list: MutableList<StoreData> = ArrayList()
     val NEW_STORE = 22
 
     override fun onCreateView(
@@ -42,7 +46,7 @@ class SearchScreen : Fragment() {
 
         Log.e("FirstFragment", "Data List: ${list}")
 
-        list = requireActivity().intent!!.extras!!.get("DataList") as ArrayList<StoreData>
+        list = requireActivity().intent!!.extras!!.get("DataList") as MutableList<StoreData>
 
         // Fragment에서 전달받은 list를 넘기면서 ListAdapter 생성
         storeAdapter1 = StoreAdapter1(list)
@@ -58,29 +62,18 @@ class SearchScreen : Fragment() {
             override fun onItemClick(v: View, data: StoreData, pos: Int){
                 val intent = Intent(requireActivity(), StoreDetailActivity::class.java)
                 intent.putExtra("data",data)
-                intent.putExtra("list",list)
-                //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivityForResult(intent,NEW_STORE)
+                //intent.putExtra("list",list)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                //startActivityForResult(intent,NEW_STORE)
             }
         })
 
             search_bar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 //검색버튼 입력시 호출, 검색버튼이 없으므로 사용하지 않음
                 override fun onQueryTextSubmit(s: String): Boolean {
-                    try {
-                        val content = s
-                        val task = SearchTask()
-                        val result = task.execute(content).get()
 
-                        val gson = Gson()
-                        val listType: Type = object : TypeToken<ArrayList<StoreData2?>?>() {}.type
-                        val yourClassList: List<StoreData2> = Gson().fromJson(result, listType)
-
-                        Log.d("받은값", result)
-                        Log.d("Register", "register end...")
-                        Log.d("리스트변환했냐", yourClassList.get(1).name.toString())
-                    } catch (e: Exception) {
-                    }
+                    storeAdapter1.getFilter().filter(s)
                     return false
                 }
 
@@ -112,7 +105,7 @@ class SearchScreen : Fragment() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode : Int, data : Intent?) {
-        list = requireActivity().intent!!.extras!!.get("DataList") as ArrayList<StoreData>
+        list = requireActivity().intent!!.extras!!.get("DataList") as MutableList<StoreData>
         storeAdapter1 = StoreAdapter1(list)
         search_re.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         search_re.adapter = storeAdapter1
@@ -134,8 +127,8 @@ class SearchScreen : Fragment() {
         {
             override fun onItemClick(v: View, data: StoreData, pos: Int){
                 val intent = Intent(requireActivity(), StoreDetailActivity::class.java)
-                //intent.putExtra("data",data)
-                intent.putExtra("list",list)
+                intent.putExtra("data",data)
+                //intent.putExtra("list",list)
                 //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivityForResult(intent,NEW_STORE)
             }

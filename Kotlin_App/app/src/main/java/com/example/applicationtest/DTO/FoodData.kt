@@ -18,7 +18,8 @@ class FoodData(
     var pdTimer: Int? =null,
     var pdId: Int? =null,
     var sellerId: String? =null,
-    var expire: String? =null
+    var expire: String? =null,
+    var phoneNum : String? = null
 
 ): Serializable {
     @JvmName("getName1")

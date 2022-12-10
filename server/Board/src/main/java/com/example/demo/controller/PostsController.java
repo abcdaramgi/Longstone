@@ -2,10 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.domain.posts.PostsRepository;
 import com.example.demo.model.*;
-import com.example.demo.repository.CartRepository;
-import com.example.demo.repository.OderPostRepository;
-import com.example.demo.repository.PostRepository;
-import com.example.demo.repository.SellerFoodRepository;
+import com.example.demo.repository.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +34,9 @@ public class PostsController {
 
     @Autowired
     SellerFoodRepository sellerFoodRepository;
+
+    @Autowired
+    OrderHistoryRepository orderHistoryRepository;
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
@@ -146,6 +146,7 @@ public class PostsController {
 //                String savePath = "\\home\\ec2-user\\Board\\src\\main\\resources\\static\\images\\" + file.getOriginalFilename();
                 String savePath = "/home/ec2-user/Board/src/main/resources/static/images/" + file.getOriginalFilename();
                 String dbSavePath = "http://ec2-3-35-255-89.ap-northeast-2.compute.amazonaws.com/images/" + file.getOriginalFilename();
+//                String dbSavePath = "http://222.103.14.187:8080/images/" + file.getOriginalFilename();
 
                 System.out.println("seller name : " + sellerId);
                 System.out.println("save file path : " + savePath);
@@ -158,6 +159,18 @@ public class PostsController {
                 success = postRepository.insertProductImage(imagefile);
             }
         }
+        return success;
+    }
+
+    @RequestMapping (value = "/updatestatus", method = {RequestMethod.POST})
+    public String updateFoodStatus(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        String success = "false";
+        ServletInputStream inputStream = request.getInputStream();
+        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+
+        Post postData = objectMapper.readValue(messageBody, Post.class);
+        success = sellerFoodRepository.updateFoodStatus(postData);
+
         return success;
     }
 
@@ -185,6 +198,34 @@ public class PostsController {
         JSONObject data = new JSONObject();
 
         data.put("post", resultList);
+        return data;
+    }
+
+    //등록 삭제
+    @RequestMapping (value = "/deleteStoreFood", method = {RequestMethod.POST})
+    public String deleteSellerFood(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        String success = "false";
+        ServletInputStream inputStream = request.getInputStream();
+        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+
+        Store store = objectMapper.readValue(messageBody, Store.class);
+
+        System.out.println("sellerId : " + store.getSellerId() + "\n" +
+                            "pdname : " + store.getPdname());
+        success = sellerFoodRepository.deleteStoreFoodData(store);
+
+        return success;
+    }
+
+    @RequestMapping(value = "/orderHistory", method = {RequestMethod.POST})
+    public JSONObject orderHistory(HttpServletRequest request, HttpServletResponse response) throws  IOException{
+        ServletInputStream inputStream = request.getInputStream();
+        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+
+        System.out.println("sellerId : " + messageBody);
+        List<OrderHistory> orderHistories = orderHistoryRepository.getOrderHistory(messageBody);
+        JSONObject data = new JSONObject();
+        data.put("orderHistory", orderHistories);
         return data;
     }
 }

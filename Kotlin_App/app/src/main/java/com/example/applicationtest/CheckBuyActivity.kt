@@ -9,6 +9,7 @@ import com.example.applicationtest.DTO.FoodData
 import kotlinx.android.synthetic.main.activity_check_buy.*
 import kotlinx.android.synthetic.main.fragment_bell_screen.*
 import kotlinx.android.synthetic.main.fragment_bell_screen.toolbar
+import java.time.LocalDateTime
 
 class CheckBuyActivity : AppCompatActivity() {
     lateinit var datas : FoodData
@@ -17,6 +18,8 @@ class CheckBuyActivity : AppCompatActivity() {
     var num2 : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val datetime: LocalDateTime = LocalDateTime.now()
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_check_buy)
 
@@ -29,6 +32,7 @@ class CheckBuyActivity : AppCompatActivity() {
         store_name.text = datas.storename
         check_food_name.text = datas.name
         buy_count.text = num.toString() + "개"
+        textView15.text = datetime.toString()
         sum_cost.text = sum.toString()+"원"
 
         setSupportActionBar(toolbar) //커스텀한 toolbar 액션바로 사용

@@ -16,6 +16,7 @@ public class OnSalePostDTO {
     private Integer pdTimer;
     private Float pdSale;
     private String expire;
+    private String number;
 
     public Float getPdSale() {
         return pdSale;
@@ -120,4 +121,12 @@ public class OnSalePostDTO {
     public String getExpire(){return expire;}
 
     public void setExpire(String expire){this.expire = expire;}
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
 }

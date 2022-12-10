@@ -7,12 +7,25 @@ public class CartListDTO {
     public String imgUrl;
     public Integer pdPrice;
     public Integer pdCount;
+    public Double pdSale;
+    public String phoneNum;
+    public String storeAddr;
     //===========================================//
 
     //===========================================//
     public String getuserId(){ return userId;}
     public void setuserId(String userId){
         this.userId = userId;
+    }
+
+    public String getstoreAddr(){ return storeAddr;}
+    public void setstoreAddr(String storeAddr){
+        this.storeAddr = storeAddr;
+    }
+
+    public String getphoneNum(){ return phoneNum;}
+    public void setphoneNum(String phoneNum){
+        this.phoneNum = phoneNum;
     }
 
     public String getstoreName(){ return storeName;}
@@ -38,5 +51,10 @@ public class CartListDTO {
     public Integer getpdCount(){ return pdCount;}
     public void setpdCount(Integer pdCount){
         this.pdCount = pdCount;
+    }
+
+    public Double getpdSale(){ return pdSale;}
+    public void setpdSale(Double pdSale){
+        this.pdSale = pdSale;
     }
 }

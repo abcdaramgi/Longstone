@@ -1,4 +1,5 @@
 package com.example.applicationtest.Transport;
+
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -10,14 +11,14 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class StoreFoodListTask extends AsyncTask<String, Void, String>{
+public class OrderHistoryTask extends AsyncTask<String, Void, String> {
     String sendMsg, receiveMsg;
     @Override
     protected String doInBackground(String... strings) {
         try{
             String str;
-            URL url = new URL("http://ec2-3-35-255-89.ap-northeast-2.compute.amazonaws.com/post/storeFood");
-            //URL url = new URL("http://10.0.2.2:8080/post/storeFood");
+            //URL url = new URL("http://ec2-3-35-255-89.ap-northeast-2.compute.amazonaws.com/post/storeFood");
+            URL url = new URL("http://ec2-3-35-255-89.ap-northeast-2.compute.amazonaws.com/post/orderHistory");
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type", "application/json");

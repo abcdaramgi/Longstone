@@ -44,6 +44,8 @@ public class OderPostRepository {
         String insertSQL = "INSERT INTO OrderTB(userId, pdId, sellerId, orderCount) VALUES (?, ?, (SELECT sellerId FROM ProductTB WHERE pdId = ?), ?)";
         jdbcTemplate.update(insertSQL, orderPost.getUid(), orderPost.getPid(), orderPost.getPid(), orderPost.getPcount());
 
+        String updateCount = "UPDATE ProductTB SET pdCount = pdCount - ?  WHERE pdId = ?;";
+        jdbcTemplate.update(updateCount, orderPost.getPcount(), orderPost.getPid());
         // 여기서 seller한테 알림 팅궈줘야해요
         System.out.println("제발요~");
     }
@@ -55,4 +57,5 @@ public class OderPostRepository {
 //
 //        return sellerId;
 //    }
+
 }

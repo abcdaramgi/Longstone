@@ -1,6 +1,10 @@
 package com.example.applicationtest.Transport;
+
 import android.os.AsyncTask;
 import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,14 +14,13 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class StoreFoodListTask extends AsyncTask<String, Void, String>{
+public class deleteFoodTask extends AsyncTask<String, Void, String>{
     String sendMsg, receiveMsg;
     @Override
     protected String doInBackground(String... strings) {
         try{
             String str;
-            URL url = new URL("http://ec2-3-35-255-89.ap-northeast-2.compute.amazonaws.com/post/storeFood");
-            //URL url = new URL("http://10.0.2.2:8080/post/storeFood");
+            URL url = new URL("http://ec2-3-35-255-89.ap-northeast-2.compute.amazonaws.com/post/updatestatus");
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type", "application/json");
@@ -28,11 +31,14 @@ public class StoreFoodListTask extends AsyncTask<String, Void, String>{
             //서버에 보낼값포함해 요청함
             OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
 
-            String sendData = strings[0];
+            JSONObject sendJson = new JSONObject();
+            sendJson.put("sellerId", strings[0]);
+            sendJson.put("pdname", strings[1]);
 
-            osw.write(sendData);
-            Log.d("status value :", sendData);
+            osw.write(sendJson.toString());
+            Log.d("pdName :", sendJson.toString());
             osw.flush();
+
 
             //통신도 잘되고 서버에서 보낸값 받음
             if(conn.getResponseCode() == conn.HTTP_OK){
@@ -43,15 +49,14 @@ public class StoreFoodListTask extends AsyncTask<String, Void, String>{
                     buffer.append(str);
                 }
                 receiveMsg = buffer.toString();
-                receiveMsg = receiveMsg.toString();
-                Log.d("receiveMsg", receiveMsg);
-
             }else{
                 Log.i("통신결과 : ", conn.getResponseCode()+"에러");
             }
         }catch (MalformedURLException e){
             e.printStackTrace();
         }catch (IOException e){
+            e.printStackTrace();
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         return receiveMsg;

@@ -4,6 +4,20 @@ logging-module:
   version: 0.0.4
 
 spring:
+  web:
+    resources:
+      static-locations[0]: "file:home/ec2-user/Board/src/main/resources/static/"
+      static-locations[1]: "classpath:/static/"
+  devtools:
+    remote:
+      restart:
+        enabled: true
+    livereload:
+      enabled: true
+  freemarker:
+    cache: false
+  thymeleaf:
+    cache: false
   http:
     encoding:
       charset: UTF-8
@@ -14,6 +28,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: kddnswlr
     url: jdbc:mysql://3.35.255.89:3306/longstonedb?serverTimezone=UTC&characterEncoding=UTF-8
+
 server: ''
 string: ''
 //DB: ''

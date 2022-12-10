@@ -30,7 +30,7 @@ public class NotificationController {
     }
 
     //유저
-    @PostMapping("/notification/user")
+    @PostMapping(value = "/notification/user")
     public ResponseEntity pushMessage(@RequestBody RequestDTO requestDTO) throws IOException {
         String uid = requestDTO.getId() + "님이";
         String pdid = requestDTO.getTitle();

@@ -1,6 +1,7 @@
 package com.example.applicationtest.DTO;
 
 public class StoreFoodDTO {
+    private String pdId;
     private String sellerId;
     private String pdName;
     private String storeAddr;
@@ -9,6 +10,9 @@ public class StoreFoodDTO {
     private String status;
     private String imgUrl;
     private Integer saleprice;
+
+    public String getPdId() {return pdId;}
+    public void setPdId(String pdId) {this.pdId = pdId;}
 
     public Integer getSaleprice() {return saleprice;}
     public void setSaleprice(Integer slalePrice) {this.saleprice = slalePrice;}

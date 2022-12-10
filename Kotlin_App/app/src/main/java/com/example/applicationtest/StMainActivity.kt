@@ -1,5 +1,6 @@
 package com.example.applicationtest
 
+import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,8 +11,12 @@ import android.widget.Switch
 import com.example.applicationtest.DTO.FoodData
 import com.example.applicationtest.DTO.StoreFoodDTO
 import com.example.applicationtest.Singleton.SellerSingleton
+import com.example.applicationtest.Singleton.UserSingleton
+import com.example.applicationtest.Transport.SaveTokenTask
 import com.example.applicationtest.Transport.StoreFoodListTask
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_st_main.*
 import kotlinx.android.synthetic.main.fragment_st_user.*
 import kotlinx.android.synthetic.main.item_menu_view.*
@@ -41,6 +46,7 @@ class StMainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationIte
 
         val transaction = supportFragmentManager.beginTransaction()
         getStoreFoodData()
+        updateToken()
         R.id.menu_Home
         transaction.replace(
             R.id.fragment_frame,
@@ -114,7 +120,7 @@ class StMainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationIte
                     var row = array.getJSONObject(i)
                     var storeFoodDTO = StoreFoodDTO()
 
-
+                    storeFoodDTO.setPdId(row.getString("pdId"))
                     storeFoodDTO.setSellerId(row.getString("sellerId"))
                     storeFoodDTO.setPdName(row.getString("pdName"))
                     storeFoodDTO.setStoreAddr(row.getString("storeAddr"))
@@ -136,8 +142,10 @@ class StMainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationIte
                         null,
                         storeFoodDTO.getStatus(),
                         null,
+                        //Integer.parseInt(storeFoodDTO.getPdId()),
                         null,
                         storeFoodDTO.getSellerId()
+
                     ));
 
                 }
@@ -149,5 +157,30 @@ class StMainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationIte
         }catch(e : Exception){
             e.printStackTrace()
         }
+    }
+
+    private fun updateToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(ContentValues.TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            val token = task.result
+
+            val testid = MyApplication.prefs.getString("id", "0")
+            Log.i("plz", testid)
+            Log.i("plz", SellerSingleton.getInstance().sellerId)
+            if(testid == SellerSingleton.getInstance().sellerId){
+                val task = SaveTokenTask()
+                val result = task.execute( SellerSingleton.getInstance().sellerId, token, "seller").get()
+                if(result == "true"){
+                    Log.i("saveToken", "성공적으로 소비자 토큰을 저장함")
+                }
+            }else{
+                Log.i("saveToken", "토큰저장 실패")
+            }
+        })
+
     }
 }
