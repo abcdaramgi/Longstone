@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.applicationtest.DTO.FoodData
 import kotlinx.android.synthetic.main.fragment_st_home.*
+import kotlinx.android.synthetic.main.item_menu_view.*
 
 class StHomeFragment : Fragment()
 {
@@ -37,5 +38,7 @@ class StHomeFragment : Fragment()
         listView.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         // RecyclerView.adapter에 지정
         listView.adapter = listAdapter
+
+        switch1.setOnClickListener()
     }
 }

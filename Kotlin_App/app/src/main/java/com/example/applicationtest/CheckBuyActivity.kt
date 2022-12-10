@@ -1,7 +1,9 @@
 package com.example.applicationtest
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import com.example.applicationtest.DTO.FoodData
 import kotlinx.android.synthetic.main.activity_check_buy.*
@@ -35,14 +37,21 @@ class CheckBuyActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true) //액션바 뒤로가기 아이콘 표시
     }
 
+    //액션버튼 클릭
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-        when (id) {
-            android.R.id.home -> {
-                finish()
-                return true
+        when(item?.itemId){
+            R.id.action_go_home -> {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
             }
+            else -> return super.onOptionsItemSelected(item)
         }
-        return super.onOptionsItemSelected(item)
+        return true
     }
+    //커스텀 툴바 액션
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_go_home_menu, menu)
+        return true
+    }
+
 }
