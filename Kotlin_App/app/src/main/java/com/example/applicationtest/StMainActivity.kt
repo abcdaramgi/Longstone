@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Switch
 import com.example.applicationtest.DTO.FoodData
 import com.example.applicationtest.DTO.StoreFoodDTO
 import com.example.applicationtest.Singleton.SellerSingleton
@@ -18,6 +19,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_st_main.*
 import kotlinx.android.synthetic.main.fragment_st_user.*
+import kotlinx.android.synthetic.main.item_menu_view.*
 import org.json.JSONArray
 import org.json.JSONObject
 
