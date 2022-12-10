@@ -19,7 +19,7 @@ public class SearchRepository {
     public List<Store> searchStoreIncludeContent(SearchData searchData){
 
         //String content = searchData.getContent();
-        String sql = "SELECT storeName,storeNum,StoreTB.pdName, StoreTB.imgUrl, StoreTB.storeAddr FROM StoreTB, ProductTB WHERE (topicName LIKE ? OR storeName LIKE ?) AND ProductTB.sellerId = StoreTB.sellerId";
+        String sql = "SELECT DISTINCT storeName,storeNum,StoreTB.pdName, StoreTB.imgUrl, StoreTB.storeAddr FROM StoreTB, ProductTB WHERE (topicName LIKE ? OR storeName LIKE ?) AND ProductTB.sellerId = StoreTB.sellerId";
         String targetData = "%" + searchData.content + "%";
 
         List<Store> result = jdbcTemplate.query(sql, new RowMapper<Store>() {

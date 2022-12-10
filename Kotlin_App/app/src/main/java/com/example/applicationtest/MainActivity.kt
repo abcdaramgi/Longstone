@@ -116,13 +116,13 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 supportFragmentManager.beginTransaction().replace(R.id.fl_container, homeScreen).commit()*/
             }
             R.id.second -> {
-                getFavoritesData()
+                getStoreData()
                 transaction.replace(
                     R.id.fl_container,
                     SearchScreen()
                 )
                 transaction.commit()
-                intent.putExtra("DataList",storeList as ArrayList)
+                intent.putExtra("DataList",storeList1 as ArrayList)
                 /*searchScreen = SearchScreen.newInstance()
                 supportFragmentManager.beginTransaction().replace(R.id.fl_container, searchScreen).commit()*/
             }
@@ -266,41 +266,37 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     }
 
     fun getStoreData(){
-        storeList1!!.clear();
-        var result = ""
-        try{
-            Log.d("Store List", "Store List start...")
+        try {
+            storeList1!!.clear();
+            val content = ""
+            val task = SearchTask()
+            val result = task.execute(content).get()
 
-            val task = SearchStoreTask()
-            result = task.execute("Y").get()
             Log.d("받은값", result)
+
 
             if(result != null){
                 val `object` = JSONObject(result)
-                val array = `object`.get("post") as JSONArray
+                val array = `object`.get("store") as JSONArray
 
                 for(i: Int in 0..array.length()-1){
                     var row = array.getJSONObject(i)
-                    var storeDTO = StoreDTO()
 
-                    storeDTO.setName(row.getString("name"))
-                    storeDTO.setPdname(row.getString("pdname"))
-                    storeDTO.setImgUrl(row.getString("imgUrl"))
-
-                    Log.d("storeName : ", storeDTO.getName())
-                    Log.d("storePdName : ", storeDTO.getPdname())
-                    Log.d("storeUrl : ", storeDTO.getImgUrl())
-
-                    storeList1!!.add(StoreData(storeDTO.getName(), storeDTO.getPdname(), storeDTO.getImgUrl()));
+                    storeList1!!.add(
+                        StoreData(
+                            row.getString("name"),
+                            row.getString("pdname"),
+                            row.getString("imgUrl")
+                        )
+                    );
                 }
             }
-            else{
-                Log.d("Search", "Search fail...")
+            else {
+                Log.d("search", "search fail...")
             }
-            Log.d("Search List", "Search List end...")
-        }catch(e : Exception){
-            e.printStackTrace()
+        } catch (e: Exception) {
         }
+        Log.d("search", storeList1?.get(0)?.storename.toString())
     }
 
     fun getFavoritesData(){
