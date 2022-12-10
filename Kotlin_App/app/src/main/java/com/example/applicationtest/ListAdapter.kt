@@ -42,16 +42,14 @@ class ListAdapter(private var list: ArrayList<FoodData>): RecyclerView.Adapter<L
             switch.setOnCheckedChangeListener{CompoundButton, onSwitch ->
                 //  스위치가 켜지면
                 if (onSwitch){
-                    val task = UpdatePostStatusTask()
-                    val result = task.execute(data.getPdId().toString(), "Y").get()
+                    Log.d("스위치", "위치위치ㅅ")
                 }
                 //  스위치가 꺼지면
                 else{
-                    val task = UpdatePostStatusTask()
-                    val result = task.execute(data.getPdId().toString(), "N").get()
+                    Log.d("스위치", "위치위치dddㅅ")
                 }
             }
-            
+
             Glide.with(itemView).load(data.getImg()).into(imgFood)
         }
     }
@@ -73,11 +71,17 @@ class ListAdapter(private var list: ArrayList<FoodData>): RecyclerView.Adapter<L
 
         holder.switch.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener{
                 buttonView, isChecked ->
+            var pdName = holder.data1Text.text.toString()
+            val sellerId = SellerSingleton.getInstance().sellerId.toString()
             if (holder.switch.isChecked) {
                 Log.d("스위치", "켜짐")
+                val task = UpdatePostStatusTask()
+                val result = task.execute(sellerId, pdName, "Y").get()
             }
             else{
                 Log.d("스위치", "꺼짐")
+                val task = UpdatePostStatusTask()
+                val result = task.execute(sellerId, pdName, "N").get()
             }
         })
 

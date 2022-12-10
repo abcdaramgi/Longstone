@@ -38,8 +38,9 @@ public class UpdatePostStatusTask extends AsyncTask<String, Void, String> {
             String pdSale = getSaleRate(strings[0], strings[1]);
             String strId = SellerSingleton.getInstance().sellerId.toString();
 
-            sendJson.put("pdid", strings[0]);
-            sendJson.put("status", strings[1]);
+            sendJson.put("sellerId", strings[0]);
+            sendJson.put("pdName", strings[1]);
+            sendJson.put("status", strings[2]);
 
             osw.write(sendJson.toString());
             Log.d("value :", sendJson.toString());
