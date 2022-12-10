@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.applicationtest.DTO.FoodData
 import com.example.applicationtest.Singleton.SellerSingleton
 import com.example.applicationtest.Transport.deleteFoodTask
+import com.example.applicationtest.Transport.UpdatePostStatusTask
 
 //ST_HOME_LIST, ITEM 연결
 class ListAdapter(private var list: ArrayList<FoodData>): RecyclerView.Adapter<ListAdapter.ListItemViewHolder> () {
@@ -33,7 +35,24 @@ class ListAdapter(private var list: ArrayList<FoodData>): RecyclerView.Adapter<L
             data3Text.text = data.getUpdatecost().toString() + "원"
             if (data.getStatus() == "Y") {
                 switch.isChecked = true
+            } else if(data.getStatus() == "N"){
+                switch.isChecked = false
             }
+
+            switch.setOnCheckedChangeListener{CompoundButton, onSwitch ->
+                //  스위치가 켜지면
+                if (onSwitch){
+                    val task = UpdatePostStatusTask()
+                    val result = task.execute(data.getPdId().toString(), "Y").get()
+                }
+                //  스위치가 꺼지면
+                else{
+                    val task = UpdatePostStatusTask()
+                    val result = task.execute(data.getPdId().toString(), "N").get()
+                }
+            }
+            
+            Glide.with(itemView).load(data.getImg()).into(imgFood)
         }
     }
 
