@@ -15,11 +15,11 @@ public class Store {
     public String imgUrl;
 
     public String sellerId;
+    public Integer pdPrice;
+    public Integer pdSale;
     public Integer reviewCount;
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
     public String getNumber() {
         return number;
@@ -33,6 +33,8 @@ public class Store {
         return openHour;
     }
 
+    public Integer getpdPrice() { return pdPrice; }
+    public Integer getpdSale() { return pdSale; }
     public String getStoreAddr() {
         return storeAddr;
     }
@@ -44,7 +46,12 @@ public class Store {
     public void setName(String name) {
         this.name = name;
     }
-
+    public void setpdPrice(Integer pdPrice) {
+        this.pdPrice = pdPrice;
+    }
+    public void setpdSale(Integer pdSale) {
+        this.pdSale = pdSale;
+    }
     public void setNumber(String number) {
         this.number = number;
     }

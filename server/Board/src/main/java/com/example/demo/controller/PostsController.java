@@ -31,7 +31,8 @@ public class PostsController {
     OderPostRepository oderPostRepository;
     @Autowired
     CartRepository cartRepository;
-
+    @Autowired
+    StoreRepository storeRepository;
     @Autowired
     SellerFoodRepository sellerFoodRepository;
 
@@ -76,6 +77,18 @@ public class PostsController {
         List<Cart> cartList = cartRepository.getCartListData(messageBody);
         JSONObject data = new JSONObject();
         data.put("cartList", cartList);
+        return data;
+    }
+
+    @RequestMapping(value = "/storelist", method = {RequestMethod.POST})
+    public JSONObject storeDetailListPost(HttpServletRequest request, HttpServletResponse response) throws  IOException{
+        ServletInputStream inputStream = request.getInputStream();
+        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+
+        System.out.println("userId : " + messageBody);
+        List<Store> store = storeRepository.getStoreDetailListData(messageBody);
+        JSONObject data = new JSONObject();
+        data.put("StoreDetailList", store);
         return data;
     }
 
