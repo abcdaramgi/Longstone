@@ -71,15 +71,17 @@ class ListAdapter(private var list: ArrayList<FoodData>): RecyclerView.Adapter<L
 
         holder.switch.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener{
                 buttonView, isChecked ->
+            var pdName = holder.data1Text.text.toString()
+            val sellerId = SellerSingleton.getInstance().sellerId.toString()
             if (holder.switch.isChecked) {
                 Log.d("스위치", "켜짐")
                 val task = UpdatePostStatusTask()
-                //val result = task.execute(data.getPdId().toString(), "Y").get()
+                val result = task.execute(sellerId, pdName, "Y").get()
             }
             else{
                 Log.d("스위치", "꺼짐")
                 val task = UpdatePostStatusTask()
-                //val result = task.execute(data.getPdId().toString(), "N").get()
+                val result = task.execute(sellerId, pdName, "N").get()
             }
         })
 

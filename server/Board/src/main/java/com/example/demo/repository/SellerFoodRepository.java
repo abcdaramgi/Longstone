@@ -81,8 +81,10 @@ public class SellerFoodRepository {
 
     public String updateFoodStatus(Post post){
         String success = "False";
-        String sql = "UPDATE ProductTB SET STATUS = ? WHERE pdId = ?";
-        int result = jdbcTemplate.update(sql, post.getStatus(), post.getPdid());
+
+
+        String sql = "UPDATE ProductTB SET STATUS = ? WHERE pdId = (SELECT pdId FROM ProductTB WHERE sellerId = ? AND pdName = ?)";
+        int result = jdbcTemplate.update(sql, post.getStatus(), post.getSellerid(), post.getPdName());
         if(result != 0)
             success = "true";
         return success;
