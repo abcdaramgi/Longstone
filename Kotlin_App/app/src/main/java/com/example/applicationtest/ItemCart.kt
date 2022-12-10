@@ -9,6 +9,7 @@ data class ItemCart (
     var food_img : String? = null,
     var cost : Int? = null,
     var food_count : Int? = null
+
 ): Serializable {
     fun getData1(): Boolean {
         return isChecked

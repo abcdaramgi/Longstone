@@ -25,7 +25,9 @@ class CartBuyActivity : AppCompatActivity() {
         Glide.with(this).load(R.drawable.ic_baseline_home_24).into(img_store)
         buy_food_name.text = datas.FoodName
         buy_store_name.text = datas.StoreName
+
         buy_food_cost.text = datas.cost.toString() + "원"
+
         buy_num.text = datas.food_count.toString() + "개"
         textView28.text = (datas.cost?.times(datas.food_count!!)).toString() + "원"
 

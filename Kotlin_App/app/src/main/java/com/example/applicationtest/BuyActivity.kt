@@ -39,6 +39,7 @@ class BuyActivity : AppCompatActivity() {
         buy_store_name.text = datas.storename
         buy_store_place.text = datas.place
         buy_count.text = num.toString() + "개"
+        buy_food_cost.text = (datas.cost?.times(num)).toString() + "원->" + (datas.updatecost?.times(num)).toString() + "원"
         food_buy_cost.text = (datas.updatecost?.times(num)).toString() + "원"
 
         button4.setOnClickListener {
