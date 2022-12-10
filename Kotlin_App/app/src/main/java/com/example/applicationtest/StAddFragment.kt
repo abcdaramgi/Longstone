@@ -141,7 +141,7 @@ class StAddFragment : AppCompatActivity() {
             var foodCount = food_count!!.text.toString()
             val foodName = foodName_edit!!.text.toString()
             val foodContent = food_content!!.text.toString()
-            var timePicker = ((hourPicker!!.value * 60) + (minutePicker!!.value)).toString()
+            var timePicker = (((hourPicker!!.value * 60) + (minutePicker!!.value)) * 60).toString()
 
             Log.d("앱에서 보낸값", "${SellerSingleton.getInstance().sellerId} ,$originalPrice, " +
                     "$discountPrice, $foodCount, $foodName, $foodContent, $timePicker")
