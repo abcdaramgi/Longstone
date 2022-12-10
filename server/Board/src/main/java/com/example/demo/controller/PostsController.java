@@ -162,6 +162,18 @@ public class PostsController {
         return success;
     }
 
+    @RequestMapping (value = "/updatestatus", method = {RequestMethod.POST})
+    public String updateFoodStatus(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        String success = "false";
+        ServletInputStream inputStream = request.getInputStream();
+        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+
+        Post userData = objectMapper.readValue(messageBody, Post.class);
+        success = sellerFoodRepository.updateFoodStatus(userData);
+
+        return success;
+    }
+
     //판매중인거 다 땡겨오기
     @RequestMapping(value = "/onsalepost", method = {RequestMethod.POST})
     public JSONObject getTodayFoodData(HttpServletRequest request, HttpServletResponse response) throws IOException {

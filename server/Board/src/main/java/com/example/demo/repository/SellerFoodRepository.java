@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import com.example.demo.model.Post;
 import com.example.demo.model.storeFood;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -70,5 +71,12 @@ public class SellerFoodRepository {
 
     }
 
-
+    public String updateFoodStatus(Post post){
+        String success = "False";
+        String sql = "UPDATE ProductTB SET STATUS = ? WHERE pdId = ?";
+        int result = jdbcTemplate.update(sql, post.getStatus(), post.getPdid());
+        if(result != 0)
+            success = "true";
+        return success;
+    }
 }
