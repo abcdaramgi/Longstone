@@ -2,10 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.domain.posts.PostsRepository;
 import com.example.demo.model.*;
-import com.example.demo.repository.CartRepository;
-import com.example.demo.repository.OderPostRepository;
-import com.example.demo.repository.PostRepository;
-import com.example.demo.repository.SellerFoodRepository;
+import com.example.demo.repository.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +34,9 @@ public class PostsController {
 
     @Autowired
     SellerFoodRepository sellerFoodRepository;
+
+    @Autowired
+    OrderHistoryRepository orderHistoryRepository;
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
@@ -199,5 +199,17 @@ public class PostsController {
         success = sellerFoodRepository.deleteStoreFoodData(messageBody);
 
         return success;
+    }
+
+    @RequestMapping(value = "/orderHistory", method = {RequestMethod.POST})
+    public JSONObject orderHistory(HttpServletRequest request, HttpServletResponse response) throws  IOException{
+        ServletInputStream inputStream = request.getInputStream();
+        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+
+        System.out.println("sellerId : " + messageBody);
+        List<OrderHistory> orderHistories = orderHistoryRepository.getOrderHistory(messageBody);
+        JSONObject data = new JSONObject();
+        data.put("orderHistory", orderHistories);
+        return data;
     }
 }
