@@ -44,17 +44,17 @@ class BellScreen : AppCompatActivity() {
 
 
         datas.apply {
-            add(ItemBell(storeName = "가게1", storeInfo = "20분 후 가게 마감"))
-            add(ItemBell(storeName = "가게2", storeInfo = "20분 후 가게 마감"))
-            add(ItemBell(storeName = "가게3", storeInfo = "20분 후 가게 마감"))
-            add(ItemBell(storeName = "가게4", storeInfo = "20분 후 가게 마감"))
-            add(ItemBell(storeName = "가게5", storeInfo = "20분 후 가게 마감"))
-            add(ItemBell(storeName = "가게6", storeInfo = "20분 후 가게 마감"))
-            add(ItemBell(storeName = "가게7", storeInfo = "20분 후 가게 마감"))
-            add(ItemBell(storeName = "가게8", storeInfo = "20분 후 가게 마감"))
-            add(ItemBell(storeName = "가게9", storeInfo = "20분 후 가게 마감"))
-            add(ItemBell(storeName = "가게10", storeInfo = "20분 후 가게 마감"))
-            add(ItemBell(storeName = "가게11", storeInfo = "20분 후 가게 마감"))
+//            add(ItemBell(storeName = "가게1", storeInfo = "20분 후 가게 마감"))
+//            add(ItemBell(storeName = "가게2", storeInfo = "20분 후 가게 마감"))
+//            add(ItemBell(storeName = "가게3", storeInfo = "20분 후 가게 마감"))
+//            add(ItemBell(storeName = "가게4", storeInfo = "20분 후 가게 마감"))
+//            add(ItemBell(storeName = "가게5", storeInfo = "20분 후 가게 마감"))
+//            add(ItemBell(storeName = "가게6", storeInfo = "20분 후 가게 마감"))
+//            add(ItemBell(storeName = "가게7", storeInfo = "20분 후 가게 마감"))
+//            add(ItemBell(storeName = "가게8", storeInfo = "20분 후 가게 마감"))
+//            add(ItemBell(storeName = "가게9", storeInfo = "20분 후 가게 마감"))
+//            add(ItemBell(storeName = "가게10", storeInfo = "20분 후 가게 마감"))
+//            add(ItemBell(storeName = "가게11", storeInfo = "20분 후 가게 마감"))
 
             bellAdapter.datas = datas
             bellAdapter.notifyDataSetChanged()
