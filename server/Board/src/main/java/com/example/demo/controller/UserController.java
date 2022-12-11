@@ -38,7 +38,7 @@ public class UserController {
 
     @GetMapping
     public String check(){
-        return "cicd 업데이트 데모 영상";
+        return "CD/CD 데모 영상 코드 변환 ";
     }
 
     //tset
