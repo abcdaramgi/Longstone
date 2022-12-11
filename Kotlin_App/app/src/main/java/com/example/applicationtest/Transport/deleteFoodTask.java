@@ -20,7 +20,7 @@ public class deleteFoodTask extends AsyncTask<String, Void, String>{
     protected String doInBackground(String... strings) {
         try{
             String str;
-            URL url = new URL("http://121.151.86.65:8080/post/updatestatus");
+            URL url = new URL("http://ec2-3-35-255-89.ap-northeast-2.compute.amazonaws.com/post/deleteStoreFood");
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type", "application/json");
