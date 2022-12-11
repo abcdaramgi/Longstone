@@ -16,6 +16,7 @@ import com.example.applicationtest.Singleton.UserSingleton
 import com.example.applicationtest.Transport.FavoritesTask
 import com.example.applicationtest.Transport.SellerLoginTask
 import com.example.applicationtest.Transport.StoreDetailListTask
+import com.example.applicationtest.Transport.StoreGetImgTask2
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_food_store_detail.*
 import kotlinx.android.synthetic.main.activity_store_detile.*
@@ -40,7 +41,13 @@ class FoodStoreDetailActivity : AppCompatActivity() {
 
         initRecycler()
         store_re.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+        //======================================================//
+        val task = StoreGetImgTask2();
+        val resultImg = task.execute(data.getStorename().toString()).get()
 
+        data.setImg(resultImg)
+        data.setStoreimg(resultImg)
+        //======================================================//
         Glide.with(this).load(data.img).into(store_img)
         st_de_name.text = data.storename
         st_de_info.text = data.place

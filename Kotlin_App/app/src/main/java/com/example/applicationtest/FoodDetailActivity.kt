@@ -19,6 +19,7 @@ import com.example.applicationtest.DTO.FoodData
 import com.example.applicationtest.MapScreen.Companion.newInstance
 import com.example.applicationtest.Singleton.UserSingleton
 import com.example.applicationtest.Transport.CartTask
+import com.example.applicationtest.Transport.StoreGetImgTask2
 import kotlinx.android.synthetic.main.activity_buy.*
 import kotlinx.android.synthetic.main.fragment_cart_screen.*
 import kotlinx.android.synthetic.main.fragment_cart_screen.view.*
@@ -90,7 +91,13 @@ class FoodDetailActivity : AppCompatActivity() {
 
         list.add(StoreData("hi","hell",R.drawable.image_bread1))
         storeAdapter.notifyDataSetChanged()*/
+        //======================================================//
+        val task = StoreGetImgTask2();
+        val resultImg = task.execute(datas.getStorename().toString()).get()
 
+        datas.setImg(resultImg)
+        datas.setStoreimg(resultImg)
+        //======================================================//
         Glide.with(this).load(datas.img).into(img_profile)
         Glide.with(this).load(datas.storeimg).into(img_store_photo)
         detail_food_name.text = datas.name
@@ -223,3 +230,4 @@ class FoodDetailActivity : AppCompatActivity() {
         }
     }
 }
+

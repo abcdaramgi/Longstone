@@ -44,6 +44,16 @@ public class StoreRepository {
         return result;
     }
 
+    //가게이름으로 가게 이미지 가져오기
+    public String findStoreImgData2(String storeName){
+        String result = "false";
+
+        String sql = "SELECT imgUrl FROM StoreTB WHERE storeName = ?";
+        result = jdbcTemplate.queryForObject(sql, String.class ,storeName);
+
+        return result;
+    }
+
     // 가게정보 모두 들고오기
     public List<Store> SearchStoreData(String status){
         String sql = "SELECT storeName, pdName, imgUrl FROM StoreTB";
@@ -63,7 +73,7 @@ public class StoreRepository {
     public List<Store> getStoreDetailListData(String storeName){
         String sql = "SELECT ProductTB.pdName, imgUrl, pdPrice, pdSale " +
                 "FROM ProductTB, PdimageTB " +
-                "WHERE ProductTB.sellerId = (SELECT sellerId FROM StoreTB WHERE storeName = ?) AND ProductTB.sellerId = PdimageTB.sellerId;";
+                "WHERE ProductTB.sellerId = (SELECT sellerId FROM StoreTB WHERE storeName = ?) AND ProductTB.pdId = PdimageTB.pdId;";
         List<Store> result = jdbcTemplate.query(sql, new RowMapper<Store>() {
             @Override
             public Store mapRow(ResultSet rs, int rowNum) throws SQLException {

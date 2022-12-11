@@ -59,6 +59,22 @@ public class StoreController {
         return imgUrl;
     }
 
+    //가게이미지 가져오기2
+    @RequestMapping(value = "/imginfo2", method = {RequestMethod.POST})
+    public String getStoreImgData2(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        File storeImg = null;
+
+        ServletInputStream inputStream = request.getInputStream();
+        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+
+        System.out.println("storeName : "+messageBody);
+
+        String imgUrl = storeRepository.findStoreImgData(messageBody);
+
+        System.out.println(imgUrl);
+        return imgUrl;
+    }
+
     @RequestMapping(value = "/storedata", method = {RequestMethod.POST})
     public JSONObject getSearchStoreData(HttpServletRequest request, HttpServletResponse response) throws IOException {
         ServletInputStream inputStream = request.getInputStream();

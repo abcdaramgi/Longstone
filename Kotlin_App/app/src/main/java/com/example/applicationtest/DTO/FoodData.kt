@@ -10,7 +10,7 @@ class FoodData(
     var img: String? =null,
     var count: Int? =null,
     var storename: String? =null,
-    var storeimg: Int? =null,
+    var storeimg: String? =null,
     var refood: Int? =null,
     var pdContents: String? =null,
     var status: String? =null,
@@ -134,5 +134,10 @@ class FoodData(
     @JvmName("setStaus")
     fun setStatus(status: String) {
         this.status = status
+    }
+
+    @JvmName("setStoreimg1")
+    fun setStoreimg(status: String) {
+        this.storeimg = status
     }
 }
