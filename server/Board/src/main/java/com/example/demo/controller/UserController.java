@@ -38,7 +38,7 @@ public class UserController {
 
     @GetMapping
     public String check(){
-        return "어서온나 요게 부트스프링이다";
+        return "cicd 업데이트 데모 영상";
     }
 
     //tset
