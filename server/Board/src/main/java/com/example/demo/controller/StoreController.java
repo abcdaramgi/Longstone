@@ -69,7 +69,7 @@ public class StoreController {
 
         System.out.println("storeName : "+messageBody);
 
-        String imgUrl = storeRepository.findStoreImgData(messageBody);
+        String imgUrl = storeRepository.findStoreImgData2(messageBody);
 
         System.out.println(imgUrl);
         return imgUrl;

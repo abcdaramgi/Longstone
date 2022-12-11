@@ -94,12 +94,15 @@ class FoodDetailActivity : AppCompatActivity() {
         //======================================================//
         val task = StoreGetImgTask2();
         val resultImg = task.execute(datas.getStorename().toString()).get()
-
-        datas.setImg(resultImg)
-        datas.setStoreimg(resultImg)
+        Log.d("result", resultImg)
+        datas.img = resultImg;
+//        datas.setStoreimg(resultImg)
+        Log.d("img", datas.img.toString())
+        Log.d("img", datas.storename.toString())
+        Log.d("img", datas.storeimg.toString())
         //======================================================//
-        Glide.with(this).load(datas.img).into(img_profile)
-        Glide.with(this).load(datas.storeimg).into(img_store_photo)
+        Glide.with(this).load(resultImg).into(img_profile)
+        Glide.with(this).load(resultImg).into(img_store_photo)
         detail_food_name.text = datas.name
         ad_count = datas.count!!
         store_de_name.text = datas.getStorename()

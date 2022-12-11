@@ -42,11 +42,11 @@ class FoodStoreDetailActivity : AppCompatActivity() {
         initRecycler()
         store_re.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
         //======================================================//
-        val task = StoreGetImgTask2();
-        val resultImg = task.execute(data.getStorename().toString()).get()
-
-        data.setImg(resultImg)
-        data.setStoreimg(resultImg)
+//        val task = StoreGetImgTask2();
+//        val resultImg = task.execute(data.getStorename().toString()).get()
+//
+//        data.setImg(resultImg)
+//        data.setStoreimg(resultImg)
         //======================================================//
         Glide.with(this).load(data.img).into(store_img)
         st_de_name.text = data.storename
