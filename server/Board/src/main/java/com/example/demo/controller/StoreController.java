@@ -60,7 +60,7 @@ public class StoreController {
     }
 
     //가게이미지 가져오기2
-    @RequestMapping(value = "/imginfo2", method = {RequestMethod.POST})
+    @RequestMapping(value = "/imginfoname", method = {RequestMethod.POST})
     public String getStoreImgData2(HttpServletRequest request, HttpServletResponse response) throws IOException {
         File storeImg = null;
 

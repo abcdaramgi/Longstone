@@ -50,7 +50,6 @@ public class StoreRepository {
 
         String sql = "SELECT imgUrl FROM StoreTB WHERE storeName = ?";
         result = jdbcTemplate.queryForObject(sql, String.class ,storeName);
-        System.out.println(result);
         return result;
     }
 

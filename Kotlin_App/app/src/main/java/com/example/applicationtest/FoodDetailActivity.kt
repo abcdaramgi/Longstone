@@ -92,14 +92,19 @@ class FoodDetailActivity : AppCompatActivity() {
         list.add(StoreData("hi","hell",R.drawable.image_bread1))
         storeAdapter.notifyDataSetChanged()*/
         //======================================================//
-        val task = StoreGetImgTask2();
-        val resultImg = task.execute(datas.getStorename().toString()).get()
-        Log.d("result", resultImg)
-        datas.img = resultImg;
+        var resultImg : String? = null;
+        try {
+            val task = StoreGetImgTask2();
+            resultImg = task.execute(datas.getStorename().toString()).get()
+            Log.d("result", resultImg)
+            datas.img = resultImg;
 //        datas.setStoreimg(resultImg)
-        Log.d("img", datas.img.toString())
-        Log.d("img", datas.storename.toString())
-        Log.d("img", datas.storeimg.toString())
+            Log.d("img", datas.img.toString())
+            Log.d("img", datas.storename.toString())
+            Log.d("img", datas.storeimg.toString())
+        }catch (e :Exception){
+            e.printStackTrace()
+        }
         //======================================================//
         Glide.with(this).load(resultImg).into(img_profile)
         Glide.with(this).load(resultImg).into(img_store_photo)

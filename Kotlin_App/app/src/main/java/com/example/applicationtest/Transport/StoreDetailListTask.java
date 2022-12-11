@@ -25,7 +25,7 @@ public class StoreDetailListTask extends AsyncTask<String, Void, String> {
         try {
             String str;
 //            URL url = new URL("http://ec2-3-35-255-89.ap-northeast-2.compute.amazonaws.com/post/storelist");
-            URL url = new URL("http://ec2-3-35-255-89.ap-northeast-2.compute.amazonaws.com/post/storelist");
+            URL url = new URL("http://http://ec2-3-35-255-89.ap-northeast-2.compute.amazonaws.com/post/storelist");
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type", "application/json");
