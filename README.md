@@ -1,3 +1,7 @@
+# Architecture
+![image](https://github.com/abcdaramgi/Longstone/assets/69470424/1a6d7a34-8398-4152-9f9c-a77e12803535)
+
+
 # Features
 
 -   [Link](#link)
