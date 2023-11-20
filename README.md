@@ -1,6 +1,12 @@
 # Architecture
 ![image](https://github.com/abcdaramgi/Longstone/assets/69470424/1a6d7a34-8398-4152-9f9c-a77e12803535)
 
+# CICD, Zero-downtime-Deployment Demo 
+https://youtu.be/Uz4COjFaupw
+
+# Application Demo
+https://youtu.be/Zl2atS4nF_A
+
 
 # Features
 
