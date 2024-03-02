@@ -21,12 +21,6 @@ https://youtu.be/Zl2atS4nF_A
 https://join.slack.com/t/longstonehq/shared_invite/zt-1hru24frp-qFzmKwTflfKXBQK0O3BKdw
 ```
 
-### Notion
-
-```md
-https://www.notion.so/LongStone-aed314b49bef4644b0355e0359198893
-```
-
 # DataBase
 
 ### ER Diagram
